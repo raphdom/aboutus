@@ -1,0 +1,44 @@
+Ext.define('AboutUs.view.group.Dialog', {
+    extend: 'AboutUs.view.common.Dialog',
+    
+    alias: 'widget.groupdialog',
+    
+    title: 'Grupo',
+    
+    urlLoad: 'group/get.action',
+    urlSubmit: 'group/create.action',
+    
+    items:[{
+    	xtype: 'form',
+        layout: 'form',
+        bodyPadding: 10,
+        fieldDefaults: {
+            msgTarget: 'side',
+            labelWidth: 75
+        },
+        defaultType: 'textfield',
+        items: [
+       	{
+			fieldLabel: 'id',
+			name : 'id',
+			hidden:true
+		},{
+            fieldLabel: 'Nome',
+            name: 'name',
+            allowBlank: false
+		},{
+			name : 'permissions',
+			hidden:true
+        },{
+        	xtype:'fieldset',
+        	title: 'Permissões',
+        	layout:'anchor',
+        	items :[{
+        		xtype:'permissionlist'
+        	}]
+        }
+        ]
+    }]
+    
+    
+});

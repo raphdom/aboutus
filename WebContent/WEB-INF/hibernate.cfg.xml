@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost/zbapfnjc_jrchurch001</property>
+        <property name="hibernate.default_catalog">zbapfnjc_jrchurch001</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        
+        <property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+        
+        <mapping class="com.jrdevel.aboutus.model.Batch" />
+        <mapping class="com.jrdevel.aboutus.model.lists.translate.ContactTypeTranslate" />
+        <mapping class="com.jrdevel.aboutus.model.lists.Country" />
+        <mapping class="com.jrdevel.aboutus.model.File" />
+        <mapping class="com.jrdevel.aboutus.model.FileData" />
+        <mapping class="com.jrdevel.aboutus.model.lists.translate.MemberTypeTranslate" />
+        <mapping class="com.jrdevel.aboutus.model.lists.translate.CountryTranslate" />
+        <mapping class="com.jrdevel.aboutus.model.Event" />
+        <mapping class="com.jrdevel.aboutus.model.FolderRole" />
+        <mapping class="com.jrdevel.aboutus.model.lists.Frequency" />
+        <mapping class="com.jrdevel.aboutus.model.Folder" />
+        <mapping class="com.jrdevel.aboutus.model.Address" />
+        <mapping class="com.jrdevel.aboutus.model.Album" />
+        <mapping class="com.jrdevel.aboutus.model.Tab" />
+        <mapping class="com.jrdevel.aboutus.model.lists.translate.CivilStatusTranslate" />
+        <mapping class="com.jrdevel.aboutus.model.lists.MemberType" />
+        <mapping class="com.jrdevel.aboutus.model.Session" />
+        <mapping class="com.jrdevel.aboutus.model.Instrument" />
+        <mapping class="com.jrdevel.aboutus.model.EventRecurrence" />
+        <mapping class="com.jrdevel.aboutus.model.Person" />
+        <mapping class="com.jrdevel.aboutus.model.Group" />
+        <mapping class="com.jrdevel.aboutus.model.lists.translate.FrequencyTranslate" />
+        <mapping class="com.jrdevel.aboutus.model.Audit" />
+        <mapping class="com.jrdevel.aboutus.model.PersonContacts" />
+        <mapping class="com.jrdevel.aboutus.model.Video" />
+        <mapping class="com.jrdevel.aboutus.model.Access" />
+        <mapping class="com.jrdevel.aboutus.model.Category" />
+        <mapping class="com.jrdevel.aboutus.model.Church" />
+        <mapping class="com.jrdevel.aboutus.model.Playlist" />
+        <mapping class="com.jrdevel.aboutus.model.MemberFunction" />
+        <mapping class="com.jrdevel.aboutus.model.Music" />
+        <mapping class="com.jrdevel.aboutus.model.lists.CivilStatus" />
+        <mapping class="com.jrdevel.aboutus.model.lists.ContactType" />
+        <mapping class="com.jrdevel.aboutus.model.User" />
+        <mapping class="com.jrdevel.aboutus.model.ItemAlbum" />
+        <mapping class="com.jrdevel.aboutus.model.Banner" />
+        <mapping class="com.jrdevel.aboutus.model.Permission" />
+        <mapping class="com.jrdevel.aboutus.model.Article" />
+        
+    </session-factory>
+</hibernate-configuration>

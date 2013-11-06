@@ -1,0 +1,32 @@
+Ext.define('AboutUs.view.cloud.TileGridThumbs' ,{
+    extend: 'Ext.panel.Panel',
+    alias : 'widget.tilegridthumbs',
+    
+        id: 'images-view',
+    
+        initComponent: function() {
+                var me = this;
+                var store = AboutUs.app.getStore('CloudStore');
+                Ext.applyIf(me, {
+                        items: Ext.create('Ext.view.View', {
+                            store: store,
+                            tpl: [
+                                '<tpl for=".">',
+                                    '<div class="thumb-wrap" id="{name:stripTags}">',
+                                        '<div class="thumb"><img src="{url}" title="{name:htmlEncode}"></div>',
+                                        '<span class="x-editable">{shortName:htmlEncode}</span>',
+                                    '</div>',
+                                '</tpl>',
+                                '<div class="x-clear"></div>'
+                            ],
+                            multiSelect: true,
+                            trackOver: true,
+                            overItemCls: 'x-item-over',
+                            itemSelector: 'div.thumb-wrap',
+                            emptyText: 'No images to display'
+                        })
+                });
+                me.callParent(arguments);
+        }
+    
+});
