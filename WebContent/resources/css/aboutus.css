@@ -8,7 +8,6 @@
     font-size: 12px;
     line-height: 40px;
     cursor: pointer;
-    background: url(images/rss.gif) no-repeat 0 2px;
     border: 1px solid #fff;
 }
 
@@ -57,4 +56,9 @@
 	padding-top: 12px;
 	background-color: #CC0000;
 	font-weight: bold;
+}
+
+.imageLogo{
+	background-image: url(../images/logoAboutUs.png);
+	background-repeat: no-repeat;
 }

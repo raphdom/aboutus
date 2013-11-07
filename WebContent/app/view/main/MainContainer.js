@@ -8,6 +8,7 @@ Ext.define('AboutUs.view.main.MainContainer', {
         {
         	region:'north',
         	height:100,
+        	bodyCls:'imageLogo',
         	buttons:[
         		{
         			text:'Disco',

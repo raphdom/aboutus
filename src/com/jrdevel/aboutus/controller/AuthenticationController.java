@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.jrdevel.aboutus.model.User;
 import com.jrdevel.aboutus.service.AuthenticationService;
@@ -53,7 +54,7 @@ public class AuthenticationController {
 		
 		session.setAttribute("user", null);
 		
-		return new ModelAndView("login");
+		return new ModelAndView(new RedirectView("")); 
 	}
 
 }

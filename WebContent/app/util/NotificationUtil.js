@@ -49,7 +49,7 @@ Ext.define('AboutUs.util.NotificationUtil', {
 				closable: false,
 				resizable:false,
 				shadow:true,
-				icon:'resources/images/error.png',
+				icon:'resources/images/cross.png',
 				title:'Erro!',
 				manager: 'demo1',
 				autoCloseDelay: 10000,

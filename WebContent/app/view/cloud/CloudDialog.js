@@ -5,6 +5,7 @@ Ext.define('AboutUs.view.cloud.CloudDialog' ,{
         title: 'Novo ficheiro',
         height: 200,
         width: 400,
+        modal:true,
         layout: 'fit',
         
         items:[]
