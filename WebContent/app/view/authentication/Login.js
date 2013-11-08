@@ -29,9 +29,12 @@ Ext.define('AboutUs.view.authentication.Login', {
             inputType: 'password'
         },
         {
-            xtype:'checkbox',
-            fieldLabel: 'Lembrar',
-            name: 'remember'
+        	xtype: 'component',
+            autoEl: {
+                tag: 'a',
+                href: 'http://www.example.com/',
+                html: 'Recuperar palavra-chave'
+            }
         }
     ],
     
