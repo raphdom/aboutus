@@ -7,34 +7,37 @@ Ext.define('AboutUs.view.common.List', {
     
     editColumn:true,
     
+    hidetoolbar:false,
+    
 	initComponent: function(){
-		
-		this.dockedItems = [{
-		    xtype: 'toolbar',
-		    dock: 'top',
-		   items: [{
-                icon: 'resources/images/add.png',
-                itemId: 'add',
-                text: 'Adicionar',
-                action: 'add',
-                iconAlign: 'top'
-            },{
-                icon: 'resources/images/delete.png',
-                text: 'Eliminar',
-                action: 'delete',
-                iconAlign: 'top'
-            },{
-				icon: 'resources/images/magnifier.png',                
-                text: 'Pesquisar',
-                action: 'search',
-                iconAlign: 'top'
-            }]
-		},{
-		 	xtype: 'pagingtoolbar',
-	        dock: 'bottom',
-	        displayInfo: true,
-	        store:this.store
-		}];
+		if (this.hidetoolbar!=true){
+			this.dockedItems = [{
+			    xtype: 'toolbar',
+			    dock: 'top',
+			   items: [{
+	                icon: 'resources/images/add.png',
+	                itemId: 'add',
+	                text: 'Adicionar',
+	                action: 'add',
+	                iconAlign: 'top'
+	            },{
+	                icon: 'resources/images/delete.png',
+	                text: 'Eliminar',
+	                action: 'delete',
+	                iconAlign: 'top'
+	            },{
+					icon: 'resources/images/magnifier.png',                
+	                text: 'Pesquisar',
+	                action: 'search',
+	                iconAlign: 'top'
+	            }]
+			},{
+			 	xtype: 'pagingtoolbar',
+		        dock: 'bottom',
+		        displayInfo: true,
+		        store:this.store
+			}];
+		}
 		
 		if (this.editColumn){
 			var columnsList = this.columns;
@@ -60,6 +63,7 @@ Ext.define('AboutUs.view.common.List', {
 		}
 		
         this.addEvents('editRecord');
+        AboutUs.app.getStore(this.store).clearFilter();
         this.callParent(arguments);
     }
     

@@ -124,7 +124,8 @@ Ext.define('AboutUs.controller.CommonListController', {
         		this.getCommonList().getStore().reload();
             },
             failure: function(form, action) {
-                AboutUs.util.NotificationUtil.showNotificationError("Erro ao guardar!");
+            	AboutUs.util.NotificationUtil.processMessages(action.result.messages);
+                //AboutUs.util.NotificationUtil.showNotificationError("Erro ao guardar!");
             }
         });
     },

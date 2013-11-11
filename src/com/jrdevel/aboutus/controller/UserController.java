@@ -12,6 +12,7 @@ import com.jrdevel.aboutus.service.UserService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
+import com.jrdevel.aboutus.util.ResultObject;
 
 @Controller
 public class UserController {
@@ -36,6 +37,21 @@ public class UserController {
 		} catch (Exception e) {
 
 			return ExtJSReturn.mapError("Error retrieving Contacts from database.");
+		}
+	}
+	
+	@RequestMapping(value="/user/create.action")
+	public @ResponseBody Map<String,? extends Object> create(User input) throws Exception {
+
+		try{
+
+			ResultObject result = userService.update(input);
+			
+			return result.toMap();
+			
+		} catch (Exception e) {
+
+			return ExtJSReturn.mapError("Error save User in database.");
 		}
 	}
 	

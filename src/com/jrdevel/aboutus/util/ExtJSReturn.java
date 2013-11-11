@@ -1,5 +1,6 @@
 package com.jrdevel.aboutus.util;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +77,9 @@ public class ExtJSReturn {
 	public static Map<String,Object> mapError(String msg){
 
 		Map<String,Object> modelMap = new HashMap<String,Object>(2);
-		modelMap.put("message", msg);
+		List<Message> messages = new ArrayList<Message>();
+		messages.add(new Message(ResultObject.ERROR,msg));
+		modelMap.put("messages", messages);
 		modelMap.put("success", false);
 
 		return modelMap;

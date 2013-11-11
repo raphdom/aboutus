@@ -5,6 +5,9 @@ Ext.define('AboutUs.view.user.Dialog', {
     
     title: 'Utilizador',
     
+    width:500,
+    height:300,
+    
     layout:'fit',
     
     urlLoad: 'user/get.action',

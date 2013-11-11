@@ -8,6 +8,7 @@ Ext.define('AboutUs.view.user.TabUserData', {
     closable:false,
     
     items:[{
+    	xtype:'form',
         layout: 'form',
         bodyPadding: 10,
         fieldDefaults: {
@@ -26,19 +27,27 @@ Ext.define('AboutUs.view.user.TabUserData', {
             vtype:'email'
         },{
             fieldLabel: 'Pessoa',
-            name: 'person',
-            xtype:'triggerfield',
-            triggerCls:'x-form-search-trigger',
-            allowBlank: false
+            name: 'person.id',
+            xtype:'combo',
+            allowBlank: false,
+            store:'PersonStore',
+            displayField:'name',
+            valueField:'id'
         },{
             fieldLabel: 'Igreja',
-            name: 'church',
+            name: 'church.id',
             allowBlank: false,
             xtype:'combo',
             store:'ChurchStore',
             displayField:'name',
             valueField:'id'
-        }]
+        },{
+			name : 'groups',
+			hidden:true
+		},{
+			name : 'permissions',
+			hidden:true
+		}]
     }]
     
     

@@ -2,6 +2,15 @@ Ext.define('AboutUs.util.NotificationUtil', {
     
     singleton: true,
     
+    processMessages: function(messages){
+    	var me = this;
+    	Ext.Array.forEach(messages,function(item, index){
+    		if (item.type == 1){
+    			me.showNotificationError(item.message);
+    		}
+    	});
+    },
+    
     showNotificationInfo: function(message) {
     	Ext.create('widget.uxNotification', {
 				title: '',
