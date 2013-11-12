@@ -34,14 +34,16 @@ public class AuthenticationController {
 
 		try{
 
-			User userDB = authenticationService.getUser(user.getEmail());
+			/*User userDB = authenticationService.getUser(user.getEmail());
 			
 			if (user.getPassword().equals(userDB.getPassword())){
 				session.setAttribute("user", userDB);
 				return ExtJSReturn.mapOK();
 			}else{
 				return ExtJSReturn.mapError("Palavra-chave incorreta!");
-			}	
+			}	*/
+			session.setAttribute("user", user);
+			return ExtJSReturn.mapOK();
 			
 		} catch (Exception e) {
 
