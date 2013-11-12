@@ -1,7 +1,7 @@
 Ext.define('AboutUs.controller.CommonListController', {
     extend: 'Ext.app.Controller',
     
-    views: ['common.List','common.Dialog'],
+    views: ['common.List','common.Dialog', 'common.Form'],
     
     refs: [{
         ref: 'commonList',
@@ -12,6 +12,9 @@ Ext.define('AboutUs.controller.CommonListController', {
     },{
     	ref: 'commonsearch',
         selector: 'commonsearch'
+    },{
+    	ref: 'commonForm',
+        selector: 'commonform'
     }],
     
 	 init: function() {
