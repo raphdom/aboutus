@@ -1,5 +1,5 @@
 Ext.define('AboutUs.view.person.Dialog', {
-    extend: 'Ext.window.Window',
+	extend: 'AboutUs.view.common.Dialog',
     
     alias: 'widget.persondialog',
     
@@ -7,22 +7,15 @@ Ext.define('AboutUs.view.person.Dialog', {
     
     modal: true,
     
-    width: 500,
+    width: 600,
     
     layout:'fit',
     
     items:[{
-    
-    	xtype: 'persontabpanel'
-        
-    }],
-    
-    buttons: [{
-        text: 'Save',
-        action:'save'
-    },{
-        text: 'Cancel',
-        action:'cancel'
+    	xtype:'commonform',
+    	items:[{
+    		xtype: 'persontabpanel'
+        }]
     }]
     
 });
