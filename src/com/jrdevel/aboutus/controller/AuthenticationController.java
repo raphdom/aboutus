@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.jrdevel.aboutus.model.Register;
 import com.jrdevel.aboutus.model.User;
 import com.jrdevel.aboutus.service.AuthenticationService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
+import com.jrdevel.aboutus.util.ResultObject;
 
 /**
  * @author Raphael Domingues
@@ -34,17 +36,33 @@ public class AuthenticationController {
 
 		try{
 
-			/*User userDB = authenticationService.getUser(user.getEmail());
+			User userDB = authenticationService.getUser(user.getEmail());
 			
 			if (user.getPassword().equals(userDB.getPassword())){
+				if (!user.isActivation() && user.getCustomer()==null){
+					
+				}
 				session.setAttribute("user", userDB);
 				return ExtJSReturn.mapOK();
 			}else{
 				return ExtJSReturn.mapError("Palavra-chave incorreta!");
-			}	*/
-			session.setAttribute("user", user);
-			return ExtJSReturn.mapOK();
+			}
 			
+		} catch (Exception e) {
+
+			return ExtJSReturn.mapError("O Email não existe registado no sistema!");
+		}
+	}
+	
+	@RequestMapping(value="/register.action")
+	public @ResponseBody Map<String,? extends Object> register(Register register, HttpSession session) throws Exception {
+
+		try{
+			
+			ResultObject result = authenticationService.register(register);
+			
+			return result.toMap();
+
 		} catch (Exception e) {
 
 			return ExtJSReturn.mapError("O Email não existe registado no sistema!");

@@ -37,33 +37,37 @@ Ext.define('AboutUs.view.authentication.Register', {
         {
         	allowBlank: false,
             fieldLabel: 'Igreja',
-            name: 'church'
+            name: 'churchName'
         },
         {
         	allowBlank: false,
             fieldLabel: 'Morada da Igreja',
-            name: 'address'
+            name: 'churchAddress'
         },
         {
         	allowBlank: false,
             fieldLabel: 'País',
             xtype:'combo',
-            name: 'country'
+            store:'list.CountryStore',
+            valueField:'value',
+            forceSelection:true,
+            displayField:'text',
+            name: 'country',
+            queryMode:'local'
         },
         {
         	allowBlank: false,
             fieldLabel: 'Nome do Responsável',
-            name: 'respName'
+            name: 'nameResp'
         },
         {
         	allowBlank: false,
             fieldLabel: 'Nome do site',
-            name: 'siteName'
+            name: 'siteAlias'
         },
         {
-        	allowBlank: false,
             fieldLabel: 'Quantos membro tem sua igreja?',
-            name: 'qtdMember'
+            name: 'qtdMembers'
         }
     ],
     

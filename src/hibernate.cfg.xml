@@ -53,5 +53,7 @@
         <mapping class="com.jrdevel.aboutus.model.Banner" />
         <mapping class="com.jrdevel.aboutus.model.Permission" />
         <mapping class="com.jrdevel.aboutus.model.Article" />
+        <mapping class="com.jrdevel.aboutus.model.Register" />
+        <mapping class="com.jrdevel.aboutus.model.Customer" />
     </session-factory>
 </hibernate-configuration>

@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.jrdevel.aboutus.dao.GroupDAO;
-import com.jrdevel.aboutus.model.Group;
-import com.jrdevel.aboutus.util.ListParams;
-import com.jrdevel.aboutus.util.ListResult;
+import com.jrdevel.aboutus.dao.ListDAO;
+import com.jrdevel.aboutus.util.GenericValueText;
 
 /**
  * @author Raphael Domingues
@@ -18,47 +16,20 @@ import com.jrdevel.aboutus.util.ListResult;
 @Service
 public class ListService {
 	
-	private GroupDAO groupDAO;
+	private ListDAO listDAO;
 	
 	/**
 	 * Spring use - DI
 	 * @param userDAO
 	 */
 	@Autowired
-	public void setGroupDAO(GroupDAO groupDAO) {
-		this.groupDAO = groupDAO;
-	}
-	
-	
-	/**
-	 * Get all groups
-	 * @return
-	 */
-	@Transactional
-	public ListResult<Group> getList(ListParams params){
-
-		return groupDAO.findAllByCriteria(params);
+	public void setListDAO(ListDAO listDAO) {
+		this.listDAO = listDAO;
 	}
 	
 	@Transactional
-	public Group getGroup(int id){
-		
-		return groupDAO.getGroupById(id);
-		
-	}
-	
-	@Transactional
-	public void updateGroup(Group entity){
-		
-		groupDAO.makePersistent(entity);
-		
-	}
-	
-	@Transactional
-	public void deleteGroups(List<Group> entities){
-		
-		//groupDAO.makeTransient(entities);
-		
+	public List<GenericValueText> getList(int listType){
+		return listDAO.getList(listType);
 	}
 
 }

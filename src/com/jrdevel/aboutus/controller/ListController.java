@@ -1,5 +1,6 @@
 package com.jrdevel.aboutus.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -9,8 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jrdevel.aboutus.service.AuthenticationService;
+import com.jrdevel.aboutus.service.ListService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
+import com.jrdevel.aboutus.util.GenericValueText;
 
 /**
  * @author Raphael Domingues
@@ -19,11 +21,11 @@ import com.jrdevel.aboutus.util.ExtJSReturn;
 @Controller
 public class ListController {
 
-	private AuthenticationService authenticationService;
+	private ListService listService;
 
 	@Autowired
-	public void setContactService(AuthenticationService authenticationService) {
-		this.authenticationService = authenticationService;
+	public void setListService(ListService listService) {
+		this.listService = listService;
 	}
 
 	@RequestMapping(value="/list/country.action")
@@ -31,7 +33,9 @@ public class ListController {
 
 		try{
 
-			return null;
+			List<GenericValueText> listCountry = listService.getList(1);
+			
+			return ExtJSReturn.mapOK(listCountry);
 
 		} catch (Exception e) {
 

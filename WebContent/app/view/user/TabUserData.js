@@ -33,13 +33,21 @@ Ext.define('AboutUs.view.user.TabUserData', {
             displayField:'name',
             valueField:'id'
         },{
+        	xtype:'combo',
+        	id:'church',
             fieldLabel: 'Igreja',
             name: 'church.id',
             allowBlank: false,
-            xtype:'combo',
-            store:'ChurchStore',
             displayField:'name',
-            valueField:'id'
+            valueField:'id',
+            store:'ChurchStore',
+            listeners:{
+            	change:function(combo, newValue, oldValue, eOpts){
+            		combo.suspendEvent('change');
+            		combo.setValue(newValue.name);
+            		combo.resumeEvent('change');
+            	}
+            }
         },{
 			name : 'groups',
 			hidden:true

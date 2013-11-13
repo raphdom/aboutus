@@ -1,7 +1,7 @@
 Ext.define('AboutUs.store.list.CountryStore', {
     extend: 'Ext.data.Store',
-    model: 'AboutUs.model.list.Country',
-    
+    autoLoad:true,
+    fields: ['value','text'], 
     proxy: {
         type: 'ajax',
         api: {

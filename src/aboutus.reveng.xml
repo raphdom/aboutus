@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+
+
+	<table-filter match-schema=".*" match-name=".*" />
+	<table name="tbl_user" class="com.jrdevel.aboutus.model.User">
+	</table>
+	<table name="tbl_permission"
+		class="com.jrdevel.aboutus.model.Permission">
+	</table>
+	<table name="tbl_group_permissions"></table>
+	<table name="tbl_user_groups"></table>
+	<table name="tbl_personContacts"
+		class="com.jrdevel.aboutus.model.PersonContacts">
+	</table>
+	<table name="tbl_group" class="com.jrdevel.aboutus.model.Group">
+	</table>
+	<table name="tbl_person" class="com.jrdevel.aboutus.model.Person">
+	</table>
+	<table name="tbl_user_permissions"></table>
+	<table name="tbl_memberFunctions"
+		class="com.jrdevel.aboutus.model.MemberFunction">
+	</table>
+	<table name="tbl_audit" class="com.jrdevel.aboutus.model.Audit">
+	</table>
+	<table name="tbl_address"
+		class="com.jrdevel.aboutus.model.Address">
+	</table>
+	<table name="trans_memberType"
+		class="com.jrdevel.aboutus.model.lists.translate.MemberTypeTranslate">
+	</table>
+	<table name="lst_memberType"
+		class="com.jrdevel.aboutus.model.lists.MemberType">
+	</table>
+	<table name="trans_country"
+		class="com.jrdevel.aboutus.model.lists.translate.CountryTranslate">
+	</table>
+	<table name="lst_civilStatus"
+		class="com.jrdevel.aboutus.model.lists.CivilStatus">
+	</table>
+	<table name="lst_country"
+		class="com.jrdevel.aboutus.model.lists.Country">
+	</table>
+	<table name="trans_civilStatus"
+		class="com.jrdevel.aboutus.model.lists.translate.CivilStatusTranslate">
+	</table>
+	<table name="lst_contactType"
+		class="com.jrdevel.aboutus.model.lists.ContactType">
+	</table>
+	<table name="trans_contactType"
+		class="com.jrdevel.aboutus.model.lists.translate.ContactTypeTranslate">
+	</table>
+	<table name="tbl_events" class="com.jrdevel.aboutus.model.Event">
+	</table>
+	<table name="tbl_events_recurrences"
+		class="com.jrdevel.aboutus.model.EventRecurrence">
+	</table>
+	<table name="tbl_file_data"
+		class="com.jrdevel.aboutus.model.FileData">
+	</table>
+	<table name="tbl_album" class="com.jrdevel.aboutus.model.Album">
+	</table>
+	<table name="tbl_article"
+		class="com.jrdevel.aboutus.model.Article">
+	</table>
+	<table name="tbl_file" class="com.jrdevel.aboutus.model.File">
+	</table>
+	<table name="tbl_categories"
+		class="com.jrdevel.aboutus.model.Category">
+	</table>
+	<table name="tbl_folder" class="com.jrdevel.aboutus.model.Folder">
+	</table>
+	<table name="tbl_session"
+		class="com.jrdevel.aboutus.model.Session">
+	</table>
+	<table name="lst_frequency"
+		class="com.jrdevel.aboutus.model.lists.Frequency">
+	</table>
+	<table name="trans_frequency"
+		class="com.jrdevel.aboutus.model.lists.translate.FrequencyTranslate">
+	</table>
+	<table name="tbl_musics" class="com.jrdevel.aboutus.model.Music"></table>
+	<table name="tbl_tabs" class="com.jrdevel.aboutus.model.Tab"></table>
+	<table name="tbl_playlists"
+		class="com.jrdevel.aboutus.model.Playlist">
+	</table>
+	<table name="tbl_instruments"
+		class="com.jrdevel.aboutus.model.Instrument">
+	</table>
+	<table name="tbl_folder_roles"
+		class="com.jrdevel.aboutus.model.FolderRole">
+	</table>
+	<table name="tbl_item_album"
+		class="com.jrdevel.aboutus.model.ItemAlbum">
+	</table>
+	<table name="tbl_videos" class="com.jrdevel.aboutus.model.Video"></table>
+	<table name="tbl_churchs"
+		class="com.jrdevel.aboutus.model.Church">
+	</table>
+	<table name="tbl_banners"
+		class="com.jrdevel.aboutus.model.Banner">
+	</table>
+	<table name="tbl_batches" class="com.jrdevel.aboutus.model.Batch"></table>
+	<table name="tbl_access" class="com.jrdevel.aboutus.model.Access"></table>
+	<table name="tbl_register"
+		class="com.jrdevel.aboutus.model.Register">
+	</table>
+	<table name="tbl_customer" class="com.jrdevel.aboutus.model.Customer">
+		<column name="id"></column>
+		<column name="name"></column>
+		<column name="plan"></column>
+	</table>
+</hibernate-reverse-engineering>

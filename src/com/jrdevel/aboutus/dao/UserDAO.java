@@ -28,6 +28,13 @@ public class UserDAO extends GenericDAO<User, Integer>{
 		return user;
 	}
 	
+	public boolean existEmailRegistered(String email) {
+		Criteria criteria = getSession().createCriteria(getPersistentClass());
+		criteria.add(Restrictions.eq("email", email));
+		User user = (User) criteria.uniqueResult(); 
+		return user != null;
+	}
+	
 	public void setExtraFilters(Criteria criteria) {
 		
 		criteria.setFetchMode("church", FetchMode.JOIN);

@@ -3,6 +3,8 @@ Ext.define('AboutUs.controller.Authentication', {
 
     views: ['authentication.Login','authentication.Register'],
     
+    stores: ['list.CountryStore'],
+    
      refs: [{
         ref: 'loginForm',
         selector: 'loginForm'
@@ -24,7 +26,7 @@ Ext.define('AboutUs.controller.Authentication', {
      		},
      		'registerForm button[action=register]': {
          		click: this.onRegister
-     		},
+     		}
         });
     },
     
@@ -61,12 +63,10 @@ Ext.define('AboutUs.controller.Authentication', {
 	    	this.getRegisterForm().getForm().submit({
 	    		scope:this,
 	        	success: function(form, action) {
-	        		window.location.href = "";
+	        		window.location.href = "home.action";
 	            },
 	            failure: function(form, action) {
-	            	this.getLoginForm().down('textfield[name=password]').setValue("");
-	            	this.getLoginForm().down('textfield[name=password]').focus(false,1000);
-	            	AboutUs.util.NotificationUtil.showNotificationError(action.result.message);
+	            	AboutUs.util.NotificationUtil.processMessages(action.result.messages);
 	            }
 	        });
     	}else{

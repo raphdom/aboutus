@@ -1,19 +1,15 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 23/Set/2013 20:26:47 by Hibernate Tools 4.0.0
+// Generated 13/Nov/2013 22:02:32 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -34,6 +30,7 @@ public class User implements java.io.Serializable {
 	private Integer id;
 	private Church church;
 	private Person person;
+	private Customer customer;
 	private String email;
 	private String password;
 	private boolean block;
@@ -48,10 +45,8 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	public User(Church church, Person person, String email, String password,
-			boolean block, boolean activation, Date registerDate) {
-		this.church = church;
-		this.person = person;
+	public User(String email, String password, boolean block,
+			boolean activation, Date registerDate) {
 		this.email = email;
 		this.password = password;
 		this.block = block;
@@ -59,13 +54,14 @@ public class User implements java.io.Serializable {
 		this.registerDate = registerDate;
 	}
 
-	public User(Church church, Person person, String email, String password,
-			boolean block, boolean activation, Date registerDate,
-			Date lastvisitDate, Set<Permission> permissions,
+	public User(Church church, Person person, Customer customer, String email,
+			String password, boolean block, boolean activation,
+			Date registerDate, Date lastvisitDate, Set<Permission> permissions,
 			Set<Session> sessions, Set<FolderRole> folderRoles,
 			Set<Group> groups) {
 		this.church = church;
 		this.person = person;
+		this.customer = customer;
 		this.email = email;
 		this.password = password;
 		this.block = block;
@@ -90,7 +86,7 @@ public class User implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "churchId", nullable = false)
+	@JoinColumn(name = "churchId")
 	public Church getChurch() {
 		return this.church;
 	}
@@ -100,13 +96,23 @@ public class User implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "person_id", nullable = false)
+	@JoinColumn(name = "person_id")
 	public Person getPerson() {
 		return this.person;
 	}
 
 	public void setPerson(Person person) {
 		this.person = person;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customerId")
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Column(name = "email", nullable = false)
@@ -193,7 +199,7 @@ public class User implements java.io.Serializable {
 		this.folderRoles = folderRoles;
 	}
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name = "tbl_user_groups", joinColumns = { @JoinColumn(name = "user_id", nullable = false, updatable = false) }, inverseJoinColumns = { @JoinColumn(name = "group_id", nullable = false, updatable = false) })
 	public Set<Group> getGroups() {
 		return this.groups;

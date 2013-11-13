@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 23/Set/2013 20:26:47 by Hibernate Tools 4.0.0
+// Generated 13/Nov/2013 22:02:32 by Hibernate Tools 3.4.0.CR1
 
 import com.jrdevel.aboutus.model.lists.Frequency;
 import java.util.Date;
