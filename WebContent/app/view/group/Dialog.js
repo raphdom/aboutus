@@ -9,13 +9,9 @@ Ext.define('AboutUs.view.group.Dialog', {
     urlSubmit: 'group/create.action',
     
     items:[{
-    	xtype: 'form',
+    	xtype: 'commonform',
         layout: 'form',
         bodyPadding: 10,
-        fieldDefaults: {
-            msgTarget: 'side',
-            labelWidth: 75
-        },
         defaultType: 'textfield',
         items: [
        	{

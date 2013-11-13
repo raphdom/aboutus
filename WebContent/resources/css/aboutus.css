@@ -77,3 +77,7 @@
 .errors-tip .error {
     font-style: italic;
 }
+
+.x-icon-valid-message {
+	background-image: url("../images/tick.png");
+}

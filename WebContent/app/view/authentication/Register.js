@@ -18,6 +18,8 @@ Ext.define('AboutUs.view.authentication.Register', {
         labelWidth: 200
     },
     
+    plugins:['validationMessages'],
+    
     items: [
         {
             allowBlank: false,
@@ -69,7 +71,9 @@ Ext.define('AboutUs.view.authentication.Register', {
         	text:'Registar',
         	action:'register',
         	icon:'resources/images/next.png',
-        	iconAlign: 'right'
+        	iconAlign: 'right',
+        	formBind: true,
+            disabled: true
         	
 	}]
 });

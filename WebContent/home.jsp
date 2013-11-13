@@ -8,7 +8,7 @@
     <script type="text/javascript" src="ext4.2.1/ext-all-dev.js"></script>
     <script type="text/javascript" src="ext4.2.1/ext-theme-neptune.js"></script>
     <script type="text/javascript" src="resources/js/lightview.js"></script>
-    <script type="text/javascript" src="ext4.2.1/locale/ext-lang-pt_PT.js"></script>
+    <script type="text/javascript" src="ext4.2.1/locale/ext-lang-pt_PT.js" charset="utf-8"></script>
     
     <!-- App Files -->
 	<link rel="stylesheet" type="text/css" href="resources/css/aboutus.css">
