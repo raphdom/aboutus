@@ -55,6 +55,20 @@ public class UserController {
 		}
 	}
 	
+	@RequestMapping(value="/user/get.action")
+	public @ResponseBody Map<String,? extends Object> get(User input) throws Exception {
+
+		try{
+			
+			User user = userService.getUser(input.getId());
+			
+			return ExtJSReturn.mapOK(user);
+			
+		} catch (Exception e) {
+
+			return ExtJSReturn.mapError("Error retrieving Groups from database.");
+		}
+	}
 	
 
 }

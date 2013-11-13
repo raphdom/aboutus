@@ -1,8 +1,6 @@
 package com.jrdevel.aboutus.service;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +8,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jrdevel.aboutus.dao.UserDAO;
-import com.jrdevel.aboutus.model.Group;
 import com.jrdevel.aboutus.model.User;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
@@ -76,6 +73,13 @@ public class UserService {
 		User bean = userDAO.getUserByEmail(email);
 		
 		return bean != null;
+		
+	}
+	
+	@Transactional
+	public User getUser(int id){
+		
+		return userDAO.getUserById(id);
 		
 	}
 

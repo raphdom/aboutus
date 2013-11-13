@@ -2,7 +2,6 @@ package com.jrdevel.aboutus.dao;
 
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -34,6 +33,16 @@ public class UserDAO extends GenericDAO<User, Integer>{
 		criteria.setFetchMode("church", FetchMode.JOIN);
 		criteria.setFetchMode("person", FetchMode.JOIN);
 		
+	}
+	
+	public User getUserById(int id){
+		Criteria crit = getSession().createCriteria(getPersistentClass());
+		crit.setFetchMode("person", FetchMode.JOIN);
+		crit.setFetchMode("church", FetchMode.JOIN);
+		crit.setFetchMode("groups", FetchMode.JOIN);
+		crit.setFetchMode("permissions", FetchMode.JOIN);
+		crit.add(Restrictions.eq("id", id));
+		return (User) crit.uniqueResult();
 	}
 
 }

@@ -8,7 +8,6 @@ Ext.define('AboutUs.view.user.TabUserData', {
     closable:false,
     
     items:[{
-    	xtype:'form',
         layout: 'form',
         bodyPadding: 10,
         fieldDefaults: {

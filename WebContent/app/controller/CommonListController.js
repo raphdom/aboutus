@@ -22,9 +22,6 @@ Ext.define('AboutUs.controller.CommonListController', {
 	 		'commonlist button[action=add]': {
 				click: this.onAdd
 			},
-			'commondialog button[action=cancel]': {
-				click: this.onDialogCancel
-			},
 			'commonlist button[action=delete]': {
 				click: this.onDelete
 			},
@@ -34,12 +31,15 @@ Ext.define('AboutUs.controller.CommonListController', {
 			'commonlist':{
 				editRecord: this.onEdit
 			},
-			'commondialog button[action=save]': {
-				click: this.onSave
-			},
 			'usersearch button[action=search]': {
 	 			click: this.onDoSearch
-	 		}
+	 		},
+	 		'commonform button[action=save]': {
+	 			click: this.onSave
+	 		},
+	 		'commonform button[action=cancel]': {
+				click: this.onDialogCancel
+			}
 	    });
 	},
 	
@@ -67,7 +67,7 @@ Ext.define('AboutUs.controller.CommonListController', {
     
     onDialogCancel: function(button, event, options) {
     	console.log('CommonController.onDialogCancel()');
-    	button.up('commonDialog').hide();
+    	button.up('commondialog').close();
     },
     
     onEdit: function(button, record) {
@@ -80,6 +80,13 @@ Ext.define('AboutUs.controller.CommonListController', {
         		id: record.get('id')
     		},
         	success: function(form, response) {
+        		
+        		var titleUpdate = this.getCommonDialog().titleUpdate;
+        		if (titleUpdate != undefined){
+        			var dados = response.result.data;
+        			this.getCommonDialog().setTitle(this.getCommonDialog().titleUpdate);	
+        		}
+        		
 		    	if (this.getController(this.getControllerName()).onGetDataSuccess != undefined){
 		    		this.getController(this.getControllerName()).onGetDataSuccess(response);	
 		    	}

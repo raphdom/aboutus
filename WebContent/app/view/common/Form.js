@@ -19,6 +19,9 @@ Ext.define('AboutUs.view.common.Form', {
         },
         fielderrorchange: function() {
             this.updateErrorState();
+        },
+        afterrender:function(){
+        	this.updateErrorState();
         }
     },
 
@@ -26,7 +29,6 @@ Ext.define('AboutUs.view.common.Form', {
         var me = this,
             errorCmp, fields, errors;
 
-        if (me.hasBeenDirty || me.getForm().isDirty()) { //prevents showing global error when form first loads
             errorCmp = me.down('#formErrorState');
             fields = me.getForm().getFields();
             errors = [];
@@ -37,7 +39,6 @@ Ext.define('AboutUs.view.common.Form', {
             });
             errorCmp.setErrors(errors);
             me.hasBeenDirty = true;
-        }
     },
     
     dockedItems: [{
@@ -100,36 +101,16 @@ Ext.define('AboutUs.view.common.Form', {
                     tip.hide();
                 }
             }
-        }, {
+        },{
+        	xtype:'button',
+        	text:'Cancelar',
+        	action:'cancel'
+    	}, {
             xtype: 'button',
             formBind: true,
             disabled: true,
             text: 'Guardar',
-            width: 100,
-            handler: function() {
-                var form = this.up('form').getForm();
-
-                /* Normally we would submit the form to the server here and handle the response...
-                form.submit({
-                    clientValidation: true,
-                    url: 'register.php',
-                    success: function(form, action) {
-                       //...
-                    },
-                    failure: function(form, action) {
-                        //...
-                    }
-                });
-                */
-
-                if (form.isValid()) {
-                    var out = [];
-                    Ext.Object.each(form.getValues(), function(key, value){
-                        out.push(key + '=' + value);
-                    });
-                    Ext.Msg.alert('Submitted Values', out.join('<br />'));
-                }
-            }
+            action:'save'
         }]
     }]
     

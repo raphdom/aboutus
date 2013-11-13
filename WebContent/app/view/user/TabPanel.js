@@ -5,8 +5,6 @@ Ext.define('AboutUs.view.user.TabPanel', {
     
     activeTab: 0,
     
-    width:400,
-    
     items:[{
     	xtype:'usertabuserdata'
     },{

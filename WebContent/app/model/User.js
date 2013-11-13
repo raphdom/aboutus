@@ -7,6 +7,10 @@ Ext.define('AboutUs.model.User', {
     	},{
     		name:'email',
     		type:'string'
+		},{
+    		name:'churchId',
+    		type:'string',
+    		mapping:'church.id'
     	},{
     		name:'churchName',
     		type:'string',

@@ -3,7 +3,10 @@ Ext.define('AboutUs.view.user.Dialog', {
     
     alias: 'widget.userdialog',
     
-    title: 'Utilizador',
+    title: 'Novo Utilizador',
+    titleUpdate: 'Detalhes do utilizador: {email}',
+    
+    icon:'resources/images/user.png',
     
     width:500,
     height:300,
@@ -14,9 +17,10 @@ Ext.define('AboutUs.view.user.Dialog', {
     urlSubmit: 'user/create.action',
     
     items:[{
-    
-    	xtype: 'usertabpanel'
-        
+    	xtype:'commonform',
+    	items:[{
+    		xtype: 'usertabpanel'
+    	}]
     }]
     
 });
