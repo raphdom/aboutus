@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 13/Nov/2013 22:02:32 by Hibernate Tools 3.4.0.CR1
+// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
 
 import com.jrdevel.aboutus.model.lists.Country;
 import java.util.Date;
@@ -25,6 +25,7 @@ public class Register implements java.io.Serializable {
 
 	private Integer id;
 	private Country country;
+	private User user;
 	private String email;
 	private String password;
 	private String churchName;
@@ -50,10 +51,11 @@ public class Register implements java.io.Serializable {
 		this.registerDate = registerDate;
 	}
 
-	public Register(Country country, String email, String password,
+	public Register(Country country, User user, String email, String password,
 			String churchName, String churchAddress, String nameResp,
 			String siteAlias, String qtdMembers, Date registerDate) {
 		this.country = country;
+		this.user = user;
 		this.email = email;
 		this.password = password;
 		this.churchName = churchName;
@@ -83,6 +85,16 @@ public class Register implements java.io.Serializable {
 
 	public void setCountry(Country country) {
 		this.country = country;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "userId")
+	public User getUser() {
+		return this.user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	@Column(name = "email", nullable = false)

@@ -36,21 +36,13 @@ public class AuthenticationController {
 
 		try{
 
-			User userDB = authenticationService.getUser(user.getEmail());
+			ResultObject result = authenticationService.login(user,session);
 			
-			if (user.getPassword().equals(userDB.getPassword())){
-				if (!user.isActivation() && user.getCustomer()==null){
-					
-				}
-				session.setAttribute("user", userDB);
-				return ExtJSReturn.mapOK();
-			}else{
-				return ExtJSReturn.mapError("Palavra-chave incorreta!");
-			}
+			return result.toMap();
 			
 		} catch (Exception e) {
-
-			return ExtJSReturn.mapError("O Email não existe registado no sistema!");
+			e.printStackTrace();
+			return ExtJSReturn.mapError("Erro no login");
 		}
 	}
 	

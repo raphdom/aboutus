@@ -18,7 +18,7 @@
     		height:200px;
     		margin-left: auto ;
 		  	margin-right: auto ;
-		  	
+		  	background-image: url("resources/images/aboutUsLogin.png");
 			margin-top:50px;
 			margin-bottom:20px;
     	}

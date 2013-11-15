@@ -8,6 +8,7 @@ import com.jrdevel.aboutus.dao.ChurchDAO;
 import com.jrdevel.aboutus.model.Church;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
+import com.jrdevel.aboutus.util.ResultObject;
 
 /**
  * @author Raphael Domingues
@@ -37,6 +38,21 @@ public class ChurchService {
 
 		return churchDAO.findAllByCriteria(params);
 		
+	}
+	
+	@Transactional()
+	public ResultObject update(Church church){
+		ResultObject result = new ResultObject();
+		
+		boolean isUpdate = church.getId() != null;
+		
+		if (!isUpdate){
+			
+		}
+		
+		churchDAO.makePersistent(church);
+		
+		return result;
 	}
 
 

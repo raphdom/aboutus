@@ -55,5 +55,6 @@
         <mapping class="com.jrdevel.aboutus.model.Article" />
         <mapping class="com.jrdevel.aboutus.model.Register" />
         <mapping class="com.jrdevel.aboutus.model.Customer" />
+        <mapping class="com.jrdevel.aboutus.model.Plan" />
     </session-factory>
 </hibernate-configuration>

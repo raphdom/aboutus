@@ -1,8 +1,9 @@
 package com.jrdevel.aboutus.model.lists;
 
-// Generated 13/Nov/2013 22:02:32 by Hibernate Tools 3.4.0.CR1
+// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
 
 import com.jrdevel.aboutus.model.Access;
+import com.jrdevel.aboutus.model.Church;
 import com.jrdevel.aboutus.model.Person;
 import com.jrdevel.aboutus.model.Register;
 import com.jrdevel.aboutus.model.lists.translate.CountryTranslate;
@@ -26,6 +27,7 @@ public class Country implements java.io.Serializable {
 	private Set<Access> accesses = new HashSet<Access>(0);
 	private Set<Register> registers = new HashSet<Register>(0);
 	private Set<Person> persons = new HashSet<Person>(0);
+	private Set<Church> churches = new HashSet<Church>(0);
 	private Set<CountryTranslate> countryTranslates = new HashSet<CountryTranslate>(
 			0);
 
@@ -37,11 +39,13 @@ public class Country implements java.io.Serializable {
 	}
 
 	public Country(String id, Set<Access> accesses, Set<Register> registers,
-			Set<Person> persons, Set<CountryTranslate> countryTranslates) {
+			Set<Person> persons, Set<Church> churches,
+			Set<CountryTranslate> countryTranslates) {
 		this.id = id;
 		this.accesses = accesses;
 		this.registers = registers;
 		this.persons = persons;
+		this.churches = churches;
 		this.countryTranslates = countryTranslates;
 	}
 
@@ -80,6 +84,15 @@ public class Country implements java.io.Serializable {
 
 	public void setPersons(Set<Person> persons) {
 		this.persons = persons;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "country")
+	public Set<Church> getChurches() {
+		return this.churches;
+	}
+
+	public void setChurches(Set<Church> churches) {
+		this.churches = churches;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "country")

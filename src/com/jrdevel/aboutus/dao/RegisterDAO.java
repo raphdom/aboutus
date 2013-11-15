@@ -1,10 +1,12 @@
 package com.jrdevel.aboutus.dao;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.jrdevel.aboutus.model.Register;
+import com.jrdevel.aboutus.model.User;
 
 /**
  * @author Raphael Domingues
@@ -26,6 +28,11 @@ public class RegisterDAO extends GenericDAO<Register, Integer>{
 		criteria.add(Restrictions.eq("email", email));
 		Register register = (Register) criteria.uniqueResult(); 
 		return register != null;
+	}
+	
+	public Register getRegisterByUser(User user){
+		Criterion crit = Restrictions.eq("user.id", user.getId());
+		return findUniqueByCriteria(crit);
 	}
 	
 

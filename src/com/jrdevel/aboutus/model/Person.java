@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 13/Nov/2013 22:02:32 by Hibernate Tools 3.4.0.CR1
+// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
 
 import com.jrdevel.aboutus.model.lists.CivilStatus;
 import com.jrdevel.aboutus.model.lists.Country;
@@ -32,6 +32,7 @@ public class Person implements java.io.Serializable {
 	private MemberType memberType;
 	private Church church;
 	private CivilStatus civilStatus;
+	private Customer customer;
 	private Country country;
 	private String name;
 	private boolean isMember;
@@ -55,9 +56,11 @@ public class Person implements java.io.Serializable {
 	public Person() {
 	}
 
-	public Person(Church church, String name, boolean isMember, int nif,
-			boolean consolidated, int state, boolean male, boolean baptized) {
+	public Person(Church church, Customer customer, String name,
+			boolean isMember, int nif, boolean consolidated, int state,
+			boolean male, boolean baptized) {
 		this.church = church;
+		this.customer = customer;
 		this.name = name;
 		this.isMember = isMember;
 		this.nif = nif;
@@ -68,16 +71,18 @@ public class Person implements java.io.Serializable {
 	}
 
 	public Person(MemberType memberType, Church church,
-			CivilStatus civilStatus, Country country, String name,
-			boolean isMember, int nif, Date birthday, Date baptismdate,
-			String profession, boolean consolidated, int state, boolean male,
-			boolean baptized, Date arrivalChurchDate, String precedingChurch,
-			String observations, Set<MemberFunction> memberFunctions,
+			CivilStatus civilStatus, Customer customer, Country country,
+			String name, boolean isMember, int nif, Date birthday,
+			Date baptismdate, String profession, boolean consolidated,
+			int state, boolean male, boolean baptized, Date arrivalChurchDate,
+			String precedingChurch, String observations,
+			Set<MemberFunction> memberFunctions,
 			Set<PersonContacts> personContactses, Set<User> users,
 			Set<Address> addresses) {
 		this.memberType = memberType;
 		this.church = church;
 		this.civilStatus = civilStatus;
+		this.customer = customer;
 		this.country = country;
 		this.name = name;
 		this.isMember = isMember;
@@ -137,6 +142,16 @@ public class Person implements java.io.Serializable {
 
 	public void setCivilStatus(CivilStatus civilStatus) {
 		this.civilStatus = civilStatus;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customerId", nullable = false)
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)

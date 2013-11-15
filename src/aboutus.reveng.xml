@@ -104,12 +104,7 @@
 	</table>
 	<table name="tbl_batches" class="com.jrdevel.aboutus.model.Batch"></table>
 	<table name="tbl_access" class="com.jrdevel.aboutus.model.Access"></table>
-	<table name="tbl_register"
-		class="com.jrdevel.aboutus.model.Register">
-	</table>
-	<table name="tbl_customer" class="com.jrdevel.aboutus.model.Customer">
-		<column name="id"></column>
-		<column name="name"></column>
-		<column name="plan"></column>
-	</table>
+	<table name="tbl_register"	class="com.jrdevel.aboutus.model.Register"></table>
+	<table name="tbl_customer"	class="com.jrdevel.aboutus.model.Customer"></table>
+	<table name="tbl_plan" class="com.jrdevel.aboutus.model.Plan"></table>
 </hibernate-reverse-engineering>

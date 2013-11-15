@@ -1,7 +1,8 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 13/Nov/2013 22:02:32 by Hibernate Tools 3.4.0.CR1
+// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
 
+import com.jrdevel.aboutus.model.lists.Country;
 import java.util.HashSet;
 import java.util.Set;
 import javax.persistence.Column;
@@ -23,35 +24,37 @@ import javax.persistence.Table;
 public class Church implements java.io.Serializable {
 
 	private Integer id;
+	private Country country;
 	private File file;
+	private Customer customer;
 	private String name;
 	private String completeName;
 	private String address;
 	private String state;
-	private String country;
 	private String postalCode;
-	private int nif;
+	private Integer nif;
 	private Set<Person> persons = new HashSet<Person>(0);
 	private Set<User> users = new HashSet<User>(0);
 
 	public Church() {
 	}
 
-	public Church(String name, String completeName, int nif) {
+	public Church(Customer customer, String name, String completeName) {
+		this.customer = customer;
 		this.name = name;
 		this.completeName = completeName;
-		this.nif = nif;
 	}
 
-	public Church(File file, String name, String completeName, String address,
-			String state, String country, String postalCode, int nif,
-			Set<Person> persons, Set<User> users) {
+	public Church(Country country, File file, Customer customer, String name,
+			String completeName, String address, String state,
+			String postalCode, Integer nif, Set<Person> persons, Set<User> users) {
+		this.country = country;
 		this.file = file;
+		this.customer = customer;
 		this.name = name;
 		this.completeName = completeName;
 		this.address = address;
 		this.state = state;
-		this.country = country;
 		this.postalCode = postalCode;
 		this.nif = nif;
 		this.persons = persons;
@@ -70,6 +73,16 @@ public class Church implements java.io.Serializable {
 	}
 
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "country")
+	public Country getCountry() {
+		return this.country;
+	}
+
+	public void setCountry(Country country) {
+		this.country = country;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "logo")
 	public File getFile() {
 		return this.file;
@@ -77,6 +90,16 @@ public class Church implements java.io.Serializable {
 
 	public void setFile(File file) {
 		this.file = file;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customerId", nullable = false)
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Column(name = "name", nullable = false)
@@ -115,15 +138,6 @@ public class Church implements java.io.Serializable {
 		this.state = state;
 	}
 
-	@Column(name = "country", length = 100)
-	public String getCountry() {
-		return this.country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
 	@Column(name = "postalCode", length = 100)
 	public String getPostalCode() {
 		return this.postalCode;
@@ -133,12 +147,12 @@ public class Church implements java.io.Serializable {
 		this.postalCode = postalCode;
 	}
 
-	@Column(name = "nif", nullable = false)
-	public int getNif() {
+	@Column(name = "nif")
+	public Integer getNif() {
 		return this.nif;
 	}
 
-	public void setNif(int nif) {
+	public void setNif(Integer nif) {
 		this.nif = nif;
 	}
 

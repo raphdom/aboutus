@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 13/Nov/2013 22:02:32 by Hibernate Tools 3.4.0.CR1
+// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,20 +23,26 @@ import javax.persistence.Table;
 public class Customer implements java.io.Serializable {
 
 	private Integer id;
+	private Plan plan;
 	private String name;
-	private Integer plan;
+	private Set<Church> churches = new HashSet<Church>(0);
+	private Set<Person> persons = new HashSet<Person>(0);
 	private Set<User> users = new HashSet<User>(0);
 
 	public Customer() {
 	}
 
-	public Customer(String name) {
+	public Customer(Plan plan, String name) {
+		this.plan = plan;
 		this.name = name;
 	}
 
-	public Customer(String name, Integer plan, Set<User> users) {
-		this.name = name;
+	public Customer(Plan plan, String name, Set<Church> churches,
+			Set<Person> persons, Set<User> users) {
 		this.plan = plan;
+		this.name = name;
+		this.churches = churches;
+		this.persons = persons;
 		this.users = users;
 	}
 
@@ -49,6 +57,16 @@ public class Customer implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "plan", nullable = false)
+	public Plan getPlan() {
+		return this.plan;
+	}
+
+	public void setPlan(Plan plan) {
+		this.plan = plan;
+	}
+
 	@Column(name = "name", nullable = false)
 	public String getName() {
 		return this.name;
@@ -58,13 +76,22 @@ public class Customer implements java.io.Serializable {
 		this.name = name;
 	}
 
-	@Column(name = "plan")
-	public Integer getPlan() {
-		return this.plan;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Church> getChurches() {
+		return this.churches;
 	}
 
-	public void setPlan(Integer plan) {
-		this.plan = plan;
+	public void setChurches(Set<Church> churches) {
+		this.churches = churches;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Person> getPersons() {
+		return this.persons;
+	}
+
+	public void setPersons(Set<Person> persons) {
+		this.persons = persons;
 	}
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")

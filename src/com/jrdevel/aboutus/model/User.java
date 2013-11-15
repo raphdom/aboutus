@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 13/Nov/2013 22:02:32 by Hibernate Tools 3.4.0.CR1
+// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -37,6 +37,7 @@ public class User implements java.io.Serializable {
 	private boolean activation;
 	private Date registerDate;
 	private Date lastvisitDate;
+	private Set<Register> registers = new HashSet<Register>(0);
 	private Set<Permission> permissions = new HashSet<Permission>(0);
 	private Set<Session> sessions = new HashSet<Session>(0);
 	private Set<FolderRole> folderRoles = new HashSet<FolderRole>(0);
@@ -56,9 +57,9 @@ public class User implements java.io.Serializable {
 
 	public User(Church church, Person person, Customer customer, String email,
 			String password, boolean block, boolean activation,
-			Date registerDate, Date lastvisitDate, Set<Permission> permissions,
-			Set<Session> sessions, Set<FolderRole> folderRoles,
-			Set<Group> groups) {
+			Date registerDate, Date lastvisitDate, Set<Register> registers,
+			Set<Permission> permissions, Set<Session> sessions,
+			Set<FolderRole> folderRoles, Set<Group> groups) {
 		this.church = church;
 		this.person = person;
 		this.customer = customer;
@@ -68,6 +69,7 @@ public class User implements java.io.Serializable {
 		this.activation = activation;
 		this.registerDate = registerDate;
 		this.lastvisitDate = lastvisitDate;
+		this.registers = registers;
 		this.permissions = permissions;
 		this.sessions = sessions;
 		this.folderRoles = folderRoles;
@@ -169,6 +171,15 @@ public class User implements java.io.Serializable {
 
 	public void setLastvisitDate(Date lastvisitDate) {
 		this.lastvisitDate = lastvisitDate;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+	public Set<Register> getRegisters() {
+		return this.registers;
+	}
+
+	public void setRegisters(Set<Register> registers) {
+		this.registers = registers;
 	}
 
 	@ManyToMany(fetch = FetchType.LAZY)

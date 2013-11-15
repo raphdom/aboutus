@@ -12,7 +12,7 @@ import java.util.Map;
 public class ResultObject {
 	
 	private List<Message> messages = new ArrayList<Message>();
-	private boolean success = false;
+	private boolean success = true;
 	private List<Object> data;
 	private int total = 0;
 	
