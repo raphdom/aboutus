@@ -1,7 +1,10 @@
 Ext.define('AboutUs.controller.Authentication', {
     extend: 'Ext.app.Controller',
 
-    views: ['authentication.Login','authentication.Register'],
+    views: ['authentication.Login',
+    		'authentication.Register',
+    		'authentication.TermsOfUseDialog',
+    		'authentication.RegisterWindow'],
     
     stores: ['list.CountryStore'],
     
@@ -11,6 +14,12 @@ Ext.define('AboutUs.controller.Authentication', {
     },{
     	ref: 'registerForm',
         selector: 'registerForm'
+    },{
+    	ref: 'termsWindow',
+        selector: 'termswindow'
+    },{
+    	ref: 'registerWindow',
+        selector: 'registerwindow'
     }],
     
     init: function() {
@@ -24,8 +33,20 @@ Ext.define('AboutUs.controller.Authentication', {
      		'loginForm textfield': {
          		specialkey: this.submitOnEnter
      		},
+     		'registerForm textfield[name=churchName]': {
+         		afterrender: this.onEmailAfterRender
+     		},
      		'registerForm button[action=register]': {
          		click: this.onRegister
+     		},
+     		'registerForm textfield[name=siteAlias]': {
+         		keyup: this.onSiteAliasKeyUp
+     		},
+     		'termswindow button[action=decline]':{
+     			click: this.onDeclineTerms
+     		},
+     		'termswindow button[action=accept]':{
+     			click: this.onAcceptTerms
      		}
         });
     },
@@ -49,7 +70,7 @@ Ext.define('AboutUs.controller.Authentication', {
     },
     
     onEmailAfterRender: function(field){
-    	field.focus(false, 1000);
+    	field.focus(false, 500);
     },
     
     submitOnEnter: function(field, event) {
@@ -63,7 +84,8 @@ Ext.define('AboutUs.controller.Authentication', {
 	    	this.getRegisterForm().getForm().submit({
 	    		scope:this,
 	        	success: function(form, action) {
-	        		window.location.href = "home.action";
+	        		this.getRegisterForm().hide();
+					Ext.create('AboutUs.view.authentication.RegisterWindow').show();
 	            },
 	            failure: function(form, action) {
 	            	AboutUs.util.NotificationUtil.processMessages(action.result.messages);
@@ -72,6 +94,24 @@ Ext.define('AboutUs.controller.Authentication', {
     	}else{
     		AboutUs.util.NotificationUtil.showNotificationError("Preencha todos os campos obrigatórios!");
     	}
+	},
+	
+	onDeclineTerms:function(button){
+		this.getTermsWindow().close();
+        this.getRegisterForm().down('[name=acceptTerms]').setValue(false);
+	},
+	
+	onAcceptTerms: function(button){
+		this.getTermsWindow().close();
+        this.getRegisterForm().down('[name=acceptTerms]').setValue(true);
+	},
+	
+	onSiteAliasKeyUp:function(textfield, e, eOpts){
+		if (textfield.getValue()!=""){
+			this.getRegisterForm().down('[id=aliasNameEx]').setValue(textfield.getValue() + "/");
+		}else{
+			this.getRegisterForm().down('[id=aliasNameEx]').setValue("");
+		}
 	}
     
 });

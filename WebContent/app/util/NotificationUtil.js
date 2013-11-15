@@ -51,17 +51,16 @@ Ext.define('AboutUs.util.NotificationUtil', {
     
     showNotificationError: function(message) {
     	Ext.create('widget.uxNotification', {
-				title: '',
 				position: 't',
 				slideInDuration:100,
 				slideBackDuration: 100,
-				closable: false,
+				closable: true,
 				resizable:false,
 				shadow:true,
-				icon:'resources/images/cross.png',
+				icon:'resources/images/error.png',
 				title:'Erro!',
 				manager: 'demo1',
-				autoCloseDelay: 10000,
+				autoCloseDelay: 100000,
 				spacing: 20,
 				cls:'ux-notification-window-error',
 				html: message

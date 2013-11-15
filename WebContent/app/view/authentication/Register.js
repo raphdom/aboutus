@@ -3,11 +3,11 @@ Ext.define('AboutUs.view.authentication.Register', {
     xtype: 'registerForm',
     
     url:'register.action',
-    title: 'Registar',
+    title: 'Registo',
     frame:true,
     width: 700,
     bodyPadding: 10,
-    icon:'resources/images/lock.png',
+    icon:'resources/images/church.png',
     
     defaultType: 'textfield',
     defaults: {
@@ -36,7 +36,7 @@ Ext.define('AboutUs.view.authentication.Register', {
 		        },
 		        {
 		        	allowBlank: false,
-		            fieldLabel: 'Morada da Igreja',
+		            fieldLabel: 'Morada',
 		            name: 'churchAddress'
 		        },
 		        {
@@ -50,9 +50,37 @@ Ext.define('AboutUs.view.authentication.Register', {
 		            name: 'country',
 		            queryMode:'local'
 		        },{
+		        	xtype: 'fieldcontainer',
 		        	allowBlank: false,
 		            fieldLabel: 'Nome do site',
-		            name: 'siteAlias'
+		            layout:'hbox',
+		        	items:[{
+		        		xtype:'textfield',
+		        		allowBlank: false,
+		        		fieldLabel: 'Nome do site',
+		        		hideLabel:true,
+		        		name: 'siteAlias',
+		        		enableKeyEvents:true,
+		        		flex:1
+		        	},{
+		        		xtype: 'splitter'
+		        	},{
+		        		xtype:'displayfield',
+		        		value:'http://www.aboutuschurch.com/',
+		        		fieldStyle: {
+				            'font-size': '10px',
+				            'margin-top': '6px',
+				            color:'#BBBBBB'
+				        },
+		        		flex:1
+	        		},{
+		        		xtype:'displayfield',
+		        		id:'aliasNameEx',
+		        		fieldStyle: {
+				            color:'#157FCC'
+				        },
+		        		flex:1
+		        	}]
 		        },
 		        {
 		            fieldLabel: 'Quantos membro tem sua igreja?',
@@ -84,16 +112,42 @@ Ext.define('AboutUs.view.authentication.Register', {
 		        	allowBlank: false,
 		            fieldLabel: 'Confirmar palavra-chave',
 		            name: 'passwordConfirm',
-		            inputType: 'password'
+		            inputType: 'password',
+					validator: function(value) {
+		                var password1 = this.previousSibling('[name=password]');
+		                return (value === password1.getValue()) ? true : 'Palavra-chave não corresponde.'
+		            }		            
 		        },{
 		        	allowBlank: false,
 		            fieldLabel: 'Nome completo',
 		            name: 'nameResp'
 		        }]
+	},{
+	    xtype: 'checkboxfield',
+	    name: 'acceptTerms',
+	    fieldLabel: 'Termos e Condições',
+	    hideLabel: true,
+	    margin: '15 0 0 0',
+	    boxLabel: 'Eu li e aceito os <a href="#" class="terms">Termos de utilização</a>.',
+        getErrors: function() {
+            return this.getValue() ? [] : ['Você deve aceitar os termos de utilização']
+        },
+        listeners: {
+                click: {
+                    element: 'boxLabelEl',
+                    fn: function(e) {
+                        var target = e.getTarget('.terms');
+                        if (target) {
+                        	Ext.create('AboutUs.view.authentication.TermsOfUseDialog').show();
+                        }
+                        e.preventDefault();
+                    }
+                }
+        }
 	}],
     
     buttons: [{ 
-        	text:'Registar',
+        	text:'Enviar Registo',
         	action:'register',
         	icon:'resources/images/next.png',
         	iconAlign: 'right',
