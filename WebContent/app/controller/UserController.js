@@ -59,6 +59,16 @@ Ext.define('AboutUs.controller.UserController', {
 		form.getForm().findField('groups').setValue(Ext.encode(groupsJson));
 		form.getForm().findField('permissions').setValue(Ext.encode(permissionsJson));
 		
+	},
+	
+	onGetDataSuccess:function(response){
+		var data = response.result.data;
+		
+		var form = this.getUserDialog().down('form');
+		
+//		form.down('combo[id=person]').setValue(data.person.id);
+//		form.down('combo[id=church]').setValue(data.church.id);
+		
 	}
     
 });

@@ -2,7 +2,6 @@ Ext.define('AboutUs.store.ChurchStore', {
     extend: 'Ext.data.Store',
     model: 'AboutUs.model.Church',
     
-    autoLoad:true,
     remoteFilter:true,
     remoteSort:true,
     pageSize: 35,

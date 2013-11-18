@@ -61,7 +61,7 @@ Ext.define('AboutUs.controller.Authentication', {
 	            failure: function(form, action) {
 	            	this.getLoginForm().down('textfield[name=password]').setValue("");
 	            	this.getLoginForm().down('textfield[name=password]').focus(false,1000);
-	            	AboutUs.util.NotificationUtil.showNotificationError(action.result.message);
+	            	AboutUs.util.NotificationUtil.processMessages(action.result.messages);
 	            }
 	        });
     	}else{

@@ -23,36 +23,36 @@ import com.jrdevel.aboutus.util.ResultObject;
  */
 @Controller
 public class AuthenticationController {
-	
+
 	private AuthenticationService authenticationService;
-	
+
 	@Autowired
 	public void setContactService(AuthenticationService authenticationService) {
 		this.authenticationService = authenticationService;
 	}
-	
+
 	@RequestMapping(value="/login.action")
 	public @ResponseBody Map<String,? extends Object> login(User user, HttpSession session) throws Exception {
 
 		try{
 
-			ResultObject result = authenticationService.login(user,session);
-			
+			ResultObject result = authenticationService.login(user);
+
 			return result.toMap();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ExtJSReturn.mapError("Erro no login");
 		}
 	}
-	
+
 	@RequestMapping(value="/register.action")
 	public @ResponseBody Map<String,? extends Object> register(Register register, HttpSession session) throws Exception {
 
 		try{
-			
+
 			ResultObject result = authenticationService.register(register);
-			
+
 			return result.toMap();
 
 		} catch (Exception e) {
@@ -60,12 +60,11 @@ public class AuthenticationController {
 			return ExtJSReturn.mapError("O Email não existe registado no sistema!");
 		}
 	}
-	
+
 	@RequestMapping(value="/logout.action")
 	public ModelAndView logout(HttpSession session){
-		
-		session.setAttribute("user", null);
-		
+
+		session.setAttribute("scopedTarget.userSession", null);
 		return new ModelAndView(new RedirectView("")); 
 	}
 

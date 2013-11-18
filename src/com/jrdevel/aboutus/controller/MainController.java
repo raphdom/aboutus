@@ -2,12 +2,9 @@ package com.jrdevel.aboutus.controller;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import com.jrdevel.aboutus.model.User;
 
 /**
  * @author Raphael Domingues
@@ -16,15 +13,11 @@ import com.jrdevel.aboutus.model.User;
 @Controller
 public class MainController {
 	
-	
-	@Autowired
-	private User userSession;
-	
 	@RequestMapping(value="/home.action")
 	public ModelAndView home(HttpSession session) throws Exception {
 		
-		if (userSession.getId()==null){
-			return new ModelAndView("login");
+		if (session.getAttribute("user")==null){
+			return new ModelAndView("home");
 		}else{
 			return new ModelAndView("home");
 		}

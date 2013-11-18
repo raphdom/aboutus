@@ -3,6 +3,8 @@ Ext.define('AboutUs.view.user.TabUserData', {
     
     alias: 'widget.usertabuserdata',
     
+    requires:['AboutUs.view.component.ChurchCombo'],
+    
     title:'Dados',
     
     closable:false,
@@ -27,27 +29,17 @@ Ext.define('AboutUs.view.user.TabUserData', {
         },{
             fieldLabel: 'Pessoa',
             name: 'person.id',
+            id:'person',
             xtype:'combo',
             allowBlank: false,
             store:'PersonStore',
             displayField:'name',
             valueField:'id'
         },{
-        	xtype:'combo',
+        	xtype:'churchcombo',
         	id:'church',
             fieldLabel: 'Igreja',
-            name: 'church.id',
-            allowBlank: false,
-            displayField:'name',
-            valueField:'id',
-            store:'ChurchStore',
-            listeners:{
-            	change:function(combo, newValue, oldValue, eOpts){
-            		combo.suspendEvent('change');
-            		combo.setValue(newValue.name);
-            		combo.resumeEvent('change');
-            	}
-            }
+            allowBlank: false
         },{
 			name : 'groups',
 			hidden:true

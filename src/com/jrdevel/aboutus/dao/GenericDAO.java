@@ -19,6 +19,8 @@ import org.hibernate.persister.entity.AbstractEntityPersister;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jrdevel.aboutus.model.Audit;
+import com.jrdevel.aboutus.model.Permission;
+import com.jrdevel.aboutus.model.User;
 import com.jrdevel.aboutus.util.Filter;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
@@ -44,6 +46,9 @@ public abstract class GenericDAO<T, PK extends Serializable>{
 	public Class<T> getPersistentClass() {
 		return persistentClass;
 	}
+	
+	@Autowired
+	private User userSession;
 
 //	@Autowired
 //	public void setSessionFactory(SessionFactory sessionFactory) {
@@ -82,6 +87,9 @@ public abstract class GenericDAO<T, PK extends Serializable>{
 		int count = setPagingInfo(criteria);
 		criteria.setFirstResult(params.getStart());
 		criteria.setMaxResults(params.getLimit());
+		if (this.getPersistentClass() != Permission.class){
+			criteria.add(Restrictions.eq("customer.id", userSession.getCustomer().getId()));
+		}
 		criteria.setProjection(null);
 		criteria.setResultTransformer(Criteria.ROOT_ENTITY);
 		return new ListResult<T>(criteria.list(), count);
