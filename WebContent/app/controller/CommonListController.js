@@ -1,7 +1,7 @@
 Ext.define('AboutUs.controller.CommonListController', {
     extend: 'Ext.app.Controller',
     
-    views: ['common.List','common.Dialog', 'common.Form'],
+    views: ['common.List','common.Dialog', 'common.Form','common.CriteriaContainer'],
     
     refs: [{
         ref: 'commonList',
@@ -15,6 +15,9 @@ Ext.define('AboutUs.controller.CommonListController', {
     },{
     	ref: 'commonForm',
         selector: 'commonform'
+    },{
+    	ref: 'criteriaContainer',
+        selector: 'criteriacontainer'
     }],
     
 	 init: function() {
@@ -27,6 +30,9 @@ Ext.define('AboutUs.controller.CommonListController', {
 			},
 			'commonlist button[action=search]': {
 				click: this.onSearch
+			},
+			'commonlist splitbutton[action=search] menu menucheckitem': {
+				checkchange: this.onSearchCheckField
 			},
 			'commonlist':{
 				editRecord: this.onEdit
@@ -164,6 +170,14 @@ Ext.define('AboutUs.controller.CommonListController', {
         } else {
         	store.clearFilter();
         }
+    },
+    
+    onSearchCheckField:function(menuItem, checked, options){
+    	var field = Ext.create('Ext.form.field.Text',{
+    		fieldLabel: menuItem.header,
+			name : menuItem.dataIndex
+    	});
+    	this.getCriteriaContainer().add(field);
     }
     
 });

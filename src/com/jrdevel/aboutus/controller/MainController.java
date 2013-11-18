@@ -17,7 +17,7 @@ public class MainController {
 	public ModelAndView home(HttpSession session) throws Exception {
 		
 		if (session.getAttribute("user")==null){
-			return new ModelAndView("login");
+			return new ModelAndView("home");
 		}else{
 			return new ModelAndView("home");
 		}
