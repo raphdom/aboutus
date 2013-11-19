@@ -7,6 +7,9 @@ Ext.define('AboutUs.controller.CommonListController', {
         ref: 'commonList',
         selector: 'commonlist'
     },{
+    	ref: 'commonGrid',
+        selector: 'commonlist grid'
+    },{
     	ref: 'commonDialog',
         selector: 'commondialog'
     },{
@@ -29,7 +32,7 @@ Ext.define('AboutUs.controller.CommonListController', {
 				click: this.onDelete
 			},
 			'commonlist button[action=search]': {
-				click: this.onSearch
+				click: this.onDoSearch
 			},
 			'commonlist splitbutton[action=search] menu menucheckitem': {
 				checkchange: this.onSearchCheckField
@@ -37,9 +40,6 @@ Ext.define('AboutUs.controller.CommonListController', {
 			'commonlist':{
 				editRecord: this.onEdit
 			},
-			'usersearch button[action=search]': {
-	 			click: this.onDoSearch
-	 		},
 	 		'commonform button[action=save]': {
 	 			click: this.onSave
 	 		},
@@ -104,7 +104,7 @@ Ext.define('AboutUs.controller.CommonListController', {
     
     onDelete: function(button, event, options) {
     	console.log('CommonController.onDelete()');
-    	if (this.getCommonList().getSelectionModel().getSelection().length > 0){
+    	if (this.getCommonGrid().getSelectionModel().getSelection().length > 0){
     		
     	}else{
     		AboutUs.util.NotificationUtil.showNotificationError("Você deve selecionar um registo.");
@@ -137,7 +137,7 @@ Ext.define('AboutUs.controller.CommonListController', {
         	scope:this,
         	success: function(form, action) {
         		win.hide();
-        		this.getCommonList().getStore().reload();
+        		this.getCommonGrid().getStore().reload();
             },
             failure: function(form, action) {
             	AboutUs.util.NotificationUtil.processMessages(action.result.messages);
@@ -148,9 +148,8 @@ Ext.define('AboutUs.controller.CommonListController', {
     
     onDoSearch: function(button, event, options) {
     	console.log('CommonController.onDoSearch()');
-    	var win = this.getCommonsearch();
-        var store = this.getCommonList().store;
-        var form = win.down('form');
+        var store = this.getCommonGrid().store;
+        var form = this.getCriteriaContainer();
         var values = form.getValues();
         var filters = [];
  
@@ -162,8 +161,6 @@ Ext.define('AboutUs.controller.CommonListController', {
         	}
         }
  
-        win.hide();
- 
         if (filters.length) {
         	store.clearFilter(true);
         	store.filter(filters);
@@ -173,11 +170,24 @@ Ext.define('AboutUs.controller.CommonListController', {
     },
     
     onSearchCheckField:function(menuItem, checked, options){
-    	var field = Ext.create('Ext.form.field.Text',{
-    		fieldLabel: menuItem.header,
-			name : menuItem.dataIndex
-    	});
-    	this.getCriteriaContainer().add(field);
+    	if (checked){
+    		if (!menuItem.criteriaXtype){
+    			menuItem.criteriaXtype= 'textfield'
+    		}
+	    	var field = Ext.widget(menuItem.criteriaXtype,{
+	    		fieldLabel: menuItem.header,
+				name : menuItem.dataIndex
+	    	});
+	    	this.getCriteriaContainer().add(field);
+    	}else{
+    		var field = this.getCriteriaContainer().down('[name='+menuItem.dataIndex+']');
+    		this.getCriteriaContainer().remove(field);
+    	}
+    	if (this.getCriteriaContainer().items.length > 0){
+    		this.getCriteriaContainer().setVisible(true);
+    	}else{
+    		this.getCriteriaContainer().setVisible(false);
+    	}
     }
     
 });

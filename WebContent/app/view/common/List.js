@@ -1,15 +1,15 @@
 Ext.define('AboutUs.view.common.List', {
-    extend: 'Ext.grid.Panel',
+    extend: 'Ext.panel.Panel',
 
     alias: 'widget.commonlist',
-    
-    selType: 'checkboxmodel',
     
     editColumn:true,
     
     hidetoolbar:false,
     
 	initComponent: function(){
+		var me = this;
+		
 		if (this.hidetoolbar!=true){
 			
 			var searchMenu = new Array();
@@ -18,7 +18,8 @@ Ext.define('AboutUs.view.common.List', {
 			    	text: 'Procurar por '+ column.header,
 			    	dataIndex: column.dataIndex,
 			    	header: column.header,
-			    	checked: false
+			    	checked: false,
+			    	criteriaXtype:column.criteriaXtype
 			    })
 			});
 			
@@ -48,9 +49,6 @@ Ext.define('AboutUs.view.common.List', {
 		        dock: 'bottom',
 		        displayInfo: true,
 		        store:this.store
-			},{
-				xtype:'criteriacontainer',
-				dock: 'top'
 			}];
 		}
 		
@@ -77,7 +75,18 @@ Ext.define('AboutUs.view.common.List', {
 			this.columns.push.apply(this.columns,columnsList);
 		}
 		
-        this.addEvents('editRecord');
+		var grid = Ext.create('Ext.grid.Panel',{
+			xtype:'grid',
+			store:me.store,
+			columns:me.columns,
+			selType: 'checkboxmodel'
+		});
+		
+        Ext.applyIf(me, {
+        	items: [{xtype:'criteriacontainer'},grid]
+        });
+		
+        grid.addEvents('editRecord');
         AboutUs.app.getStore(this.store).clearFilter();
         this.callParent(arguments);
     }

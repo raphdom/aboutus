@@ -23,13 +23,15 @@ Ext.define('AboutUs.view.user.List', {
 		header: "Igreja",
 		width: 170,
 		flex:1,
-		dataIndex: 'churchName'
+		dataIndex: 'churchName',
+		criteriaXtype:'combo'
 	},{
 		header: "Último acesso",
 		width: 150,
 		flex:1,
 		dataIndex:'lastvisitDate',
-		renderer: Ext.util.Format.dateRenderer('d-M-Y h:i a')
+		renderer: Ext.util.Format.dateRenderer('d-M-Y h:i a'),
+		criteriaXtype:'datefield'
 	}],
 	
 	initComponent: function() {
