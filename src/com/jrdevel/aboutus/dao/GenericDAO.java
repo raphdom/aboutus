@@ -34,7 +34,6 @@ import com.jrdevel.aboutus.util.Sort;
 public abstract class GenericDAO<T, PK extends Serializable>{
 
 	private Class<T> persistentClass;
-	//private HibernateTemplate hibernateTemplate;
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -49,11 +48,6 @@ public abstract class GenericDAO<T, PK extends Serializable>{
 	
 	@Autowired
 	private User userSession;
-
-//	@Autowired
-//	public void setSessionFactory(SessionFactory sessionFactory) {
-//		hibernateTemplate = new HibernateTemplate(sessionFactory);
-//	}
 
 	public Session getSession(){
 		return getSessionFactory().getCurrentSession();
@@ -165,6 +159,19 @@ public abstract class GenericDAO<T, PK extends Serializable>{
         return entity;
     }
     
+    public T makeTransient(T entity) {
+    	return makeTransient(entity, false);
+    }
+    
+    public T makeTransient(T entity, boolean audit) {
+    	int mode = 2;
+        if (audit){
+        	audit(entity, mode);
+        }
+        getSession().delete(entity);
+        return entity;
+    }
+    
     public void audit(T entity, int mode){
         //Audit
         ClassMetadata hibernateMetadata = getSession().getSessionFactory().getClassMetadata(getPersistentClass());
@@ -176,14 +183,12 @@ public abstract class GenericDAO<T, PK extends Serializable>{
         String tableName = persister.getTableName();
         Integer tableId = hibernateMetadata.getIdentifier(entity, EntityMode.POJO).hashCode();
         
-//        AuditDAO auditDao = new AuditDAO();
-        
 		Audit audit = new Audit();
 		audit.setUserId(1);
 		audit.setTableId(tableId);
 		audit.setTableName(tableName);
 		audit.setActionId(mode);
-//		audit.setUserName(userSession.getPersonTO().getName());
+		audit.setUserName(userSession.getPerson().getName());
 //		audit.setObjectName(getObjectName());
 //		audit.setObjectTitle(getObjectTitle(entity));
 		

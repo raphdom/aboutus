@@ -1,10 +1,10 @@
 package com.jrdevel.aboutus.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jrdevel.aboutus.dao.UserDAO;
@@ -19,31 +19,16 @@ import com.jrdevel.aboutus.util.ResultObject;
  *
  */
 @Service
-public class UserService {
+public class UserService extends GenericService<User>{
 	
 	private UserDAO userDAO;
 	
-	/**
-	 * Spring use - DI
-	 * @param userDAO
-	 */
 	@Autowired
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
 	
-	
-	/**
-	 * Get all users
-	 * @return
-	 */
 	@Transactional
-	public ListResult<User> getUserList(ListParams params){
-
-		return userDAO.findAllByCriteria(params);
-	}
-	
-	@Transactional(propagation=Propagation.NESTED)
 	public ResultObject update(User entity){
 		
 		ResultObject result = new ResultObject();
@@ -68,6 +53,45 @@ public class UserService {
 		
 	}
 	
+	public ResultObject list(ListParams params) {
+		
+		ListResult<User> listResult = userDAO.findAllByCriteria(params);
+		ResultObject result = newResultObject();
+		result.setData(listResult.getData());
+		result.setTotal(listResult.getTotal());
+		
+		return result;
+	}
+
+
+	public ResultObject get(User bean) {
+		
+		ResultObject result = newResultObject();
+		
+		if (bean == null || bean.getId() == null){
+			result.setSuccess(false);
+			result.addErrorMessage("Utilizador não existe.");
+		}else{
+			User user = userDAO.getUserById(bean.getId());
+			result.setData(user);
+		}
+		
+		return result;
+	}
+
+
+	public ResultObject delete(List<User> beans) {
+		
+		ResultObject result = newResultObject();
+		
+		for (User user: beans){
+			userDAO.makeTransient(user);
+		}
+		
+		return result;
+	}
+	
+	//Private methods
 	private boolean existUserEmail(String email) {
 		
 		User bean = userDAO.getUserByEmail(email);
@@ -75,14 +99,6 @@ public class UserService {
 		return bean != null;
 		
 	}
-	
-	@Transactional
-	public User getUser(int id){
-		
-		return userDAO.getUserById(id);
-		
-	}
-
 
 
 }

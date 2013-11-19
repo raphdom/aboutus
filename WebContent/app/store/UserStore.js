@@ -10,7 +10,7 @@ Ext.define('AboutUs.store.UserStore', {
         type: 'ajax',
         api: {
         	read : 'user/view.action',
-            create : 'user/create.action',
+            create : 'user/save.action',
             update: 'user/update.action',
             destroy: 'user/delete.action'
         },

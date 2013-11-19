@@ -1,5 +1,6 @@
 package com.jrdevel.aboutus.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,6 @@ import com.jrdevel.aboutus.model.User;
 import com.jrdevel.aboutus.service.UserService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
 import com.jrdevel.aboutus.util.ListParams;
-import com.jrdevel.aboutus.util.ListResult;
 import com.jrdevel.aboutus.util.ResultObject;
 
 @Controller
@@ -30,9 +30,9 @@ public class UserController {
 
 		try{
 			
-			ListResult<User> result = userService.getUserList(input);
+			ResultObject result = userService.list(input);
 			
-			return ExtJSReturn.mapOK(result.getData(),result.getTotal());
+			return result.toMap();
 			
 		} catch (Exception e) {
 
@@ -40,8 +40,8 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/user/create.action")
-	public @ResponseBody Map<String,? extends Object> create(User input) throws Exception {
+	@RequestMapping(value="/user/save.action")
+	public @ResponseBody Map<String,? extends Object> save(User input) throws Exception {
 
 		try{
 
@@ -60,9 +60,24 @@ public class UserController {
 
 		try{
 			
-			User user = userService.getUser(input.getId());
+			ResultObject result = userService.get(input);
 			
-			return ExtJSReturn.mapOK(user);
+			return result.toMap();
+			
+		} catch (Exception e) {
+
+			return ExtJSReturn.mapError("Error retrieving Groups from database.");
+		}
+	}
+	
+	@RequestMapping(value="/user/delete.action")
+	public @ResponseBody Map<String,? extends Object> delete(List<User> input) throws Exception {
+
+		try{
+			
+			ResultObject result = userService.delete(input);
+			
+			return result.toMap();
 			
 		} catch (Exception e) {
 

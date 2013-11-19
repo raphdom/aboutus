@@ -32,6 +32,12 @@ public class ResultObject {
 	public void setData(List<Object> data) {
 		this.data = data;
 	}
+	public void setData(Object data) {
+		if (this.data == null){
+			this.data = new ArrayList<Object>();
+		}
+		this.data.add(data);
+	}
 	public int getTotal() {
 		return total;
 	}
@@ -46,7 +52,11 @@ public class ResultObject {
 		map.put("success", success);
 		map.put("messages", messages);
 		map.put("total", total);
-		map.put("data", data);
+		if (data.size()==1){
+			map.put("data", data.get(0));
+		}else{
+			map.put("data", data);
+		}
 		return map;
 	}
 

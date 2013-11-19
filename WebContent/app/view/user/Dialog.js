@@ -14,7 +14,7 @@ Ext.define('AboutUs.view.user.Dialog', {
     layout:'fit',
     
     urlLoad: 'user/get.action',
-    urlSubmit: 'user/create.action',
+    urlSubmit: 'user/save.action',
     
     items:[{
     	xtype:'commonform',
