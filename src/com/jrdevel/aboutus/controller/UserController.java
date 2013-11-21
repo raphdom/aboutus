@@ -1,13 +1,18 @@
 package com.jrdevel.aboutus.controller;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jrdevel.aboutus.model.Group;
+import com.jrdevel.aboutus.model.Permission;
+import com.jrdevel.aboutus.model.Person;
 import com.jrdevel.aboutus.model.User;
 import com.jrdevel.aboutus.service.UserService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
@@ -24,6 +29,8 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	@Autowired
+	private User userSession;
 	
 	@RequestMapping(value="/user/view.action")
 	public @ResponseBody Map<String,? extends Object> view(ListParams input) throws Exception {
@@ -76,6 +83,37 @@ public class UserController {
 		try{
 			
 			ResultObject result = userService.delete(input);
+			
+			return result.toMap();
+			
+		} catch (Exception e) {
+
+			return ExtJSReturn.mapError("Error retrieving Groups from database.");
+		}
+	}
+	
+	@RequestMapping(value="/user/currentUser.action")
+	public @ResponseBody Map<String,? extends Object> currentUser() throws Exception {
+
+		try{
+			
+			Set<Permission> permissions = new HashSet<Permission>();
+			Permission permission = new Permission();
+			permission.setId(1);
+			permissions.add(permission);
+			
+			Person person = new Person();
+			person.setName("Raphael Domingues");
+			
+			User user = new User();
+			user.setId(1);
+			user.setEmail("raphdom@gmail.com");
+			
+			user.setPerson(person);
+			user.setPermissions(permissions);
+			
+			ResultObject result = new ResultObject();
+			result.setData(user);
 			
 			return result.toMap();
 			

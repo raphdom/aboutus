@@ -6,7 +6,6 @@ Ext.define('AboutUs.view.group.List', {
     store: 'GroupStore',
     icon:'resources/images/group.png',
     dialog: 'AboutUs.view.group.Dialog',
-    dialogSearch: 'AboutUs.view.group.Search',
     controller: 'GroupController',
     columns: [
     {

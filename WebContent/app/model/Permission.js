@@ -7,8 +7,12 @@ Ext.define('AboutUs.model.Permission', {
     	},{
     		name:'name',
     		type:'string'
+    	},{
+    		name: 'userId',
+    		type: 'int'
     	}],
     	
-    associations: [
-    ]
+	belongsTo: {model: 'AboutUs.model.User', foreignKey: 'userId'}
+    	
+     
 });

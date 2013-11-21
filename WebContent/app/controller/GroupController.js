@@ -1,11 +1,15 @@
 Ext.define('AboutUs.controller.GroupController', {
     extend: 'AboutUs.controller.CommonListController',
     
-    stores: ['GroupStore','PermissionStore'],
+    stores: ['GroupStore',
+    		 'PermissionStore'],
 
-    models: ['Group','Permission'],
+    models: ['Group',
+    		 'Permission'],
 
-    views: ['group.List','group.Dialog','group.Search','group.PermissionList'],
+    views: ['group.List',
+    		'group.Dialog',
+    		'group.PermissionList'],
     
     refs: [{
         	ref: 'grouplist',
@@ -13,9 +17,6 @@ Ext.define('AboutUs.controller.GroupController', {
    		},{
     		ref: 'groupDialog',
     		selector: 'groupdialog'
-   	 	},{
-	    	ref: 'groupsearch',
-    		selector: 'groupSearch'
 		},{
 	    	ref: 'permissionList',
     		selector: 'permissionlist'
@@ -33,7 +34,7 @@ Ext.define('AboutUs.controller.GroupController', {
     	
     	var list = Ext.create('AboutUs.view.group.List');
     	centerContainer.add(list);
-    	list.getStore().clearFilter();
+    	//list.getStore().clearFilter();
     	
     },
     

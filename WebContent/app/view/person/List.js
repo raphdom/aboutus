@@ -10,11 +10,8 @@ Ext.define('AboutUs.view.person.List', {
     icon:'resources/images/person.png',
     
     dialog: 'AboutUs.view.person.Dialog',
-    dialogSearch: 'AboutUs.view.person.Search',
     
-    
-    columns: [
-    {
+    columns: [{
     	header: "Nome",
 		width: 170,
 		flex:1,

@@ -3,19 +3,23 @@ Ext.define('AboutUs.controller.UserController', {
     
     stores: ['UserStore'],
 
-    models: ['User','Church','Person'],
+    models: ['Person',
+    		 'User',
+    		 'Church',
+    		 'Permission'],
 
-    views: ['user.List','user.Dialog','user.TabPanel','user.TabUserData','user.TabUserPermission', 'user.Search'],
+    views: ['user.List',
+    		'user.Dialog',
+    		'user.TabPanel',
+    		'user.TabUserData',
+    		'user.TabUserPermission'],
     
     refs: [{
         ref: 'userList',
-        selector: 'userList'
+        selector: 'userlist'
     },{
     	ref: 'userDialog',
     	selector: 'userdialog'
-   	 },{
-    	ref: 'userSearch',
-    	selector: 'usersearch'
     },{
     	ref: 'groupList',
     	selector: 'usertabuserpermission grouplist'
@@ -33,7 +37,6 @@ Ext.define('AboutUs.controller.UserController', {
     processActionMenu: function(type){
     	
     	var centerContainer = this.getController('MainController').getMainContainer().down('container[itemId=centerContainer]');
-//    	centerContainer.removeAll();
     	
     	var list = Ext.create('AboutUs.view.user.List');
     	centerContainer.add(list);

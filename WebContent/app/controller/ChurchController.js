@@ -5,7 +5,10 @@ Ext.define('AboutUs.controller.ChurchController', {
 
     models: ['Church'],
 
-    views: ['church.List','church.Dialog','church.TabPanel','church.TabData','church.Search'],
+    views: ['church.List',
+    		'church.Dialog',
+    		'church.TabPanel',
+    		'church.TabData'],
     
     refs: [{
         ref: 'churchlist',
@@ -13,9 +16,6 @@ Ext.define('AboutUs.controller.ChurchController', {
     },{
     	ref: 'churchdialog',
     	selector: 'churchdialog'
-   	 },{
-    	ref: 'churchsearch',
-    	selector: 'churchsearch'
     }],
     
     init: function() {
@@ -29,7 +29,7 @@ Ext.define('AboutUs.controller.ChurchController', {
     	
     	var list = Ext.create('AboutUs.view.church.List');
     	centerContainer.add(list);
-    	list.getStore().clearFilter();
+    	//list.getStore().clearFilter();
     	
     }
     

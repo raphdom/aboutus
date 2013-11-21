@@ -6,14 +6,13 @@ Ext.define('AboutUs.view.user.List', {
     store: 'UserStore',
     icon:'resources/images/user.png',
     dialog: 'AboutUs.view.user.Dialog',
-    dialogSearch: 'AboutUs.view.user.Search',
     controller: 'UserController',
     columns: [
     {
     	header: "Nome",
 		width: 170,
 		flex:1,
-		dataIndex: 'personName'
+		dataIndex: 'person_name'
 	},{
 		header: "Email",
 		width: 170,

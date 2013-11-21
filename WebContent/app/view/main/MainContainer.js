@@ -34,7 +34,7 @@ Ext.define('AboutUs.view.main.MainContainer', {
             split:true,
             title:'Menu',
             layout:'fit',
-            items:[{xtype:'menuContainer'}]
+            items:[]
         }
     ]
     

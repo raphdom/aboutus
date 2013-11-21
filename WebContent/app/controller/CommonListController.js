@@ -1,7 +1,10 @@
 Ext.define('AboutUs.controller.CommonListController', {
     extend: 'Ext.app.Controller',
     
-    views: ['common.List','common.Dialog', 'common.Form','common.CriteriaContainer'],
+    views: ['common.List',
+    		'common.Dialog',
+    		'common.Form',
+    		'common.CriteriaContainer'],
     
     refs: [{
         ref: 'commonList',
@@ -12,9 +15,6 @@ Ext.define('AboutUs.controller.CommonListController', {
     },{
     	ref: 'commonDialog',
         selector: 'commondialog'
-    },{
-    	ref: 'commonsearch',
-        selector: 'commonsearch'
     },{
     	ref: 'commonForm',
         selector: 'commonform'
@@ -57,9 +57,6 @@ Ext.define('AboutUs.controller.CommonListController', {
 		
 		var centerContainer = this.getController('MainController').getMainContainer().down('container[itemId=centerContainer]');
     	centerContainer.removeAll();
-    	if (this.getCommonsearch() != undefined){
-    		this.getCommonsearch().destroy();
-    	}
 		
 	},
 	
@@ -108,15 +105,6 @@ Ext.define('AboutUs.controller.CommonListController', {
     		
     	}else{
     		AboutUs.util.NotificationUtil.showNotificationError("Você deve selecionar um registo.");
-    	}
-    },
-    
-    onSearch: function(button, event, options) {
-    	console.log('CommonController.onSearch()');
-    	if (this.getCommonsearch() == undefined){
-    		Ext.create(this.getCommonList().dialogSearch).show();
-    	}else{
-    		this.getCommonsearch().show();
     	}
     },
     

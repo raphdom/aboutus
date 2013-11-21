@@ -7,27 +7,18 @@ Ext.define('AboutUs.model.User', {
     	},{
     		name:'email',
     		type:'string'
-		},{
-    		name:'churchId',
-    		type:'string',
-    		mapping:'church.id'
-    	},{
-    		name:'churchName',
-    		type:'string',
-    		mapping:'church.name'
     	},{
     		name:'lastvisitDate',
     		type:'date',
     		dateReadFormat:'timestamp',
     		dateWriteFormat:'d-m-Y'
     	},{
-    		name:'personName',
+    		name:'person_name',
     		type:'string',
-    		mapping:'person.name'
+			mapping:'person.name'
     	}],
     	
-    associations: [
-    	{ type: 'hasOne', model: 'Church' },
-    	{ type: 'hasOne', model: 'Person' }
-    ]
+   	hasOne: {model: 'AboutUs.model.Person', foreignKey: 'userId', getterName: 'getPerson'},
+   	hasMany: {model: 'AboutUs.model.Permission', foreignKey: 'userId', name:'permissions'}
+   	
 });

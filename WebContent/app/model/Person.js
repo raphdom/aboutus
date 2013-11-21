@@ -7,5 +7,8 @@ Ext.define('AboutUs.model.Person', {
     	},{ 
     		name:'name',
     		type:'string'
+    	},{
+    		name: 'userId',
+    		type: 'int'
     	}]
 });

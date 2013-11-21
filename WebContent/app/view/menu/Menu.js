@@ -13,12 +13,15 @@ Ext.define('AboutUs.view.menu.Menu', {
     },
     
     createView: function(){
+        var store= Ext.create('Ext.data.Store', {
+                model: 'AboutUs.model.ItemMenu',
+                data: this.menuItems               
+            });
+        store.filter('visible', true);
+        
         this.view = Ext.create('widget.dataview', {
             autoScroll: true,
-            store: Ext.create('Ext.data.Store', {
-                model: 'AboutUs.model.ItemMenu',
-                data: this.menuItems
-            }),
+            store: store,
             selModel: {
                 mode: 'SINGLE',
                 listeners: {
@@ -36,6 +39,7 @@ Ext.define('AboutUs.view.menu.Menu', {
             overItemCls: 'feed-list-item-hover',
             tpl: '<tpl for="."><div class="feed-list-item"><div class="image"><img src="{icon}"/></div><div class="title">{title}</div></div></tpl>'
         });
+        
         return this.view;
     },
     

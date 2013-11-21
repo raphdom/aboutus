@@ -10,8 +10,6 @@ Ext.define('AboutUs.view.church.List', {
     icon:'resources/images/church.png',
     
     dialog: 'AboutUs.view.church.Dialog',
-    dialogSearch: 'AboutUs.view.church.Search',
-    
     
     columns: [
     {

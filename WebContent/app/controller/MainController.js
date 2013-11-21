@@ -3,6 +3,8 @@ Ext.define('AboutUs.controller.MainController', {
 
     views: ['main.MainContainer'],
     
+    stores: ['CurrentUserStore'],
+    
     refs: [{
         ref: 'mainContainer',
         selector: 'mainContainer'

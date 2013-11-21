@@ -13,8 +13,7 @@ Ext.define('AboutUs.controller.PersonController', {
     		'person.TabChurchData',
     		'person.TabAddress',
     		'person.TabContact',
-    		'person.TabObservation',
-    		'person.Search'
+    		'person.TabObservation'
     		],
     
     refs: [{
@@ -23,9 +22,6 @@ Ext.define('AboutUs.controller.PersonController', {
     },{
     	ref: 'persondialog',
     	selector: 'personDialog'
-   	 },{
-    	ref: 'personsearch',
-    	selector: 'personSearch'
     }],
     
     init: function() {
@@ -39,7 +35,7 @@ Ext.define('AboutUs.controller.PersonController', {
     	
     	var list = Ext.create('AboutUs.view.person.List');
     	centerContainer.add(list);
-    	list.getStore().clearFilter();
+    	//list.getStore().clearFilter();
     	
     }
     
