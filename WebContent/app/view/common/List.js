@@ -30,16 +30,17 @@ Ext.define('AboutUs.view.common.List', {
 	                icon: 'resources/images/add.png',
 	                itemId: 'add',
 	                text: 'Adicionar',
-	                action: 'add'
-	                
+	                action: 'add',
+	                hidden:!AboutUs.util.UserManager.hasPermission(this.permissions.add)
 	            },{
 	                icon: 'resources/images/delete.png',
 	                text: 'Eliminar',
-	                action: 'delete'
+	                action: 'delete',
+	                hidden:!AboutUs.util.UserManager.hasPermission(this.permissions.remove)
 	                
 	            },'->',{
 					xtype:'splitbutton',
-					icon: 'resources/images/magnifier.png',                
+					icon: 'resources/images/magnifier.png',
 	                text: 'Pesquisar',
 	                action: 'search',
 	                menu: searchMenu
@@ -52,7 +53,7 @@ Ext.define('AboutUs.view.common.List', {
 			}];
 		}
 		
-		if (this.editColumn){
+		if (this.editColumn && AboutUs.util.UserManager.hasPermission(this.permissions.edit)){
 			var columnsList = this.columns;
 			
 			this.columns = [{

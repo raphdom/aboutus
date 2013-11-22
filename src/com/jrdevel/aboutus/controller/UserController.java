@@ -98,9 +98,18 @@ public class UserController {
 		try{
 			
 			Set<Permission> permissions = new HashSet<Permission>();
-			Permission permission = new Permission();
-			permission.setId(1);
-			permissions.add(permission);
+			Permission permissionList = new Permission();
+			permissionList.setId(1);
+			permissions.add(permissionList);
+			Permission permissionAdd = new Permission();
+			permissionAdd.setId(2);
+			permissions.add(permissionAdd);
+			Permission permissionEdit = new Permission();
+			permissionEdit.setId(3);
+			permissions.add(permissionEdit);
+			Permission permissionDelete = new Permission();
+			permissionDelete.setId(4);
+			permissions.add(permissionDelete);
 			
 			Person person = new Person();
 			person.setName("Raphael Domingues");

@@ -26,7 +26,7 @@ Ext.define('AboutUs.view.user.TabUserData', {
             name: 'email',
             allowBlank: false,
             vtype:'email'
-        },{
+        /*},{
             fieldLabel: 'Pessoa',
             name: 'person.id',
             id:'person',
@@ -34,7 +34,7 @@ Ext.define('AboutUs.view.user.TabUserData', {
             allowBlank: false,
             store:'PersonStore',
             displayField:'name',
-            valueField:'id'
+            valueField:'id'*/
         },{
         	xtype:'churchcombo',
         	id:'church',

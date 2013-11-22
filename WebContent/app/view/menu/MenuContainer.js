@@ -20,14 +20,14 @@ Ext.define('AboutUs.view.menu.MenuContainer', {
 		    	    	   icon:'resources/images/user.png',
 		    	    	   controller:'UserController',
 		    	    	   type:'list',
-		    	    	   visible:AboutUs.util.UserManager.hasPermission(1)
+		    	    	   visible:AboutUs.util.UserManager.hasPermission(Constants.auth_listuser)
 		    	       },
 		    	       {
 		    	    	   title:'Grupos',
 		    	    	   icon:'resources/images/groupManager.png',
 		    	    	   controller:'GroupController',
 		    	    	   type:'list',
-		    	    	   visible:true
+		    	    	   visible:AboutUs.util.UserManager.hasPermission(Constants.auth_listgroup)
 		    	       }
 		    	       ]
 		    },{
@@ -40,13 +40,15 @@ Ext.define('AboutUs.view.menu.MenuContainer', {
 		    	    	   title:'Pessoas',
 		    	    	   icon:'resources/images/personManager.png',
 		    	    	   controller:'PersonController',
-		    	    	   type:'list'
+		    	    	   type:'list',
+		    	    	   visible:true
 		    	       },
 		    	       {
 		    	    	   title:'Igrejas',
 		    	    	   icon:'resources/images/church.png',
 		    	    	   controller:'ChurchController',
-		    	    	   type:'list'
+		    	    	   type:'list',
+		    	    	   visible:true
 		    	       }
 		    	       ]
 		    },{
@@ -57,23 +59,28 @@ Ext.define('AboutUs.view.menu.MenuContainer', {
 		    	menuItems:[
 		    	       {
 		    	    	   title:'Categorias',
-		    	    	   icon:'resources/images/categories.png'
+		    	    	   icon:'resources/images/categories.png',
+		    	    	   visible:true
 		    	       },
 		    	       {
 		    	    	   title:'Artigos',
-		    	    	   icon:'resources/images/article.png'
+		    	    	   icon:'resources/images/article.png',
+		    	    	   visible:true
 		    	       },
 		    	       {
-		    	    	   title:'Ví­deos',
-		    	    	   icon:'resources/images/videos.png'
+		    	    	   title:'Vídeos',
+		    	    	   icon:'resources/images/videos.png',
+		    	    	   visible:true
 		    	       },
 		    	       {
 		    	    	   title:'Albuns',
-		    	    	   icon:'resources/images/albuns.png'
+		    	    	   icon:'resources/images/albuns.png',
+		    	    	   visible:true
 		    	       },
 		    	       {
 		    	    	   title:'Banners',
-		    	    	   icon:'resources/images/banners.png'
+		    	    	   icon:'resources/images/banners.png',
+		    	    	   visible:true
 		    	       }
 		    	       ]
 		    },{
@@ -84,11 +91,13 @@ Ext.define('AboutUs.view.menu.MenuContainer', {
 		    	menuItems:[
 		    	       {
 		    	    	   title:'Listas de Reprodução',
-		    	    	   icon:'resources/images/playlist.png'
+		    	    	   icon:'resources/images/playlist.png',
+		    	    	   visible:true
 		    	       },
 		    	       {
 		    	    	   title:'Músicas',
-		    	    	   icon:'resources/images/music.png'
+		    	    	   icon:'resources/images/music.png',
+		    	    	   visible:true
 		    	       }
 		    	       ]
 		    }]

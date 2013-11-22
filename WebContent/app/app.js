@@ -14,7 +14,8 @@ Ext.application({
     name: 'AboutUs',
 	
     controllers: [
-    	'UserController',    
+    	'UserController',
+    	'GroupController',
     	'CommonListController',
         'MainController',
         'MenuController'

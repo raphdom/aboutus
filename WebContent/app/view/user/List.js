@@ -7,6 +7,11 @@ Ext.define('AboutUs.view.user.List', {
     icon:'resources/images/user.png',
     dialog: 'AboutUs.view.user.Dialog',
     controller: 'UserController',
+    permissions:{
+    	add:Constants.auth_adduser,
+    	edit:Constants.auth_edituser,
+    	remove:Constants.auth_deleteuser
+    },
     columns: [
     {
     	header: "Nome",
