@@ -3,16 +3,14 @@ package com.jrdevel.aboutus.controller;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jrdevel.aboutus.model.Group;
 import com.jrdevel.aboutus.model.Permission;
-import com.jrdevel.aboutus.model.Person;
 import com.jrdevel.aboutus.model.User;
 import com.jrdevel.aboutus.service.UserService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
@@ -48,11 +46,11 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/user/save.action")
-	public @ResponseBody Map<String,? extends Object> save(User input) throws Exception {
+	public @ResponseBody Map<String,? extends Object> save(@RequestBody UserWrapper data) throws Exception {
 
 		try{
 
-			ResultObject result = userService.update(input);
+			ResultObject result = userService.update(data.getData());
 			
 			return result.toMap();
 			
@@ -97,32 +95,9 @@ public class UserController {
 
 		try{
 			
-			Set<Permission> permissions = new HashSet<Permission>();
-			Permission permissionList = new Permission();
-			permissionList.setId(1);
-			permissions.add(permissionList);
-			Permission permissionAdd = new Permission();
-			permissionAdd.setId(2);
-			permissions.add(permissionAdd);
-			Permission permissionEdit = new Permission();
-			permissionEdit.setId(3);
-			permissions.add(permissionEdit);
-			Permission permissionDelete = new Permission();
-			permissionDelete.setId(4);
-			permissions.add(permissionDelete);
-			
-			Person person = new Person();
-			person.setName("Raphael Domingues");
-			
-			User user = new User();
-			user.setId(1);
-			user.setEmail("raphdom@gmail.com");
-			
-			user.setPerson(person);
-			user.setPermissions(permissions);
-			
-			ResultObject result = new ResultObject();
-			result.setData(user);
+			ResultObject result = userService.get(userSession);
+			User user = (User)result.getData().get(0);
+			user.setPermissions(new HashSet<Permission>(userService.getUserPermissions(user)));
 			
 			return result.toMap();
 			

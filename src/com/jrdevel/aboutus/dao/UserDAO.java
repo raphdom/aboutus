@@ -51,5 +51,13 @@ public class UserDAO extends GenericDAO<User, Integer>{
 		crit.add(Restrictions.eq("id", id));
 		return (User) crit.uniqueResult();
 	}
+	
+	public User getUserSimpleById(int id){
+		Criteria crit = getSession().createCriteria(getPersistentClass());
+		crit.setFetchMode("groups", FetchMode.JOIN);
+		crit.setFetchMode("permissions", FetchMode.JOIN);
+		crit.add(Restrictions.eq("id", id));
+		return (User) crit.uniqueResult();
+	}
 
 }

@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model.lists.translate;
 
-// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
+// Generated 5/Jan/2014 19:49:45 by Hibernate Tools 3.4.0.CR1
 
 import com.jrdevel.aboutus.model.lists.Country;
 import javax.persistence.Column;

@@ -7,26 +7,26 @@ Ext.define('AboutUs.view.user.TabUserPermission', {
     
     header:false,
     
-    layout:'fit',
+    layout:{
+    	type:'hbox',
+    	align:'stretchmax'
+    },
    
     items:[{
-    	xtype:'panel',
-    	layout: {
-            type: 'hbox',
-            align: 'stretch'
-        },
-    	items:[{
     		title:'Grupos',
     		xtype:'grouplist',
     		flex:1,
     		hidetoolbar:true,
-    		editColumn:false
+    		editColumn:false,
+    		scroll:true
     	},{
     		title:'Permissões',
     		xtype:'permissionlist',
-    		flex:1
-    	}]
-    }]
+    		flex:1,
+    		hidetoolbar:true,
+    		editColumn:false,
+    		scroll:true
+	}]
     
     
 });

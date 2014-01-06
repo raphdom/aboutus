@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
+// Generated 5/Jan/2014 19:49:45 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -28,6 +28,7 @@ public class Customer implements java.io.Serializable {
 	private Set<Church> churches = new HashSet<Church>(0);
 	private Set<Person> persons = new HashSet<Person>(0);
 	private Set<User> users = new HashSet<User>(0);
+	private Set<Group> groups = new HashSet<Group>(0);
 
 	public Customer() {
 	}
@@ -38,12 +39,13 @@ public class Customer implements java.io.Serializable {
 	}
 
 	public Customer(Plan plan, String name, Set<Church> churches,
-			Set<Person> persons, Set<User> users) {
+			Set<Person> persons, Set<User> users, Set<Group> groups) {
 		this.plan = plan;
 		this.name = name;
 		this.churches = churches;
 		this.persons = persons;
 		this.users = users;
+		this.groups = groups;
 	}
 
 	@Id
@@ -101,6 +103,15 @@ public class Customer implements java.io.Serializable {
 
 	public void setUsers(Set<User> users) {
 		this.users = users;
+	}
+
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "customer")
+	public Set<Group> getGroups() {
+		return this.groups;
+	}
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
 	}
 
 }

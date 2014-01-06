@@ -7,6 +7,12 @@ Ext.define('AboutUs.view.common.List', {
     
     hidetoolbar:false,
     
+    permissions:{
+    	add:0,
+    	edit:0,
+    	remove:0
+    },
+    
 	initComponent: function(){
 		var me = this;
 		
@@ -82,6 +88,8 @@ Ext.define('AboutUs.view.common.List', {
 			columns:me.columns,
 			selType: 'checkboxmodel'
 		});
+		
+		this.grid = grid;
 		
         Ext.applyIf(me, {
         	items: [{xtype:'criteriacontainer'},grid]

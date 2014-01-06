@@ -6,7 +6,7 @@ Ext.define('AboutUs.view.group.Dialog', {
     title: 'Grupo',
     
     urlLoad: 'group/get.action',
-    urlSubmit: 'group/create.action',
+    urlSubmit: 'group/save.action',
     
     items:[{
     	xtype: 'commonform',
@@ -30,6 +30,8 @@ Ext.define('AboutUs.view.group.Dialog', {
         	title: 'Permissões',
         	layout:'anchor',
         	items :[{
+        		hidetoolbar:true,
+    			editColumn:false,
         		xtype:'permissionlist'
         	}]
         }

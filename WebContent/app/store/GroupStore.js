@@ -10,7 +10,7 @@ Ext.define('AboutUs.store.GroupStore', {
         type: 'ajax',
         api: {
         	read : 'group/view.action',
-            create : 'group/create.action',
+            create : 'group/save.action',
             update: 'group/update.action',
             destroy: 'group/delete.action'
         },

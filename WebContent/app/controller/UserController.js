@@ -47,13 +47,20 @@ Ext.define('AboutUs.controller.UserController', {
     onBeforeSaveData: function(){
 		var form = this.getUserDialog().down('form');
 		
-		var permissions = this.getPermissionList().getSelectionModel().getSelection();
-		var permissionsJson = [];
+		var permissions = this.getPermissionList().grid.getSelectionModel().getSelection();
+		var church = form.down('churchcombo').store.findRecord('id',form.down('churchcombo').getValue());
+		form.getRecord().setChurch(church);
+		form.getRecord().permissions().add(permissions);
+		
+		//var groups = this.getGroupList().grid.getSelectionModel().getSelection();
+		//form.getRecord().groups().add(groups);
+		
+		/*var permissionsJson = [];
 		for (var i in permissions) {
 			permissionsJson.push(permissions[i].data);
 		}
 		
-		var groups = this.getGroupList().getSelectionModel().getSelection();
+		var groups = this.getGroupList().grid.getSelectionModel().getSelection();
 		var groupsJson = [];
 		for (var i in groups) {
 			groupsJson.push(groups[i].data);
@@ -61,7 +68,7 @@ Ext.define('AboutUs.controller.UserController', {
 
 		form.getForm().findField('groups').setValue(Ext.encode(groupsJson));
 		form.getForm().findField('permissions').setValue(Ext.encode(permissionsJson));
-		
+		*/
 	},
 	
 	onGetDataSuccess:function(response){

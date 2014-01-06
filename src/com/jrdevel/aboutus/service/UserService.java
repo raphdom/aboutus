@@ -9,9 +9,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.jrdevel.aboutus.dao.UserDAO;
-import com.jrdevel.aboutus.model.Person;
+import com.jrdevel.aboutus.model.Group;
+import com.jrdevel.aboutus.model.Permission;
 import com.jrdevel.aboutus.model.User;
 import com.jrdevel.aboutus.util.ListParams;
+import com.jrdevel.aboutus.util.ListResult;
 import com.jrdevel.aboutus.util.PasswordGenerator;
 import com.jrdevel.aboutus.util.ResultObject;
 
@@ -54,36 +56,19 @@ public class UserService extends GenericService<User>{
 		
 	}
 	
+	@Transactional
 	public ResultObject list(ListParams params) {
 		
-		//ListResult<User> listResult = userDAO.findAllByCriteria(params);
+		ListResult<User> listResult = userDAO.findAllByCriteria(params);
 		ResultObject result = newResultObject();
-		Person person1 = new Person();
-		person1.setId(1);
-		person1.setName("User teste 1");
-		User user1 = new User();
-		user1.setId(1);
-		user1.setEmail("user1@teste.com");
-		user1.setPerson(person1);
-		
-		Person person2 = new Person();
-		person2.setId(2);
-		person2.setName("User teste 2");
-		User user2 = new User();
-		user2.setId(2);
-		user2.setEmail("user2@teste.com");
-		user2.setPerson(person2);
-		
-		List<User> users = new ArrayList<User>();
-		users.add(user1);
-		users.add(user2);
-		result.setData(users);
-		result.setTotal(2);
+		result.setData(listResult.getData());
+		result.setTotal(listResult.getTotal());
 		
 		return result;
 	}
 
 
+	@Transactional
 	public ResultObject get(User bean) {
 		
 		ResultObject result = newResultObject();
@@ -99,7 +84,7 @@ public class UserService extends GenericService<User>{
 		return result;
 	}
 
-
+	@Transactional
 	public ResultObject delete(List<User> beans) {
 		
 		ResultObject result = newResultObject();
@@ -109,6 +94,21 @@ public class UserService extends GenericService<User>{
 		}
 		
 		return result;
+	}
+	
+	@Transactional
+	public List<Permission> getUserPermissions(User bean){
+		
+		List<Permission> permissions = new ArrayList<Permission>();
+		
+		User user = userDAO.getUserSimpleById(bean.getId());
+		permissions.addAll(user.getPermissions());
+		for (Group group : user.getGroups()){
+			permissions.addAll(group.getPermissions());
+		}
+		
+		return permissions;
+		
 	}
 	
 	//Private methods

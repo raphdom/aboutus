@@ -5,6 +5,7 @@ Ext.define('AboutUs.view.component.ChurchCombo', {
     
     store:Ext.create('Ext.data.Store', {
 	    model: 'AboutUs.model.Church',
+	    loaded:false,
 	    proxy: {
 	        type: 'ajax',
 	        api: {
@@ -18,11 +19,6 @@ Ext.define('AboutUs.view.component.ChurchCombo', {
 	    }
 	}),
     displayField:'name',
-    valueField:'id',
-    
-    setValue: function(v) {
-        this.store.load();
-		this.callOverridden(arguments);
-    }
+    valueField:'id'
     
 });

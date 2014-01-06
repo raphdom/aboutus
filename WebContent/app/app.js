@@ -5,7 +5,9 @@ Ext.Loader.setConfig({
         'AboutUs': 'app'
     }
 });
+Ext.require('AboutUs.AssociatedWriter');
 Ext.require('Ext.ux.window.Notification');
+Ext.require('Ext.ux.grid.column.BooleanImageColumn');
 Ext.require('AboutUs.util.NotificationUtil');
 Ext.require('AboutUs.util.UserManager');
 

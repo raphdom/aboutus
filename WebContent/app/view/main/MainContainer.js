@@ -7,8 +7,9 @@ Ext.define('AboutUs.view.main.MainContainer', {
     items: [
         {
         	region:'north',
-        	height:100,
-        	bodyCls:'imageLogo',
+        	height:120,
+        	cls:'imageLogo',
+        	bodyCls:'imageLogoBody',
         	buttons:[
         		{
         			text:'Disco',

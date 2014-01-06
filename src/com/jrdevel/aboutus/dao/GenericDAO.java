@@ -75,15 +75,15 @@ public abstract class GenericDAO<T, PK extends Serializable>{
 	public ListResult<T> findAllByCriteria(ListParams params){
 
 		Criteria criteria = getSession().createCriteria(getPersistentClass());
+		if (this.getPersistentClass() != Permission.class){
+			criteria.add(Restrictions.eq("customer.id", userSession.getCustomer().getId()));
+		}
 		setOrder(criteria,params.getSorters());
 		setFilters(criteria, params.getFilter());
 		setExtraFilters(criteria);
 		int count = setPagingInfo(criteria);
 		criteria.setFirstResult(params.getStart());
 		criteria.setMaxResults(params.getLimit());
-		if (this.getPersistentClass() != Permission.class){
-			criteria.add(Restrictions.eq("customer.id", userSession.getCustomer().getId()));
-		}
 		criteria.setProjection(null);
 		criteria.setResultTransformer(Criteria.ROOT_ENTITY);
 		return new ListResult<T>(criteria.list(), count);

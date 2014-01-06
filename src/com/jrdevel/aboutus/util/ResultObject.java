@@ -52,7 +52,7 @@ public class ResultObject {
 		map.put("success", success);
 		map.put("messages", messages);
 		map.put("total", total);
-		if (data.size()==1){
+		if (data != null && data.size()==1){
 			map.put("data", data.get(0));
 		}else{
 			map.put("data", data);

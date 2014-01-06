@@ -59,7 +59,17 @@
 }
 
 .imageLogo{
-	
+	background-color: #DFEAF2;
+}
+
+.imageLogoBody{
+	background-image: url("../images/logoAboutUs.png");
+	background-repeat: no-repeat;
+	background-color: #DFEAF2;
+	margin-top: 20px;
+	margin-left: 20px;
+	z-index: 10;
+	width: 300px ! important;
 }
 
 /* Styling of global error indicator */

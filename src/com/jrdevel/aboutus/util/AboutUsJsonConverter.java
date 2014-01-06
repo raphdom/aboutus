@@ -11,6 +11,7 @@ import org.springframework.format.support.FormattingConversionServiceFactoryBean
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.jrdevel.aboutus.model.Group;
 import com.jrdevel.aboutus.model.Permission;
 
 /**
@@ -23,9 +24,10 @@ public class AboutUsJsonConverter extends FormattingConversionServiceFactoryBean
 
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
-		super.installFormatters(registry);
-		registry.addConverter(convertFilter());
-		registry.addConverter(convertPermissions());
+		//super.installFormatters(registry);
+//		registry.addConverter(convertFilter());
+//		registry.addConverter(convertPermissions());
+//		registry.addConverter(convertGroups());
 	}
 
 	public Converter<String, List<Filter>> convertFilter() {
@@ -55,6 +57,24 @@ public class AboutUsJsonConverter extends FormattingConversionServiceFactoryBean
 				Set<Permission> myTypeList = null;
 				try {
 					myTypeList = mapper.readValue(source, new TypeReference< Set<Permission>>() {});
+				} catch (Exception e) {
+					if(log.isErrorEnabled())
+						log.error("Error converting JSON collection to List<MyType>.", e);
+				}
+				return myTypeList;
+			}
+		};
+	}
+	
+	public Converter<String, Set<Group>> convertGroups() {
+		return new Converter<String,  Set<Group>>() {
+
+			@Override
+			public  Set<Group> convert(String source) {
+				ObjectMapper mapper = new ObjectMapper();
+				Set<Group> myTypeList = null;
+				try {
+					myTypeList = mapper.readValue(source, new TypeReference< Set<Group>>() {});
 				} catch (Exception e) {
 					if(log.isErrorEnabled())
 						log.error("Error converting JSON collection to List<MyType>.", e);

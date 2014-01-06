@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 15/Nov/2013 19:04:22 by Hibernate Tools 3.4.0.CR1
+// Generated 5/Jan/2014 19:49:45 by Hibernate Tools 3.4.0.CR1
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,6 +25,7 @@ import javax.persistence.Table;
 public class Group implements java.io.Serializable {
 
 	private Integer id;
+	private Customer customer;
 	private String name;
 	private Set<FolderRole> folderRoles = new HashSet<FolderRole>(0);
 	private Set<User> users = new HashSet<User>(0);
@@ -36,8 +38,9 @@ public class Group implements java.io.Serializable {
 		this.name = name;
 	}
 
-	public Group(String name, Set<FolderRole> folderRoles, Set<User> users,
-			Set<Permission> permissions) {
+	public Group(Customer customer, String name, Set<FolderRole> folderRoles,
+			Set<User> users, Set<Permission> permissions) {
+		this.customer = customer;
 		this.name = name;
 		this.folderRoles = folderRoles;
 		this.users = users;
@@ -53,6 +56,16 @@ public class Group implements java.io.Serializable {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customerId")
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	@Column(name = "name", nullable = false, length = 45)

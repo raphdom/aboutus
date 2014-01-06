@@ -66,6 +66,8 @@ Ext.define('AboutUs.controller.CommonListController', {
     	if (this.getController(this.getControllerName()).onAfterAdd != undefined){
     		this.getController(this.getControllerName()).onAfterAdd(button,event,options);	
     	}
+    	var record = Ext.create(this.getCommonDialog().model);
+    	this.getCommonDialog().down('form').loadRecord(record);
     },
     
     onDialogCancel: function(button, event, options) {
@@ -116,11 +118,12 @@ Ext.define('AboutUs.controller.CommonListController', {
     		AboutUs.util.NotificationUtil.showNotificationError("Preencha os campos obrigatórios!");
     		return;
     	}
+    	form.updateRecord();
     	if (this.getController(this.getControllerName()).onBeforeSaveData != undefined){
     		this.getController(this.getControllerName()).onBeforeSaveData();	
     	}
-    	
-        form.submit({
+    	form.getRecord().save();
+        /*form.submit({
         	url:this.getCommonDialog().urlSubmit,
         	scope:this,
         	success: function(form, action) {
@@ -131,7 +134,7 @@ Ext.define('AboutUs.controller.CommonListController', {
             	AboutUs.util.NotificationUtil.processMessages(action.result.messages);
                 //AboutUs.util.NotificationUtil.showNotificationError("Erro ao guardar!");
             }
-        });
+        });*/
     },
     
     onDoSearch: function(button, event, options) {

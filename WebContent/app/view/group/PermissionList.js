@@ -1,5 +1,5 @@
 Ext.define('AboutUs.view.group.PermissionList', {
-	extend: 'Ext.grid.Panel',
+	extend: 'AboutUs.view.common.List',
     
     alias: 'widget.permissionlist',
     store: 'PermissionStore',

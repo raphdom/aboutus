@@ -12,7 +12,7 @@ import com.jrdevel.aboutus.model.Group;
 import com.jrdevel.aboutus.service.GroupService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
 import com.jrdevel.aboutus.util.ListParams;
-import com.jrdevel.aboutus.util.ListResult;
+import com.jrdevel.aboutus.util.ResultObject;
 
 /**
  * @author Raphael Domingues
@@ -34,9 +34,9 @@ public class GroupController {
 
 		try{
 			
-			ListResult<Group> result = groupService.getList(input);
+			ResultObject result = groupService.list(input);
 			
-			return ExtJSReturn.mapOK(result.getData(),result.getTotal());
+			return result.toMap();
 			
 		} catch (Exception e) {
 
@@ -49,24 +49,24 @@ public class GroupController {
 
 		try{
 			
-			Group group = groupService.getGroup(input.getId());
+			ResultObject result = groupService.get(input);
 			
-			return ExtJSReturn.mapOK(group);
+			return result.toMap();
 			
 		} catch (Exception e) {
 
-			return ExtJSReturn.mapError("Error retrieving Groups from database.");
+			return ExtJSReturn.mapError("Error retrieving Group from database.");
 		}
 	}
 	
-	@RequestMapping(value="/group/create.action")
-	public @ResponseBody Map<String,? extends Object> create(Group input) throws Exception {
+	@RequestMapping(value="/group/save.action")
+	public @ResponseBody Map<String,? extends Object> save(Group input) throws Exception {
 
 		try{
 
-			groupService.updateGroup(input);
+			ResultObject result = groupService.update(input);
 			
-			return ExtJSReturn.mapOK();
+			return result.toMap();
 			
 		} catch (Exception e) {
 
@@ -79,9 +79,9 @@ public class GroupController {
 
 		try{
 
-			groupService.deleteGroups(input);
+			ResultObject result = groupService.delete(input);
 			
-			return ExtJSReturn.mapOK();
+			return result.toMap();
 			
 		} catch (Exception e) {
 

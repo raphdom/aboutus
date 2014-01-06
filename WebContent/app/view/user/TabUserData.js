@@ -37,7 +37,7 @@ Ext.define('AboutUs.view.user.TabUserData', {
             valueField:'id'*/
         },{
         	xtype:'churchcombo',
-        	id:'church',
+        	name: 'church.id',
             fieldLabel: 'Igreja',
             allowBlank: false
         },{

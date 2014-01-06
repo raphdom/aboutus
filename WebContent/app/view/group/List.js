@@ -7,6 +7,11 @@ Ext.define('AboutUs.view.group.List', {
     icon:'resources/images/group.png',
     dialog: 'AboutUs.view.group.Dialog',
     controller: 'GroupController',
+    permissions:{
+    	add:Constants.auth_addgroup,
+    	edit:Constants.auth_editgroup,
+    	remove:Constants.auth_deletegroup
+    },
     columns: [
     {
     	header: "Nome",
