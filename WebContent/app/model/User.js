@@ -19,25 +19,30 @@ Ext.define('AboutUs.model.User', {
     		name:'block',
     		type:'boolean'
     	},{
-    		name:'person_name',
+    		name:'personName',
     		type:'string',
-			mapping:'person.name'
+			mapping:'person.name',
+			persist:false
 		},{
-    		name:'church_name',
+    		name:'churchName',
     		type:'string',
-			mapping:'church.name'
+			mapping:'church.name',
+			persist:false
     	}],
     	
    	hasOne: {model: 'AboutUs.model.Person', foreignKey: 'userId', getterName: 'getPerson'},
    	hasOne: {model: 'AboutUs.model.Church', foreignKey: 'userId', getterName: 'getChurch', setterName:'setChurch', name:'church'},
-   	hasMany: {model: 'AboutUs.model.Permission', foreignKey: 'userId', name:'permissions'},
+   	hasMany: [
+   		{model: 'AboutUs.model.Permission', foreignKey: 'userId', name:'permissions'},
+   		{model: 'AboutUs.model.Group', foreignKey: 'userId', name:'groups'}
+	],
    	
    	proxy: {
         type: 'ajax',
         api: {
-        	read : 'user/view.action',
+        	read : 'user/get.action',
             create : 'user/save.action',
-            update: 'user/update.action',
+            update: 'user/save.action',
             destroy: 'user/delete.action'
         },
         reader: {
@@ -48,8 +53,7 @@ Ext.define('AboutUs.model.User', {
         writer: {
             type: 'associatedjson',
             writeAllFields: true,
-            encode: false,
-            root:'data'
+            encode: false
         }
     }
    	

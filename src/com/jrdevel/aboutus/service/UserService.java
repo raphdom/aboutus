@@ -27,6 +27,9 @@ public class UserService extends GenericService<User>{
 	private UserDAO userDAO;
 	
 	@Autowired
+	private User userSession;
+	
+	@Autowired
 	public void setUserDAO(UserDAO userDAO) {
 		this.userDAO = userDAO;
 	}
@@ -36,7 +39,7 @@ public class UserService extends GenericService<User>{
 		
 		ResultObject result = new ResultObject();
 		
-		boolean isUpdate = entity.getId() != null;
+		boolean isUpdate = entity.getId() != null && entity.getId() != 0;
 		
 		if (!isUpdate){
 			if (existUserEmail(entity.getEmail())){
@@ -44,6 +47,8 @@ public class UserService extends GenericService<User>{
 				result.addErrorMessage("Este email já existe registado na aplicação");
 				return result;
 			}
+			entity.setId(null);
+			entity.setCustomer(userSession.getCustomer());
 			entity.setRegisterDate(new Date());
 			entity.setPassword(PasswordGenerator.passGenerator(8));
 		}

@@ -52,32 +52,19 @@ Ext.define('AboutUs.controller.UserController', {
 		form.getRecord().setChurch(church);
 		form.getRecord().permissions().add(permissions);
 		
-		//var groups = this.getGroupList().grid.getSelectionModel().getSelection();
-		//form.getRecord().groups().add(groups);
-		
-		/*var permissionsJson = [];
-		for (var i in permissions) {
-			permissionsJson.push(permissions[i].data);
-		}
-		
 		var groups = this.getGroupList().grid.getSelectionModel().getSelection();
-		var groupsJson = [];
-		for (var i in groups) {
-			groupsJson.push(groups[i].data);
-		}
-
-		form.getForm().findField('groups').setValue(Ext.encode(groupsJson));
-		form.getForm().findField('permissions').setValue(Ext.encode(permissionsJson));
-		*/
+		form.getRecord().groups().add(groups);
+		
 	},
 	
-	onGetDataSuccess:function(response){
-		var data = response.result.data;
+	onGetDataSuccess:function(record){
 		
 		var form = this.getUserDialog().down('form');
 		
 //		form.down('combo[id=person]').setValue(data.person.id);
-//		form.down('combo[id=church]').setValue(data.church.id);
+//		form.down('combo[id=church]').setValue(record.getChurch());
+		
+		this.getGroupList().grid.getSelectionModel().select(record.groups().getRange());
 		
 	}
     

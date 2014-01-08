@@ -10,5 +10,6 @@ Ext.define('AboutUs.model.Group', {
     	}],
     	
     
-    	hasMany: {model: 'Permission', name: 'permissions'}
+    	hasMany: {model: 'Permission', name: 'permissions'},
+    	belongsTo: {model: 'AboutUs.model.User', foreignKey: 'userId'}
 });

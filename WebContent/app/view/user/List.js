@@ -17,7 +17,7 @@ Ext.define('AboutUs.view.user.List', {
     	header: "Nome",
 		width: 170,
 		flex:1,
-		dataIndex: 'person_name'
+		dataIndex: 'personName'
 	},{
 		header: "Email",
 		width: 170,
@@ -27,7 +27,7 @@ Ext.define('AboutUs.view.user.List', {
 		header: "Igreja",
 		width: 170,
 		flex:1,
-		dataIndex: 'church_name',
+		dataIndex: 'churchName',
 		criteriaXtype:'combo'
 	},{
 		xtype:'booleanimagecolumn', 

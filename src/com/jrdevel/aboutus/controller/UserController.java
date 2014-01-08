@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jrdevel.aboutus.model.Permission;
@@ -45,12 +46,12 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/user/save.action")
-	public @ResponseBody Map<String,? extends Object> save(@RequestBody UserWrapper data) throws Exception {
+	@RequestMapping(value="/user/save.action", method = RequestMethod.POST)
+	public @ResponseBody Map<String,? extends Object> save(@RequestBody User data) throws Exception {
 
 		try{
 
-			ResultObject result = userService.update(data.getData());
+			ResultObject result = userService.update(data);
 			
 			return result.toMap();
 			

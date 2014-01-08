@@ -77,8 +77,28 @@ Ext.define('AboutUs.controller.CommonListController', {
     
     onEdit: function(button, record) {
     	console.log('CommonController.onEdit()');
+    	var me = this;
     	Ext.create(this.getCommonList().dialog).show();
-    	this.getCommonDialog().down('form').getForm().load({
+    	
+    	eval(this.getCommonDialog().model).load(record.get('id'), {
+		    scope: this,
+		    failure: function(record, operation) {
+		    },
+		    success: function(record, operation) {
+		    	me.getCommonDialog().down('form').loadRecord(record);
+		    	var titleUpdate = me.getCommonDialog().titleUpdate;
+        		if (titleUpdate != undefined){
+        			me.getCommonDialog().setTitle(me.getCommonDialog().titleUpdate);	
+        		}
+        		
+		    	if (me.getController(me.getControllerName()).onGetDataSuccess != undefined){
+		    		me.getController(me.getControllerName()).onGetDataSuccess(record);	
+		    	}
+		    },
+		    callback: function(record, operation, success) {
+		    }
+		});
+    	/*this.getCommonDialog().down('form').getForm().load({
         	url:this.getCommonDialog().urlLoad,
         	scope:this,
         	params: {
@@ -97,7 +117,7 @@ Ext.define('AboutUs.controller.CommonListController', {
 		    	}
         		
         	}	
-    	});
+    	});*/
     	
     },
     
@@ -112,6 +132,7 @@ Ext.define('AboutUs.controller.CommonListController', {
     
     onSave: function(button, event, options) {
     	console.log('CommonController.onSave()');
+    	var me = this;
     	var win = button.up('window'),
             form = win.down('form');
     	if (!form.isValid()){
@@ -122,7 +143,16 @@ Ext.define('AboutUs.controller.CommonListController', {
     	if (this.getController(this.getControllerName()).onBeforeSaveData != undefined){
     		this.getController(this.getControllerName()).onBeforeSaveData();	
     	}
-    	form.getRecord().save();
+    	form.getRecord().save({
+    		success: function(record, operation){
+    			win.hide();
+        		me.getCommonGrid().getStore().reload();
+	    	},
+	    	failure: function(record, operation){
+	    		var response = operation.request.proxy.reader.rawData;
+	    		AboutUs.util.NotificationUtil.processMessages(response.messages);
+	    	}
+    	});
         /*form.submit({
         	url:this.getCommonDialog().urlSubmit,
         	scope:this,
