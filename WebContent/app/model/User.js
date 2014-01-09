@@ -30,8 +30,22 @@ Ext.define('AboutUs.model.User', {
 			persist:false
     	}],
     	
-   	hasOne: {model: 'AboutUs.model.Person', foreignKey: 'userId', getterName: 'getPerson'},
-   	hasOne: {model: 'AboutUs.model.Church', foreignKey: 'userId', getterName: 'getChurch', setterName:'setChurch', name:'church'},
+    associations: [{
+        type: 'hasOne',
+        model: 'AboutUs.model.Church',
+        associationKey: 'church',
+        getterName: 'getChurch',
+        setterName: 'setChurch',
+        name:'church'
+    },{
+    	type: 'hasOne',
+        model: 'AboutUs.model.Person',
+        associationKey: 'person',
+        getterName: 'getPerson',
+        setterName: 'setPerson',
+        name:'person'
+    }],
+    	
    	hasMany: [
    		{model: 'AboutUs.model.Permission', foreignKey: 'userId', name:'permissions'},
    		{model: 'AboutUs.model.Group', foreignKey: 'userId', name:'groups'}

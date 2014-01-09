@@ -78,7 +78,8 @@ Ext.define('AboutUs.controller.CommonListController', {
     onEdit: function(button, record) {
     	console.log('CommonController.onEdit()');
     	var me = this;
-    	Ext.create(this.getCommonList().dialog).show();
+    	//Ext.create(this.getCommonList().dialog).show();
+    	this.getCommonDialog().show();
     	
     	eval(this.getCommonDialog().model).load(record.get('id'), {
 		    scope: this,

@@ -62,7 +62,7 @@ Ext.define('AboutUs.controller.UserController', {
 		var form = this.getUserDialog().down('form');
 		
 //		form.down('combo[id=person]').setValue(data.person.id);
-//		form.down('combo[id=church]').setValue(record.getChurch());
+		form.down('churchcombo').setValue(record.getChurch());
 		
 		this.getGroupList().grid.getSelectionModel().select(record.groups().getRange());
 		
