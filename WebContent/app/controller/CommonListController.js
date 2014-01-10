@@ -14,7 +14,9 @@ Ext.define('AboutUs.controller.CommonListController', {
         selector: 'commonlist grid'
     },{
     	ref: 'commonDialog',
-        selector: 'commondialog'
+        selector: 'commondialog',
+        autoCreate:true,
+        xtype:'commondialog'
     },{
     	ref: 'commonForm',
         selector: 'commonform'
@@ -52,6 +54,9 @@ Ext.define('AboutUs.controller.CommonListController', {
 	getControllerName: function(){
 		return this.getCommonList().controller;
 	},
+	actualController: function(){
+		return this.getController(this.getControllerName());
+	},
 	
 	processActionMenu: function(){
 		
@@ -61,10 +66,9 @@ Ext.define('AboutUs.controller.CommonListController', {
 	},
 	
 	onAdd: function(button, event, options) {
-    	console.log('CommonController.onAdd()');
-    	Ext.create(this.getCommonList().dialog).show();
-    	if (this.getController(this.getControllerName()).onAfterAdd != undefined){
-    		this.getController(this.getControllerName()).onAfterAdd(button,event,options);	
+		Ext.widget(this.getCommonList().dialog).show();
+    	if (this.actualController().onAfterAdd != undefined){
+    		this.actualController().onAfterAdd(button,event,options);	
     	}
     	var record = Ext.create(this.getCommonDialog().model);
     	this.getCommonDialog().down('form').loadRecord(record);
@@ -76,49 +80,28 @@ Ext.define('AboutUs.controller.CommonListController', {
     },
     
     onEdit: function(button, record) {
-    	console.log('CommonController.onEdit()');
     	var me = this;
-    	//Ext.create(this.getCommonList().dialog).show();
-    	this.getCommonDialog().show();
     	
-    	eval(this.getCommonDialog().model).load(record.get('id'), {
+    	eval(record.modelName).load(record.get('id'), {
 		    scope: this,
 		    failure: function(record, operation) {
 		    },
 		    success: function(record, operation) {
+		    	Ext.widget(me.getCommonList().dialog).show();
+		    	
 		    	me.getCommonDialog().down('form').loadRecord(record);
 		    	var titleUpdate = me.getCommonDialog().titleUpdate;
         		if (titleUpdate != undefined){
         			me.getCommonDialog().setTitle(me.getCommonDialog().titleUpdate);	
         		}
-        		
-		    	if (me.getController(me.getControllerName()).onGetDataSuccess != undefined){
-		    		me.getController(me.getControllerName()).onGetDataSuccess(record);	
+		    	if (me.actualController().onGetDataSuccess != undefined){
+		    		me.actualController().onGetDataSuccess(record);	
 		    	}
+		    	
 		    },
 		    callback: function(record, operation, success) {
 		    }
 		});
-    	/*this.getCommonDialog().down('form').getForm().load({
-        	url:this.getCommonDialog().urlLoad,
-        	scope:this,
-        	params: {
-        		id: record.get('id')
-    		},
-        	success: function(form, response) {
-        		
-        		var titleUpdate = this.getCommonDialog().titleUpdate;
-        		if (titleUpdate != undefined){
-        			var dados = response.result.data;
-        			this.getCommonDialog().setTitle(this.getCommonDialog().titleUpdate);	
-        		}
-        		
-		    	if (this.getController(this.getControllerName()).onGetDataSuccess != undefined){
-		    		this.getController(this.getControllerName()).onGetDataSuccess(response);	
-		    	}
-        		
-        	}	
-    	});*/
     	
     },
     
@@ -146,7 +129,7 @@ Ext.define('AboutUs.controller.CommonListController', {
     	}
     	form.getRecord().save({
     		success: function(record, operation){
-    			win.hide();
+    			win.close();
         		me.getCommonGrid().getStore().reload();
 	    	},
 	    	failure: function(record, operation){

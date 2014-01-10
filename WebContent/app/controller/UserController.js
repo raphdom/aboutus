@@ -65,6 +65,7 @@ Ext.define('AboutUs.controller.UserController', {
 		form.down('churchcombo').setValue(record.getChurch());
 		
 		this.getGroupList().grid.getSelectionModel().select(record.groups().getRange());
+		this.getPermissionList().grid.getSelectionModel().select(record.permissions().getRange());
 		
 	}
     

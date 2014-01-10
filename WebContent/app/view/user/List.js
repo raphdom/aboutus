@@ -5,7 +5,7 @@ Ext.define('AboutUs.view.user.List', {
     title : 'Utilizadores',
     store: 'UserStore',
     icon:'resources/images/user.png',
-    dialog: 'AboutUs.view.user.Dialog',
+    dialog: 'userdialog',
     controller: 'UserController',
     permissions:{
     	add:Constants.auth_adduser,
