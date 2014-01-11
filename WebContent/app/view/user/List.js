@@ -28,7 +28,7 @@ Ext.define('AboutUs.view.user.List', {
 		width: 170,
 		flex:1,
 		dataIndex: 'churchName',
-		criteriaXtype:'combo'
+		criteriaXtype:'churchcombo'
 	},{
 		xtype:'booleanimagecolumn', 
 		header: "Ativo",

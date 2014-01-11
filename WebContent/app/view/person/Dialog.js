@@ -5,8 +5,6 @@ Ext.define('AboutUs.view.person.Dialog', {
     
     title: 'Pessoa',
     
-    modal: true,
-    
     width: 600,
     
     layout:'fit',

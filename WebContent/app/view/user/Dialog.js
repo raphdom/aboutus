@@ -13,11 +13,6 @@ Ext.define('AboutUs.view.user.Dialog', {
     
     layout:'fit',
     
-    urlLoad: 'user/get.action',
-    urlSubmit: 'user/save.action',
-    
-    model:'AboutUs.model.User',
-    
     items:[{
     	xtype:'commonform',
     	items:[{

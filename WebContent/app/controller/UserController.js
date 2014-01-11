@@ -40,7 +40,6 @@ Ext.define('AboutUs.controller.UserController', {
     	
     	var list = Ext.create('AboutUs.view.user.List');
     	centerContainer.add(list);
-    	//list.getStore().clearFilter();
     	
     },
     
@@ -49,7 +48,9 @@ Ext.define('AboutUs.controller.UserController', {
 		
 		var permissions = this.getPermissionList().grid.getSelectionModel().getSelection();
 		var church = form.down('churchcombo').store.findRecord('id',form.down('churchcombo').getValue());
+		var person = form.down('personcombo').store.findRecord('id',form.down('personcombo').getValue());
 		form.getRecord().setChurch(church);
+		form.getRecord().setPerson(person);
 		form.getRecord().permissions().add(permissions);
 		
 		var groups = this.getGroupList().grid.getSelectionModel().getSelection();
@@ -61,7 +62,9 @@ Ext.define('AboutUs.controller.UserController', {
 		
 		var form = this.getUserDialog().down('form');
 		
-//		form.down('combo[id=person]').setValue(data.person.id);
+		if (record.getAssociatedData().person){
+			form.down('personcombo').setValue(record.getPerson());
+		}
 		form.down('churchcombo').setValue(record.getChurch());
 		
 		this.getGroupList().grid.getSelectionModel().select(record.groups().getRange());

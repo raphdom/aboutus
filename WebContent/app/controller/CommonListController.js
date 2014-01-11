@@ -70,7 +70,7 @@ Ext.define('AboutUs.controller.CommonListController', {
     	if (this.actualController().onAfterAdd != undefined){
     		this.actualController().onAfterAdd(button,event,options);	
     	}
-    	var record = Ext.create(this.getCommonDialog().model);
+    	var record = Ext.create(this.getCommonList().grid.getStore().model.modelName);
     	this.getCommonDialog().down('form').loadRecord(record);
     },
     

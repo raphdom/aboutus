@@ -3,7 +3,8 @@ Ext.define('AboutUs.view.user.TabUserData', {
     
     alias: 'widget.usertabuserdata',
     
-    requires:['AboutUs.view.component.ChurchCombo'],
+    requires:['AboutUs.view.component.ChurchCombo',
+    		  'AboutUs.view.component.PersonCombo'],
     
     title:'Dados',
     
@@ -26,15 +27,11 @@ Ext.define('AboutUs.view.user.TabUserData', {
             name: 'email',
             allowBlank: false,
             vtype:'email'
-        /*},{
+        },{
             fieldLabel: 'Pessoa',
-            name: 'person.id',
-            id:'person',
-            xtype:'combo',
-            allowBlank: false,
-            store:'PersonStore',
-            displayField:'name',
-            valueField:'id'*/
+            name: 'person',
+            xtype:'personcombo',
+            allowBlank: true
         },{
         	xtype:'churchcombo',
         	name: 'church.id',

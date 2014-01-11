@@ -45,16 +45,8 @@ Ext.define('AboutUs.controller.GroupController', {
     
     onGetDataFailure: function(response){
 	},
-	onGetDataSuccess:function(response){
-		console.log('GroupController.onAfterEdit()');
-    	var permissions = response.result.data.permissions;
-		var arrayStore = Ext.create('Ext.data.ArrayStore', {
-            autoLoad: true,
-            data: permissions,
-            model: 'AboutUs.model.Permission'
-        });
-        this.getPermissionList().getStore().load();
-		this.getPermissionList().getSelectionModel().select(arrayStore.getRange());
+	onGetDataSuccess:function(record){
+		this.getPermissionList().grid.getSelectionModel().select(record.permissions().getRange());
 	},
 	onBeforeSaveData: function(){
 		var form = this.getGroupDialog().down('form');

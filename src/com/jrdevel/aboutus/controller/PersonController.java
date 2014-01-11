@@ -1,17 +1,20 @@
 package com.jrdevel.aboutus.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jrdevel.aboutus.model.Person;
 import com.jrdevel.aboutus.service.PersonService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
 import com.jrdevel.aboutus.util.ListParams;
-import com.jrdevel.aboutus.util.ListResult;
+import com.jrdevel.aboutus.util.ResultObject;
 
 @Controller
 public class PersonController {
@@ -29,16 +32,60 @@ public class PersonController {
 
 		try{
 			
-			ListResult<Person> result = personService.getPersonList(input);
+			ResultObject result = personService.list(input);
 			
-			return ExtJSReturn.mapOK(result.getData(), result.getTotal());
+			return result.toMap();
 			
 		} catch (Exception e) {
 
-			return ExtJSReturn.mapError("Error retrieving People from database.");
+			return ExtJSReturn.mapError("Error retrieving Contacts from database.");
 		}
 	}
 	
+	@RequestMapping(value="/person/save.action", method = RequestMethod.POST)
+	public @ResponseBody Map<String,? extends Object> save(@RequestBody Person data) throws Exception {
+
+		try{
+
+			ResultObject result = personService.update(data);
+			
+			return result.toMap();
+			
+		} catch (Exception e) {
+
+			return ExtJSReturn.mapError("Error save User in database.");
+		}
+	}
+	
+	@RequestMapping(value="/person/get.action")
+	public @ResponseBody Map<String,? extends Object> get(Person input) throws Exception {
+
+		try{
+			
+			ResultObject result = personService.get(input);
+			
+			return result.toMap();
+			
+		} catch (Exception e) {
+
+			return ExtJSReturn.mapError("Error retrieving Groups from database.");
+		}
+	}
+	
+	@RequestMapping(value="/person/delete.action")
+	public @ResponseBody Map<String,? extends Object> delete(List<Person> input) throws Exception {
+
+		try{
+			
+			ResultObject result = personService.delete(input);
+			
+			return result.toMap();
+			
+		} catch (Exception e) {
+
+			return ExtJSReturn.mapError("Error retrieving Groups from database.");
+		}
+	}
 	
 
 }

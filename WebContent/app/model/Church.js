@@ -1,4 +1,11 @@
 Ext.define('AboutUs.model.Church', {
     extend: 'Ext.data.Model',
-    fields: ['id', 'name']
+   fields: [
+    	{
+    		name:'id',
+    		type:'int'
+    	},{ 
+    		name:'name',
+    		type:'string'
+    	}]
 });
