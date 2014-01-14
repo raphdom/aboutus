@@ -23,6 +23,7 @@ Ext.define('AboutUs.controller.MainController', {
     
     onCloudButtonClick: function(){
     	console.log('onCloudButtonClick');
+    	this.getController('CommonListController').processActionMenu();
     	this.getController('CloudController').processActionMenu();
     },
     

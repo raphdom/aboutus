@@ -8,6 +8,8 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import com.jrdevel.aboutus.constants.DAOConstants;
+import com.jrdevel.aboutus.model.lists.translate.CivilStatusTranslate;
 import com.jrdevel.aboutus.model.lists.translate.CountryTranslate;
 import com.jrdevel.aboutus.util.GenericValueText;
 
@@ -20,13 +22,14 @@ public class ListDAO extends GenericDAO<GenericValueText, Integer>{
 	
 	public void setExtraFilters(Criteria criteria) {
 		
-		
 	}
 	
 	public List<GenericValueText> getList(int listType){
 		switch(listType){
-			case 1:
+			case DAOConstants.COUNTRY_LIST:
 				return getCountryList();
+			case DAOConstants.CIVILSTATUS_LIST:
+				return getCivilStatusList();
 		}
 		return null;
 	}
@@ -41,6 +44,22 @@ public class ListDAO extends GenericDAO<GenericValueText, Integer>{
 		for (CountryTranslate bean: data){
 			GenericValueText item = new GenericValueText();
 			item.setValue(bean.getCountry().getId());
+			item.setText(bean.getText());
+			itens.add(item);
+		}
+		return itens;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<GenericValueText> getCivilStatusList(){
+		List<GenericValueText> itens = new ArrayList<GenericValueText>();
+		Criteria criteria = getSession().createCriteria(CivilStatusTranslate.class);
+		criteria.add(Restrictions.eq("langId", "pt_PT"));
+		criteria.addOrder(Order.asc("text"));
+		List<CivilStatusTranslate> data = criteria.list();
+		for (CivilStatusTranslate bean: data){
+			GenericValueText item = new GenericValueText();
+			item.setValue(bean.getCivilStatus().getId());
 			item.setText(bean.getText());
 			itens.add(item);
 		}

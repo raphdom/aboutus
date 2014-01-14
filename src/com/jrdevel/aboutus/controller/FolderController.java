@@ -1,6 +1,5 @@
 package com.jrdevel.aboutus.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -10,8 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.jrdevel.aboutus.model.Folder;
-import com.jrdevel.aboutus.model.User;
+import com.jrdevel.aboutus.model.wrappers.FolderWrapper;
 import com.jrdevel.aboutus.service.FolderService;
 import com.jrdevel.aboutus.util.ExtJSReturn;
 
@@ -35,9 +33,7 @@ public class FolderController {
 
 		try{
 			
-			User user = (User) session.getAttribute("user");
-			
-			List<Folder> result = folderService.getFoldersPermited(user);
+			FolderWrapper result = folderService.getFoldersPermited();
 			
 			return ExtJSReturn.mapOK(result);
 			

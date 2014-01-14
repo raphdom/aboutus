@@ -49,7 +49,8 @@ Ext.define('AboutUs.view.person.TabData', {
 			xtype:'combo',
 			fieldLabel: 'Estado Civil',
             name: 'name',
-            allowBlank: false
+            allowBlank: false,
+            store:'list.CivilStatusStore'
 		},{
 			xtype:'combo',
 			fieldLabel: 'Naturalidade',

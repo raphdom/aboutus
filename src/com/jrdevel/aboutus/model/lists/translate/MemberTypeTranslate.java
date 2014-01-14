@@ -2,12 +2,16 @@ package com.jrdevel.aboutus.model.lists.translate;
 
 // Generated 5/Jan/2014 19:49:45 by Hibernate Tools 3.4.0.CR1
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jrdevel.aboutus.model.lists.MemberType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -45,6 +49,7 @@ public class MemberTypeTranslate implements java.io.Serializable {
 		this.id = id;
 	}
 
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "lstId", nullable = false)
 	public MemberType getMemberType() {

@@ -35,8 +35,10 @@ Ext.define('AboutUs.view.person.List', {
 		header: "Naturalidade",
 		width: 170,
 		flex:1,
-		dataIndex: 'naturality'
+		dataIndex: 'country'
 	},{
+		xtype:'booleanimagecolumn',
+		align:'center',
 		header: "Membro",
 		width: 170,
 		flex:1,
@@ -45,7 +47,10 @@ Ext.define('AboutUs.view.person.List', {
 		header: "Nascimento",
 		width: 170,
 		flex:1,
-		dataIndex: 'birthday'
+		dataIndex: 'birthday',
+		xtype:'datecolumn', 
+		format:'d-m-Y',
+		criteriaXtype:'datefield'
 	},{
 		header: "NIF",
 		width: 170,

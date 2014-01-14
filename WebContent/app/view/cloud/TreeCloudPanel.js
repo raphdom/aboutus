@@ -8,6 +8,8 @@ Ext.define('AboutUs.view.cloud.TreeCloudPanel' ,{
         collapsible: true,
         border:true,
         store:'FolderStore',
+        useArrows: true,
+        rootVisible: false,
         tbar:[{
                 xtype:'buttonsegment',
                 items:[{
