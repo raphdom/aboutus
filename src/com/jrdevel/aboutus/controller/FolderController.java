@@ -29,17 +29,19 @@ public class FolderController {
 	
 	
 	@RequestMapping(value="/folder/view.action")
-	public @ResponseBody Map<String,? extends Object> view(HttpSession session) throws Exception {
+	public @ResponseBody FolderWrapper view(HttpSession session) throws Exception {
 
 		try{
 			
 			FolderWrapper result = folderService.getFoldersPermited();
 			
-			return ExtJSReturn.mapOK(result);
+			return result;
 			
 		} catch (Exception e) {
+			
+			return null;
 
-			return ExtJSReturn.mapError("Error retrieving Groups from database.");
+			//return ExtJSReturn.mapError("Error retrieving Groups from database.");
 		}
 	}
 	

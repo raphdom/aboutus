@@ -13,7 +13,8 @@ Ext.define('AboutUs.controller.CloudController', {
             'cloud.TileGridIcons',
             'cloud.TileGridThumbs',
             'cloud.CenterCloudContainer',
-            'cloud.CloudDialog'
+            'cloud.CloudDialog',
+            'cloud.FolderDialog'
     ],
     
    refs: [
@@ -41,6 +42,9 @@ Ext.define('AboutUs.controller.CloudController', {
         },{
            ref: 'cloudDialog',
            selector: 'clouddialog'
+       },{
+           ref: 'folderDialog',
+           selector: 'folderdialog'
        }
     ],
     
@@ -88,7 +92,7 @@ Ext.define('AboutUs.controller.CloudController', {
     	var centerContainer = this.getController('MainController').getMainContainer().down('container[itemId=centerContainer]');
     	var list = Ext.create('AboutUs.view.cloud.CloudContainer');
     	centerContainer.add(list);
-    	AboutUs.app.getStore('FolderStore').load();
+//    	AboutUs.app.getStore('FolderStore').load();
     	//this.getFolderStore().load();
     },
     
@@ -131,13 +135,14 @@ Ext.define('AboutUs.controller.CloudController', {
     },
     
     onFolderClick : function(treepanel, record, item, idx, e, eOpts){
-        var records = new Array();
-        records.push({
-                name: 'documentAdd001.jpg',
-                type: 'document',
-                url:'document.doc'
-        });
-        AboutUs.app.getStore('CloudStore').add(records);
+//        var records = new Array();
+//        records.push({
+//                name: 'documentAdd001.jpg',
+//                type: 'document',
+//                url:'document.doc'
+//        });
+    	this.getCenterCloudContainer().setTitle("Ficheiros da pasta: " + record.get('text'));
+//        AboutUs.app.getStore('CloudStore').add(records);
     },
     
     onFileSelected : function(view, selections){

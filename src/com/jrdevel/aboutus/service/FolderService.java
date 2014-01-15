@@ -63,7 +63,7 @@ public class FolderService {
 		}
 		
 		FolderWrapper rootNode = new FolderWrapper();
-		
+		rootNode.setText("Raiz");
 		generateFolderTree(foldersWrapper,rootNode);
 		
 		return rootNode;
@@ -74,6 +74,7 @@ public class FolderService {
 		for (FolderWrapper folder : folders){
 			if (folder.getParent()==item.getId()){
 				item.setLeaf(false);
+				item.setPath(folder.getPath()+"/"+item.getText());
 				item.addChild(folder);
 				generateFolderTree(folders,folder);
 			}

@@ -16,6 +16,7 @@ public class FolderWrapper implements Serializable{
 	private String text;
 	private Integer parent;
 	private boolean leaf = true;
+	private String path;
 
 	private List<FolderWrapper> children = new ArrayList<FolderWrapper>();
 	
@@ -61,6 +62,14 @@ public class FolderWrapper implements Serializable{
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 
 }
