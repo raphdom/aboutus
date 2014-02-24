@@ -181,11 +181,11 @@ Ext.define('AboutUs.controller.CommonListController', {
     		}
 	    	var field = Ext.widget(menuItem.criteriaXtype,{
 	    		fieldLabel: menuItem.header,
-				name : menuItem.dataIndex
+				name : menuItem.criteriaName
 	    	});
 	    	this.getCriteriaContainer().add(field);
     	}else{
-    		var field = this.getCriteriaContainer().down('[name='+menuItem.dataIndex+']');
+    		var field = this.getCriteriaContainer().down('[name='+menuItem.criteriaName+']');
     		this.getCriteriaContainer().remove(field);
     	}
     	if (this.getCriteriaContainer().items.length > 0){

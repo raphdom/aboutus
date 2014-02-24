@@ -22,7 +22,7 @@ Ext.define('AboutUs.view.common.List', {
 			Ext.Array.each(this.columns, function(column, index, countriesItSelf) {
 			    searchMenu.push({
 			    	text: 'Procurar por '+ column.header,
-			    	dataIndex: column.dataIndex,
+			    	criteriaName:column.criteriaName ? column.criteriaName : column.dataIndex,
 			    	header: column.header,
 			    	checked: false,
 			    	criteriaXtype:column.criteriaXtype

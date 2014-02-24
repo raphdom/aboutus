@@ -1,7 +1,7 @@
 Ext.define('AboutUs.controller.CloudController', {
     extend: 'AboutUs.controller.CommonListController',
     
-    stores: ['CloudStore','FolderStore'],
+    stores: ['CloudStore','FolderStore','FolderComboStore'],
 
     models: ['File'],
 
@@ -44,7 +44,9 @@ Ext.define('AboutUs.controller.CloudController', {
            selector: 'clouddialog'
        },{
            ref: 'folderDialog',
-           selector: 'folderdialog'
+           selector: 'folderdialog',
+           autoCreate:true,
+           xtype:'folderdialog'
        }
     ],
     
@@ -71,6 +73,9 @@ Ext.define('AboutUs.controller.CloudController', {
     		},
     		'treecloudpanel':{
         		itemclick: this.onFolderClick
+    		},
+    		'treecloudpanel toolbar button[action=add]':{
+    			click: this.onAddFolder
     		},
     		'tilegriddetails':{
     		        selectionchange: this.onFileSelected
@@ -166,7 +171,13 @@ Ext.define('AboutUs.controller.CloudController', {
     },
     
     onAddFiles: function(button){
-        Ext.create('AboutUs.view.cloud.CloudDialog').show();
+        //Ext.create('AboutUs.view.cloud.CloudDialog').show();
+    	var dialog = Ext.create('Ext.ux.upload.Dialog', {
+		    dialogTitle: 'Adicionar ficheiros',
+		    uploadUrl: 'cloud/upload.action'
+		});
+		
+		dialog.show();
     },
     
     onViewImageFile: function(button){
@@ -180,6 +191,10 @@ Ext.define('AboutUs.controller.CloudController', {
               images.push({url:item.data.url2});
         });
         Lightview.show(images, 1);
+    },
+    
+    onAddFolder: function(button){
+   		this.getFolderDialog().show(); 	
     }
     
 });

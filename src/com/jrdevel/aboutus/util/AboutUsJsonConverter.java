@@ -24,10 +24,10 @@ public class AboutUsJsonConverter extends FormattingConversionServiceFactoryBean
 
 	@Override
 	protected void installFormatters(FormatterRegistry registry) {
-		//super.installFormatters(registry);
-//		registry.addConverter(convertFilter());
-//		registry.addConverter(convertPermissions());
-//		registry.addConverter(convertGroups());
+		super.installFormatters(registry);
+		registry.addConverter(convertFilter());
+		registry.addConverter(convertPermissions());
+		registry.addConverter(convertGroups());
 	}
 
 	public Converter<String, List<Filter>> convertFilter() {

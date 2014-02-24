@@ -17,7 +17,8 @@ Ext.define('AboutUs.view.user.List', {
     	header: "Nome",
 		width: 170,
 		flex:1,
-		dataIndex: 'personName'
+		dataIndex: 'personName',
+		criteriaName:'person.name'
 	},{
 		header: "Email",
 		width: 170,

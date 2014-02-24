@@ -7,6 +7,7 @@ Ext.define('AboutUs.view.cloud.CloudDialog' ,{
         width: 400,
         modal:true,
         layout: 'fit',
+        minimizable:true,
         
         items:[]
     

@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +21,9 @@ import com.jrdevel.aboutus.util.ResultObject;
 
 @Controller
 public class UserController {
+	
+	
+	private static final Logger logger = Logger.getLogger(UserController.class);
 	
 	private UserService userService;
 	
@@ -41,8 +45,10 @@ public class UserController {
 			return result.toMap();
 			
 		} catch (Exception e) {
-
-			return ExtJSReturn.mapError("Error retrieving Contacts from database.");
+			
+			logger.error(e);
+			
+			return ExtJSReturn.mapError("Error retrieving Users from database.");
 		}
 	}
 	
