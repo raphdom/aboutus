@@ -18,7 +18,10 @@ Ext.define('AboutUs.view.user.List', {
 		width: 170,
 		flex:1,
 		dataIndex: 'personName',
-		criteriaName:'person.name'
+		criteriaName:'person.name',
+		getSortParam: function() {
+        	return this.criteriaName;
+    	}
 	},{
 		header: "Email",
 		width: 170,
@@ -29,7 +32,11 @@ Ext.define('AboutUs.view.user.List', {
 		width: 170,
 		flex:1,
 		dataIndex: 'churchName',
-		criteriaXtype:'churchcombo'
+		criteriaXtype:'churchcombo',
+		criteriaName:'church.id',
+		getSortParam: function() {
+        	return this.criteriaName;
+    	}
 	},{
 		xtype:'booleanimagecolumn', 
 		header: "Ativo",
@@ -45,7 +52,7 @@ Ext.define('AboutUs.view.user.List', {
 		dataIndex:'block',
 		criteriaXtype:'combo'
 	},{
-		header: "Último acesso",
+		header: "ï¿½ltimo acesso",
 		width: 150,
 		flex:1,
 		dataIndex:'lastvisitDate',

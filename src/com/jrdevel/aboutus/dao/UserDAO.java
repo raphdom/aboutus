@@ -1,5 +1,7 @@
 package com.jrdevel.aboutus.dao;
 
+import javax.persistence.criteria.JoinType;
+
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.criterion.Restrictions;
@@ -37,8 +39,8 @@ public class UserDAO extends GenericDAO<User, Integer>{
 	
 	public void setExtraFilters(Criteria criteria) {
 		
-		criteria.setFetchMode("church", FetchMode.JOIN);
-		criteria.setFetchMode("person", FetchMode.JOIN);
+		criteria.createAlias("person", "person", Criteria.LEFT_JOIN);
+		criteria.createAlias("church", "church", Criteria.LEFT_JOIN);
 		
 	}
 	

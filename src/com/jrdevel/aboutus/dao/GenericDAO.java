@@ -80,8 +80,8 @@ public abstract class GenericDAO<T, PK extends Serializable>{
 		}
 		setOrder(criteria,params.getSorters());
 		setFilters(criteria, params.getFilter());
-		int count = setPagingInfo(criteria);
 		setExtraFilters(criteria);
+		int count = setPagingInfo(criteria);
 		criteria.setFirstResult(params.getStart());
 		criteria.setMaxResults(params.getLimit());
 		criteria.setProjection(null);
