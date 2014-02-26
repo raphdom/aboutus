@@ -12,6 +12,7 @@ import com.jrdevel.aboutus.dao.UserDAO;
 import com.jrdevel.aboutus.model.Group;
 import com.jrdevel.aboutus.model.Permission;
 import com.jrdevel.aboutus.model.User;
+import com.jrdevel.aboutus.model.view.UserView;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
 import com.jrdevel.aboutus.util.PasswordGenerator;
@@ -44,7 +45,7 @@ public class UserService extends GenericService<User>{
 		if (!isUpdate){
 			if (existUserEmail(entity.getEmail())){
 				result.setSuccess(false);
-				result.addErrorMessage("Este email já existe registado na aplicação");
+				result.addErrorMessage("Este email jï¿½ existe registado na aplicaï¿½ï¿½o");
 				return result;
 			}
 			entity.setId(null);
@@ -64,7 +65,8 @@ public class UserService extends GenericService<User>{
 	@Transactional
 	public ResultObject list(ListParams params) {
 		
-		ListResult<User> listResult = userDAO.findAllByCriteria(params);
+		//ListResult<User> listResult = userDAO.findAllByCriteria(params);
+		ListResult<UserView> listResult = userDAO.getUsersView();
 		ResultObject result = newResultObject();
 		result.setData(listResult.getData());
 		result.setTotal(listResult.getTotal());
@@ -80,7 +82,7 @@ public class UserService extends GenericService<User>{
 		
 		if (bean == null || bean.getId() == null){
 			result.setSuccess(false);
-			result.addErrorMessage("Utilizador não existe.");
+			result.addErrorMessage("Utilizador nï¿½o existe.");
 		}else{
 			User user = userDAO.getUserById(bean.getId());
 			result.setData(user);

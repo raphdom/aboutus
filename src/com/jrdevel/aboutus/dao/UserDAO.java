@@ -1,13 +1,15 @@
 package com.jrdevel.aboutus.dao;
 
-import javax.persistence.criteria.JoinType;
-
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.transform.Transformers;
 import org.springframework.stereotype.Repository;
 
 import com.jrdevel.aboutus.model.User;
+import com.jrdevel.aboutus.model.view.UserView;
+import com.jrdevel.aboutus.util.ListResult;
 
 /**
  * @author Raphael Domingues
@@ -60,6 +62,19 @@ public class UserDAO extends GenericDAO<User, Integer>{
 		crit.setFetchMode("permissions", FetchMode.JOIN);
 		crit.add(Restrictions.eq("id", id));
 		return (User) crit.uniqueResult();
+	}
+	
+	public ListResult<UserView> getUsersView(){
+		Criteria criteria = getSession().createCriteria(getPersistentClass());
+		criteria.createAlias("person", "person", Criteria.LEFT_JOIN);
+		criteria.createAlias("church", "church", Criteria.LEFT_JOIN);
+		
+		criteria.setProjection( Projections.projectionList()
+                .add( Projections.property("email"), "email" )
+                .add( Projections.property("person.name"), "personName" ));
+		
+		criteria.setResultTransformer(Transformers.aliasToBean(UserView.class));
+		return new ListResult<UserView>(criteria.list(), 15);
 	}
 
 }
