@@ -20,6 +20,7 @@ import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ResultObject;
 
 @Controller
+@RequestMapping(value="/user")
 public class UserController {
 	
 	
@@ -35,7 +36,7 @@ public class UserController {
 	@Autowired
 	private User userSession;
 	
-	@RequestMapping(value="/user/view.action")
+	@RequestMapping(value="/view.action")
 	public @ResponseBody Map<String,? extends Object> view(ListParams input) throws Exception {
 
 		try{
@@ -52,7 +53,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/user/save.action", method = RequestMethod.POST)
+	@RequestMapping(value="/save.action", method = RequestMethod.POST)
 	public @ResponseBody Map<String,? extends Object> save(@RequestBody User data) throws Exception {
 
 		try{
@@ -67,7 +68,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/user/get.action")
+	@RequestMapping(value="/get.action")
 	public @ResponseBody Map<String,? extends Object> get(User input) throws Exception {
 
 		try{
@@ -82,7 +83,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/user/delete.action")
+	@RequestMapping(value="/delete.action")
 	public @ResponseBody Map<String,? extends Object> delete(List<User> input) throws Exception {
 
 		try{
@@ -97,7 +98,7 @@ public class UserController {
 		}
 	}
 	
-	@RequestMapping(value="/user/currentUser.action")
+	@RequestMapping(value="/currentUser.action")
 	public @ResponseBody Map<String,? extends Object> currentUser() throws Exception {
 
 		try{
