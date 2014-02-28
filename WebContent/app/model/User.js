@@ -21,12 +21,10 @@ Ext.define('AboutUs.model.User', {
     	},{
     		name:'personName',
     		type:'string',
-			mapping:'person.name',
 			persist:false
 		},{
     		name:'churchName',
     		type:'string',
-			mapping:'church.name',
 			persist:false
     	}],
     	

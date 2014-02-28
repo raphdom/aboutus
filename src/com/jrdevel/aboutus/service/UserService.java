@@ -65,8 +65,7 @@ public class UserService extends GenericService<User>{
 	@Transactional
 	public ResultObject list(ListParams params) {
 		
-		//ListResult<User> listResult = userDAO.findAllByCriteria(params);
-		ListResult<UserView> listResult = userDAO.getUsersView();
+		ListResult<UserView> listResult = userDAO.findAllByView(params, UserView.class);
 		ResultObject result = newResultObject();
 		result.setData(listResult.getData());
 		result.setTotal(listResult.getTotal());

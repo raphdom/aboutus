@@ -1,6 +1,11 @@
 package com.jrdevel.aboutus.dao;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.io.Serializable;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 import java.util.List;
@@ -12,15 +17,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.metadata.ClassMetadata;
 import org.hibernate.persister.entity.AbstractEntityPersister;
+import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.jrdevel.aboutus.model.Audit;
 import com.jrdevel.aboutus.model.Permission;
 import com.jrdevel.aboutus.model.User;
+import com.jrdevel.aboutus.model.view.Projection;
+import com.jrdevel.aboutus.model.view.UserView;
 import com.jrdevel.aboutus.util.Filter;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
@@ -87,6 +96,52 @@ public abstract class GenericDAO<T, PK extends Serializable>{
 		criteria.setProjection(null);
 		criteria.setResultTransformer(Criteria.ROOT_ENTITY);
 		return new ListResult<T>(criteria.list(), count);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public <R> ListResult<R> findAllByView(ListParams params, Class<R> view){
+		
+		Criteria criteria = getSession().createCriteria(getPersistentClass());
+		setOrder(criteria,params.getSorters());
+		setFilters(criteria, params.getFilter());
+		setExtraFilters(criteria);
+		int count = setPagingInfo(criteria);
+		criteria.setFirstResult(params.getStart());
+		criteria.setMaxResults(params.getLimit());
+		criteria.setProjection(null);
+		
+		criteria.setProjection(getProjectionList());
+		
+		criteria.setResultTransformer(Transformers.aliasToBean(view));
+		
+		return new  ListResult<R>(criteria.list(),count);
+	}
+	
+	private ProjectionList getProjectionList(){
+		ProjectionList result = Projections.projectionList();
+		
+		Class<?> c = UserView.class;  
+
+		BeanInfo info;
+		try {
+			info = Introspector.getBeanInfo(c, Object.class);
+			PropertyDescriptor[] props = info.getPropertyDescriptors();  
+		    for (PropertyDescriptor pd : props) {  
+		        Method getter = pd.getReadMethod();  
+		        if (getter.isAnnotationPresent(Projection.class)){
+		        	String name = pd.getName();
+		        	String entityName = getter.getAnnotation(Projection.class).entityName();
+		        	if (entityName != null && entityName.trim().equals("")){
+		        		entityName = name;
+		        	}
+		        	result.add(Projections.property(entityName), name);
+		        }
+		    }
+		} catch (IntrospectionException e) {
+			e.printStackTrace();
+		}  
+		
+		return result;
 	}
 	
 	private void setOrder(Criteria criteria, List<Sort> sortInfo){
