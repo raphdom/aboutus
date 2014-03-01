@@ -174,7 +174,8 @@ Ext.define('AboutUs.controller.CloudController', {
         //Ext.create('AboutUs.view.cloud.CloudDialog').show();
     	var dialog = Ext.create('Ext.ux.upload.Dialog', {
 		    dialogTitle: 'Adicionar ficheiros',
-		    uploadUrl: 'cloud/upload.action'
+		    uploadUrl: 'cloud/upload.action',
+		    modal:true
 		});
 		
 		dialog.show();

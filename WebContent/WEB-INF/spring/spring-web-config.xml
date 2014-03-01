@@ -44,5 +44,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 	    <!-- one of the properties available; the maximum file size in bytes -->
 	    <property name="maxUploadSize" value="100000"/>
 	</bean>
+	
+	<import resource="db-config.xml" />
     
 </beans>
