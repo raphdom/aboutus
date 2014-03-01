@@ -1,16 +1,14 @@
 package com.jrdevel.aboutus.controller;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jrdevel.aboutus.model.File;
@@ -45,10 +43,16 @@ public class CloudController {
 		}
 	}
 	
-	@RequestMapping(value="/cloud/upload.action", method = RequestMethod.PUT)
-	public @ResponseBody String upload(@RequestPart MultipartHttpServletRequest request) throws Exception {
+	@RequestMapping(value="/cloud/upload.action", method = RequestMethod.POST)
+	public @ResponseBody String upload(MultipartHttpServletRequest request) throws Exception {
 		
-		try {
+		Iterator<String> itr =  request.getFileNames();
+		 
+	     MultipartFile mpf = request.getFile(itr.next());
+	     
+	     System.out.println(mpf.getOriginalFilename() +" uploaded!");
+		
+		/*try {
             InputStream inputStream = request.getInputStream();
  
             if (inputStream != null) {
@@ -68,8 +72,8 @@ public class CloudController {
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
         }
-		
-		return "";
+		*/
+		return "{'success':true,'message':'OK'}";
 		
 		
 	}
