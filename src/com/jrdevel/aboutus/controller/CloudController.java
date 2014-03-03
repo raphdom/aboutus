@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.jrdevel.aboutus.helper.AboutUsFileHelper;
 import com.jrdevel.aboutus.model.File;
 import com.jrdevel.aboutus.service.CloudService;
+import com.jrdevel.aboutus.util.AboutUsConfiguration;
 import com.jrdevel.aboutus.util.ExtJSReturn;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
@@ -23,6 +24,9 @@ import com.jrdevel.aboutus.util.ListResult;
 public class CloudController {
 
 	private CloudService cloudService;
+	
+	@Autowired
+	private AboutUsConfiguration configuration;
 
 	@Autowired
 	public void setCloudService(CloudService cloudService) {
@@ -52,7 +56,9 @@ public class CloudController {
 
 		MultipartFile mpf = request.getFile(itr.next());
 		
-		mpf.transferTo(new java.io.File(AboutUsFileHelper.getNameOfFile()));
+		mpf.transferTo(new java.io.File(AboutUsFileHelper.getNameOfFile(configuration.getMediaPath())));
+		
+		cloudService.processFile(mpf.getInputStream(),mpf.getOriginalFilename(),mpf.getSize());
 
 		//System.out.println(mpf.getOriginalFilename() +" uploaded!");
 

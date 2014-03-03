@@ -10,21 +10,15 @@ import java.util.Calendar;
  */
 public class AboutUsFileHelper {
 	
-	public static String getDirectoryPath(){
+	public static String getNameOfFile(String mediaPath){
 		
-		return "/home/raphael/mediaFiles/";
-		
-	}
-	
-	public static String getNameOfFile(){
-		
-		File directory = new File(getDirectoryPath() + year() + "/" + monthDay()+"/");
+		File directory = new File(mediaPath + year() + "/" + monthDay()+"/");
 		
 		if (!directory.exists()){
 			directory.mkdirs();
 		}
 		
-		return getDirectoryPath() + year() + "/" + monthDay() + "/" + generateUniqueFileName("upload-",".bin");
+		return mediaPath + year() + "/" + monthDay() + "/" + generateUniqueFileName("upload-",".bin");
 		
 	}
 	

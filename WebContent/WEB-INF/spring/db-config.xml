@@ -12,10 +12,10 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName"><value>com.mysql.jdbc.Driver</value></property>
-        <property name="url"><value>jdbc:mysql://localhost:3306/zbapfnjc_jrchurch001</value></property>
-        <property name="username"><value>root</value></property>
-        <property name="password"><value>root</value></property>
+        <property name="driverClassName"><value>#{applicationProperties.driver}</value></property>
+        <property name="url"><value>#{applicationProperties.url}</value></property>
+        <property name="username"><value>#{applicationProperties.username}</value></property>
+        <property name="password"><value>#{applicationProperties.password}</value></property>
     </bean>
     
      <!-- Hibernate SessionFactory -->
@@ -25,7 +25,7 @@
         <property name="hibernateProperties">
 			<props>
 				<!--<prop key="hibernate.default_catalog">zbapfnjc_aboutusDEV</prop>-->
-				<prop key="hibernate.default_catalog">zbapfnjc_jrchurch001</prop>
+				<prop key="hibernate.default_catalog">#{applicationProperties.defaultCatalog}</prop>
 		        <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 		        <prop key="hibernate.hbm2ddl.auto">update</prop>
 				<prop key="hibernate.show_sql">true</prop>
