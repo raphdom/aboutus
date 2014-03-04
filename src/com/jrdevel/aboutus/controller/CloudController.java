@@ -12,12 +12,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.jrdevel.aboutus.helper.AboutUsFileHelper;
-import com.jrdevel.aboutus.model.File;
 import com.jrdevel.aboutus.service.CloudService;
 import com.jrdevel.aboutus.util.AboutUsConfiguration;
 import com.jrdevel.aboutus.util.ExtJSReturn;
 import com.jrdevel.aboutus.util.ListParams;
-import com.jrdevel.aboutus.util.ListResult;
+import com.jrdevel.aboutus.util.ResultObject;
 
 @Controller
 @RequestMapping(value="/cloud")
@@ -39,13 +38,13 @@ public class CloudController {
 
 		try{
 
-			ListResult<File> result = cloudService.getFilesList(input);
-
-			return ExtJSReturn.mapOK(result.getData(), result.getTotal());
+			ResultObject result = cloudService.list(input);
+			
+			return result.toMap();
 
 		} catch (Exception e) {
-
-			return ExtJSReturn.mapError("Error retrieving People from database.");
+			e.printStackTrace();
+			return ExtJSReturn.mapError("Error retrieving Files from database.");
 		}
 	}
 
@@ -56,16 +55,12 @@ public class CloudController {
 
 		MultipartFile mpf = request.getFile(itr.next());
 
-		//java.io.File file = new java.io.File(AboutUsFileHelper.getNameOfFile(configuration.getMediaPath())); 
+		java.io.File file = new java.io.File(AboutUsFileHelper.getNameOfFile(configuration.getMediaPath())); 
 		
-		//mpf.transferTo(file);
+		mpf.transferTo(file);
 		
-		//byte[] bytesFile = AboutUsFileHelper.getBytesFromFile(file);
-		
-		//cloudService.processFile(mpf.getInputStream(),mpf.getOriginalFilename(),mpf.getSize(),
-				//file.getAbsolutePath(), mpf.getContentType());
 		cloudService.processFile(mpf.getInputStream(),mpf.getOriginalFilename(),mpf.getSize(),
-				"/asdasd", mpf.getContentType());
+				file.getAbsolutePath(), mpf.getContentType());
 
 		//System.out.println(mpf.getOriginalFilename() +" uploaded!");
 

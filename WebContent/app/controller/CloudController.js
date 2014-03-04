@@ -147,6 +147,7 @@ Ext.define('AboutUs.controller.CloudController', {
 //                url:'document.doc'
 //        });
     	this.getCenterCloudContainer().setTitle("Ficheiros da pasta: " + record.get('text'));
+    	this.getCloudStoreStore().load();
 //        AboutUs.app.getStore('CloudStore').add(records);
     },
     

@@ -205,7 +205,7 @@ public class ImageResizeService {
 					Image.SCALE_SMOOTH | Image.SCALE_FAST);
 			result = new BufferedImage(scaled.getWidth(null),
 					scaled.getHeight(null), BufferedImage.TYPE_INT_RGB);
-
+			
 			g2d = result.createGraphics();
 			g2d.drawImage(scaled, null, null);
 		} finally {
@@ -323,17 +323,17 @@ public class ImageResizeService {
 	private BufferedImage getSource(ImageResizeRequest request) {
 		try {
 
+			request.setDestinationByteBuffer(new ByteArrayOutputStream());
+			
 			if (request.getSourceImage() != null) {
 				return request.getSourceImage();
 			}
 
 			if (request.getSourceStream() != null) {
-				request.setDestinationByteBuffer(new ByteArrayOutputStream());
 				return ImageIO.read(request.getSourceStream());
 			}
 			
 			if (request.getSourceByteStream() != null){
-				request.setDestinationByteBuffer(new ByteArrayOutputStream());
 				return ImageIO.read(request.getSourceByteStream());
 			}
 

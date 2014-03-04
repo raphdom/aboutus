@@ -12,8 +12,8 @@ Ext.define('AboutUs.view.cloud.TileGridThumbs' ,{
                             store: store,
                             tpl: [
                                 '<tpl for=".">',
-                                    '<div class="thumb-wrap" id="{name:stripTags}">',
-                                        '<div class="thumb"><img src="{url}" title="{name:htmlEncode}"></div>',
+                                    '<div class="thumb-wrap" id="{filename:stripTags}">',
+                                        '<div class="thumb"><img src="{url}" title="{filename:htmlEncode}"></div>',
                                         '<span class="x-editable">{shortName:htmlEncode}</span>',
                                     '</div>',
                                 '</tpl>',

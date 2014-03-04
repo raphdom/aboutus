@@ -33,9 +33,9 @@ Ext.define('AboutUs.view.cloud.CenterCloudContainer' ,{
                 store: Ext.create('Ext.data.Store', {
                         fields: ['key', 'value'],
                         data : [
-                                {"key":"name", "value":"Nome"},
-                                {"key":"type", "value":"Tipo"},
-                                {"key":"size", "value":"Tamanho"}
+                                {"key":"filename", "value":"Nome"},
+                                {"key":"filetype", "value":"Tipo"},
+                                {"key":"filesize", "value":"Tamanho"}
                                 ]
                         })
         },{

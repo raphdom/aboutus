@@ -18,6 +18,8 @@ import com.jrdevel.aboutus.helper.ImageTransformHelper;
 import com.jrdevel.aboutus.model.File;
 import com.jrdevel.aboutus.model.FileData;
 import com.jrdevel.aboutus.model.Folder;
+import com.jrdevel.aboutus.model.view.FileView;
+import com.jrdevel.aboutus.model.view.UserView;
 import com.jrdevel.aboutus.util.AboutUsConfiguration;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
@@ -127,9 +129,16 @@ public class CloudService extends GenericService<File>{
 		
 	}
 
-	@Override
+	@Transactional
 	public ResultObject list(ListParams params) {
-		return null;
+		
+		ListResult<FileView> listResult = fileDAO.findAllByView(params, FileView.class);
+		ResultObject result = newResultObject();
+		result.setData(listResult.getData());
+		result.setTotal(listResult.getTotal());
+		
+		return result;
+		
 	}
 
 	@Override

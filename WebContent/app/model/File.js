@@ -1,14 +1,14 @@
 Ext.define('AboutUs.model.File', {
         extend: 'Ext.data.Model',
         fields: [
-                'name', 
+                'filename', 
                 {
                         name:'shortName',
                         convert:function(v,record){
-                                return Ext.util.Format.ellipsis(record.data.name, 15);
+                                return Ext.util.Format.ellipsis(record.data.filename, 15);
                         }
                 },
-                'type',
+                'filetype',
                 {
                         name:'url',
                         convert:function(v, record){
@@ -29,6 +29,6 @@ Ext.define('AboutUs.model.File', {
                                 }
                         }
                 },
-                'size'
+                'filesize'
                 ]
 });

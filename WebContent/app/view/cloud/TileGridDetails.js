@@ -9,17 +9,17 @@ Ext.define('AboutUs.view.cloud.TileGridDetails' ,{
             text: 'Nome',
             id: 'name',
             flex: 1,
-            dataIndex: 'name'
+            dataIndex: 'filename'
         }, {
             text: 'Tipo',
             id: 'type',
             flex: 1,
-            dataIndex: 'type'
+            dataIndex: 'filetype'
         }, {
             text: 'Tamanho',
             id: 'size',
             flex: 1,
-            dataIndex: 'size'
+            dataIndex: 'filesize'
         }]
     
 });

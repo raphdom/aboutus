@@ -110,21 +110,19 @@ public abstract class GenericDAO<T, PK extends Serializable>{
 		criteria.setMaxResults(params.getLimit());
 		criteria.setProjection(null);
 		
-		criteria.setProjection(getProjectionList());
+		criteria.setProjection(getProjectionList(view));
 		
 		criteria.setResultTransformer(Transformers.aliasToBean(view));
 		
 		return new  ListResult<R>(criteria.list(),count);
 	}
 	
-	private ProjectionList getProjectionList(){
+	private ProjectionList getProjectionList(Class<?> viewClass){
 		ProjectionList result = Projections.projectionList();
 		
-		Class<?> c = UserView.class;  
-
 		BeanInfo info;
 		try {
-			info = Introspector.getBeanInfo(c, Object.class);
+			info = Introspector.getBeanInfo(viewClass, Object.class);
 			PropertyDescriptor[] props = info.getPropertyDescriptors();  
 		    for (PropertyDescriptor pd : props) {  
 		        Method getter = pd.getReadMethod();  

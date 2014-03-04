@@ -1,9 +1,13 @@
 package com.jrdevel.aboutus.helper;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.imageio.ImageIO;
 
 import org.apache.log4j.Logger;
 
@@ -17,7 +21,7 @@ import com.jrdevel.aboutus.util.images.ImageResizeService;
  */
 public class ImageTransformHelper {
 	
-	public static final ImageSize DATA_TYPE_SMALL_1 = new ImageSize(60,60,1);
+	public static final ImageSize DATA_TYPE_SMALL_1 = new ImageSize(80,60,1);
 	public static final ImageSize DATA_TYPE_SMALL_2 = new ImageSize(128,128,2);
 	public static final ImageSize DATA_TYPE_MEDIUM_1 = new ImageSize(500,500,3);
 	public static final ImageSize DATA_TYPE_MEDIUM_2 = new ImageSize(800,800,4);
@@ -26,14 +30,14 @@ public class ImageTransformHelper {
 	
 	private HashMap<ImageSize,byte[]> result = new HashMap<ImageSize,byte[]>();
 	
-	private byte[] resizeImage(InputStream stream, int width, int height, boolean exactlySize){
+	private byte[] resizeImage(BufferedImage bufferImage, int width, int height, boolean exactlySize){
 		ImageResizeRequest request;
 		ImageResizeService handler = new ImageResizeService();
 
 		request = new ImageResizeRequest();
 
 		try {
-			request.setSourceFileStream(stream);
+			request.setSourceImage(bufferImage);
 			request.setTargetWidth(width);
 			request.setTargetHeight(height);
 			request.setResizeAction(ImageResizeAction.ALWAYS);
@@ -47,16 +51,15 @@ public class ImageTransformHelper {
 		return null;
 	}
 	
-	
 	private class ScaleImage extends Thread {
 
-		InputStream originalStream;
+		BufferedImage bufferImage;
 		ImageSize imageSize;
 		boolean exactlySize;
 		byte[] resultData;
 
-		public ScaleImage(InputStream originalStream, ImageSize dataType, boolean exactlySize){
-			this.originalStream=originalStream;
+		public ScaleImage(BufferedImage bufferImage, ImageSize dataType, boolean exactlySize){
+			this.bufferImage=bufferImage;
 			this.imageSize=dataType;
 			this.exactlySize=exactlySize;
 		}
@@ -65,7 +68,7 @@ public class ImageTransformHelper {
 
 			try {
 
-				resultData = resizeImage(originalStream, imageSize.getWidth(), 
+				resultData = resizeImage(bufferImage, imageSize.getWidth(), 
 						imageSize.getHeight(),exactlySize);
 				
 				result.put(imageSize, resultData);
@@ -84,24 +87,32 @@ public class ImageTransformHelper {
 
 		List<Thread> threads = new ArrayList<Thread>();
 
-		for (ImageSize dataType : dataTypes){
-			Thread thread0 = new Thread(new ScaleImage(stream, dataType, true));
-			thread0.start();
-			threads.add(thread0);
-		}
-
-		int running = 0;
-		do {
-			running = 0;
-			for (Thread thread : threads) {
-				if (thread.isAlive()) {
-					running++;
-				}
+		BufferedImage bufferImage;
+		try {
+			
+			bufferImage = ImageIO.read(stream);
+			for (ImageSize dataType : dataTypes){
+				Thread thread0 = new Thread(new ScaleImage(bufferImage, dataType, true));
+				thread0.start();
+				threads.add(thread0);
 			}
-		} while (running > 0);
 
-		long end = System.currentTimeMillis();
-		logger.info("Demorou " + ((end - start) / 1000) + " segundos");
+			int running = 0;
+			do {
+				running = 0;
+				for (Thread thread : threads) {
+					if (thread.isAlive()) {
+						running++;
+					}
+				}
+			} while (running > 0);
+
+			long end = System.currentTimeMillis();
+			logger.info("Demorou " + ((end - start) / 1000) + " segundos");
+		} catch (IOException e) {
+			logger.error(e.getMessage());
+			e.printStackTrace();
+		}
 		
 		return result;
 
