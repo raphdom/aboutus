@@ -1,13 +1,17 @@
 package com.jrdevel.aboutus.service;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import antlr.StringUtils;
 
 import com.jrdevel.aboutus.dao.FileDAO;
 import com.jrdevel.aboutus.dao.FileDataDAO;
@@ -19,7 +23,6 @@ import com.jrdevel.aboutus.model.File;
 import com.jrdevel.aboutus.model.FileData;
 import com.jrdevel.aboutus.model.Folder;
 import com.jrdevel.aboutus.model.view.FileView;
-import com.jrdevel.aboutus.model.view.UserView;
 import com.jrdevel.aboutus.util.AboutUsConfiguration;
 import com.jrdevel.aboutus.util.ListParams;
 import com.jrdevel.aboutus.util.ListResult;
@@ -35,6 +38,8 @@ public class CloudService extends GenericService<File>{
 	private FileDAO fileDAO;
 	private FileDataDAO fileDataDAO;
 	private FolderDAO folderDAO;
+	
+	private static final Logger logger = Logger.getLogger(CloudService.class);
 	
 	@Autowired
 	private AboutUsConfiguration configuration;
@@ -111,7 +116,8 @@ public class CloudService extends GenericService<File>{
 		if (AboutUsFileHelper.imageResizeSupported(fileType)){
 			
 			ImageTransformHelper imageTransform = new ImageTransformHelper();
-			HashMap<ImageSize,byte[]> result = imageTransform.transformImages(inputStream, 
+			HashMap<ImageSize,byte[]> result = imageTransform.transformImages(inputStream,
+					ImageTransformHelper.DATA_TYPE_SMALL_0,
 					ImageTransformHelper.DATA_TYPE_SMALL_1,
 					ImageTransformHelper.DATA_TYPE_SMALL_2);
 			
@@ -149,6 +155,38 @@ public class CloudService extends GenericService<File>{
 	@Override
 	public ResultObject get(File bean) {
 		return null;
+	}
+	
+	@Transactional
+	public byte[] getThumb(Integer fileId, Integer dataType) {
+		
+		FileData data = fileDataDAO.getFileDataByFileAndDataType(fileId,dataType);
+		
+		if (data != null && data.getData().length > 0){
+			return data.getData();
+		}else{
+			logger.info(String.format("The image thumb imageId = %s with dataType = %s does not exist.",
+					fileId,dataType));
+			return null;
+		}
+		
+	}
+	
+	@Transactional
+	public byte[] download(Integer fileId) {
+		
+		File file = fileDAO.findById(fileId, false);
+		
+		java.io.File fileDisk = new java.io.File(file.getPath());
+		
+		try {
+			return AboutUsFileHelper.getBytesFromFile(fileDisk);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+		
 	}
 
 	@Override

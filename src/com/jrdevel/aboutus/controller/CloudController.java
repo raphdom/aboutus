@@ -3,10 +3,13 @@ package com.jrdevel.aboutus.controller;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -23,7 +26,7 @@ import com.jrdevel.aboutus.util.ResultObject;
 public class CloudController {
 
 	private CloudService cloudService;
-	
+
 	@Autowired
 	private AboutUsConfiguration configuration;
 
@@ -39,7 +42,7 @@ public class CloudController {
 		try{
 
 			ResultObject result = cloudService.list(input);
-			
+
 			return result.toMap();
 
 		} catch (Exception e) {
@@ -56,9 +59,9 @@ public class CloudController {
 		MultipartFile mpf = request.getFile(itr.next());
 
 		java.io.File file = new java.io.File(AboutUsFileHelper.getNameOfFile(configuration.getMediaPath())); 
-		
+
 		mpf.transferTo(file);
-		
+
 		cloudService.processFile(mpf.getInputStream(),mpf.getOriginalFilename(),mpf.getSize(),
 				file.getAbsolutePath(), mpf.getContentType());
 
@@ -73,6 +76,20 @@ public class CloudController {
 
 		return "{'success':true,'message':'OK'}";
 
+
+	}
+
+	@RequestMapping(value="/getImage.action", method = RequestMethod.GET)
+	public void get(@RequestParam Integer imageId, @RequestParam Integer dataType,
+			final HttpServletResponse response) throws Exception {
+
+		byte[] fileByteArray = cloudService.getThumb(imageId, dataType);
+
+		if (fileByteArray != null && fileByteArray.length > 0){
+			response.addHeader("Cache-Control", "public no-transform max-age=43200");
+			response.getOutputStream().write(fileByteArray);
+			response.getOutputStream().flush();
+		}
 
 	}
 

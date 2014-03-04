@@ -13,7 +13,7 @@ Ext.define('AboutUs.view.cloud.TileGridThumbs' ,{
                             tpl: [
                                 '<tpl for=".">',
                                     '<div class="thumb-wrap" id="{filename:stripTags}">',
-                                        '<div class="thumb"><img src="{url}" title="{filename:htmlEncode}"></div>',
+                                        '<div class="thumb"><img src="{url1}" title="{filename:htmlEncode}"></div>',
                                         '<span class="x-editable">{shortName:htmlEncode}</span>',
                                     '</div>',
                                 '</tpl>',
