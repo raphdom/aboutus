@@ -55,10 +55,17 @@ public class CloudController {
 		Iterator<String> itr =  request.getFileNames();
 
 		MultipartFile mpf = request.getFile(itr.next());
+
+		//java.io.File file = new java.io.File(AboutUsFileHelper.getNameOfFile(configuration.getMediaPath())); 
 		
-		mpf.transferTo(new java.io.File(AboutUsFileHelper.getNameOfFile(configuration.getMediaPath())));
+		//mpf.transferTo(file);
 		
-		cloudService.processFile(mpf.getInputStream(),mpf.getOriginalFilename(),mpf.getSize());
+		//byte[] bytesFile = AboutUsFileHelper.getBytesFromFile(file);
+		
+		//cloudService.processFile(mpf.getInputStream(),mpf.getOriginalFilename(),mpf.getSize(),
+				//file.getAbsolutePath(), mpf.getContentType());
+		cloudService.processFile(mpf.getInputStream(),mpf.getOriginalFilename(),mpf.getSize(),
+				"/asdasd", mpf.getContentType());
 
 		//System.out.println(mpf.getOriginalFilename() +" uploaded!");
 

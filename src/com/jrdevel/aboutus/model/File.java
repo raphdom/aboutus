@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 5/Jan/2014 19:49:45 by Hibernate Tools 3.4.0.CR1
+// Generated 4/Mar/2014 12:22:19 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import java.util.HashSet;
@@ -27,12 +27,10 @@ public class File implements java.io.Serializable {
 
 	private Integer id;
 	private Folder folder;
+	private Customer customer;
 	private String filename;
 	private String fileType;
 	private long filesize;
-	private long totalFilesize;
-	private short width;
-	private short height;
 	private String title;
 	private String caption;
 	private String keywords;
@@ -53,40 +51,33 @@ public class File implements java.io.Serializable {
 	public File() {
 	}
 
-	public File(Folder folder, String filename, String fileType, long filesize,
-			long totalFilesize, short width, short height, String title,
-			String caption, String keywords, boolean published, String path,
-			Date createdDate, Date modifiedDate) {
+	public File(Folder folder, Customer customer, String filename,
+			String fileType, long filesize, String title, boolean published,
+			String path, Date createdDate, Date modifiedDate) {
 		this.folder = folder;
+		this.customer = customer;
 		this.filename = filename;
 		this.fileType = fileType;
 		this.filesize = filesize;
-		this.totalFilesize = totalFilesize;
-		this.width = width;
-		this.height = height;
 		this.title = title;
-		this.caption = caption;
-		this.keywords = keywords;
 		this.published = published;
 		this.path = path;
 		this.createdDate = createdDate;
 		this.modifiedDate = modifiedDate;
 	}
 
-	public File(Folder folder, String filename, String fileType, long filesize,
-			long totalFilesize, short width, short height, String title,
-			String caption, String keywords, boolean published, String path,
-			Date createdDate, Date modifiedDate, Set<Article> articles,
-			Set<Video> videos, Set<Album> albums, Set<ItemAlbum> itemAlbums,
-			Set<Banner> banners, Set<Category> categories, Set<Event> events,
+	public File(Folder folder, Customer customer, String filename,
+			String fileType, long filesize, String title, String caption,
+			String keywords, boolean published, String path, Date createdDate,
+			Date modifiedDate, Set<Article> articles, Set<Video> videos,
+			Set<Album> albums, Set<ItemAlbum> itemAlbums, Set<Banner> banners,
+			Set<Category> categories, Set<Event> events,
 			Set<FileData> fileDatas, Set<Church> churches) {
 		this.folder = folder;
+		this.customer = customer;
 		this.filename = filename;
 		this.fileType = fileType;
 		this.filesize = filesize;
-		this.totalFilesize = totalFilesize;
-		this.width = width;
-		this.height = height;
 		this.title = title;
 		this.caption = caption;
 		this.keywords = keywords;
@@ -126,6 +117,16 @@ public class File implements java.io.Serializable {
 		this.folder = folder;
 	}
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "customerId", nullable = false)
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
 	@Column(name = "filename", nullable = false)
 	public String getFilename() {
 		return this.filename;
@@ -153,33 +154,6 @@ public class File implements java.io.Serializable {
 		this.filesize = filesize;
 	}
 
-	@Column(name = "totalFilesize", nullable = false)
-	public long getTotalFilesize() {
-		return this.totalFilesize;
-	}
-
-	public void setTotalFilesize(long totalFilesize) {
-		this.totalFilesize = totalFilesize;
-	}
-
-	@Column(name = "width", nullable = false)
-	public short getWidth() {
-		return this.width;
-	}
-
-	public void setWidth(short width) {
-		this.width = width;
-	}
-
-	@Column(name = "height", nullable = false)
-	public short getHeight() {
-		return this.height;
-	}
-
-	public void setHeight(short height) {
-		this.height = height;
-	}
-
 	@Column(name = "title", nullable = false)
 	public String getTitle() {
 		return this.title;
@@ -189,7 +163,7 @@ public class File implements java.io.Serializable {
 		this.title = title;
 	}
 
-	@Column(name = "caption", nullable = false, length = 65535)
+	@Column(name = "caption", length = 65535)
 	public String getCaption() {
 		return this.caption;
 	}
@@ -198,7 +172,7 @@ public class File implements java.io.Serializable {
 		this.caption = caption;
 	}
 
-	@Column(name = "keywords", nullable = false, length = 65535)
+	@Column(name = "keywords", length = 65535)
 	public String getKeywords() {
 		return this.keywords;
 	}

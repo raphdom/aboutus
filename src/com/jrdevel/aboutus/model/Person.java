@@ -1,6 +1,6 @@
 package com.jrdevel.aboutus.model;
 
-// Generated 5/Jan/2014 19:49:45 by Hibernate Tools 3.4.0.CR1
+// Generated 4/Mar/2014 12:22:19 by Hibernate Tools 3.4.0.CR1
 
 import com.jrdevel.aboutus.model.lists.CivilStatus;
 import com.jrdevel.aboutus.model.lists.Country;
