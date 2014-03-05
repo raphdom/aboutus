@@ -8,6 +8,9 @@ Ext.define('AboutUs.store.UserStore', {
     
     proxy: {
         type: 'ajax',
+        actionMethods: {
+        	create: 'POST', read: 'POST', update: 'POST', destroy: 'POST'
+        },
         api: {
         	read : 'user/view.action',
             create : 'user/save.action',

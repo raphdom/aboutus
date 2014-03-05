@@ -164,7 +164,9 @@ public abstract class GenericDAO<T, PK extends Serializable>{
     		return;
     	}
     	for(Filter filter: filters){
-    		if (filter.getType().equals("textfield")){
+    		if (filter.getType().equals("id") && filter.getOperator().equals("eq")){
+    			criteria.add(Restrictions.eq(filter.getProperty(), Integer.parseInt(filter.getValue())));
+    		}else if(filter.getType().equals("textfield")){
     			criteria.add(Restrictions.like(filter.getProperty(), "%"+filter.getValue()+"%"));
     		}
     	}

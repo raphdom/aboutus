@@ -23,7 +23,7 @@ Ext.define('AboutUs.view.cloud.TileGridThumbs' ,{
                             trackOver: true,
                             overItemCls: 'x-item-over',
                             itemSelector: 'div.thumb-wrap',
-                            emptyText: 'No images to display'
+                            emptyText: 'Pasta vazia'
                         })
                 });
                 me.callParent(arguments);

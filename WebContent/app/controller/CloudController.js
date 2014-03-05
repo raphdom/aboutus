@@ -140,15 +140,16 @@ Ext.define('AboutUs.controller.CloudController', {
     },
     
     onFolderClick : function(treepanel, record, item, idx, e, eOpts){
-//        var records = new Array();
-//        records.push({
-//                name: 'documentAdd001.jpg',
-//                type: 'document',
-//                url:'document.doc'
-//        });
-    	this.getCenterCloudContainer().setTitle("Ficheiros da pasta: " + record.get('text'));
-    	this.getCloudStoreStore().load();
-//        AboutUs.app.getStore('CloudStore').add(records);
+    	//treepanel.getSelectionModel().select( 0 );
+    	if (record.get('path')=="/"){
+    		this.getCenterCloudContainer().setTitle("/" + record.get('text'));
+    	}else{
+    		this.getCenterCloudContainer().setTitle(record.get('path') + "/" + record.get('text'));	
+    	}
+    	var filters = [];
+    	filters.push({ property: 'folder.id', value: record.get('id') , type: 'id', operator:'eq'});
+       	this.getCloudStoreStore().clearFilter(true);
+       	this.getCloudStoreStore().filter(filters);
     },
     
     onFileSelected : function(view, selections){

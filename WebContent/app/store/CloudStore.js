@@ -1,7 +1,9 @@
 Ext.define('AboutUs.store.CloudStore', {
     extend: 'Ext.data.Store',
-
+	
     model: 'AboutUs.model.File',
+    
+    remoteFilter:true,
     
     proxy: {
         type: 'ajax',

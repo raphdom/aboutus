@@ -63,7 +63,8 @@ public class FolderService {
 		}
 		
 		FolderWrapper rootNode = new FolderWrapper();
-		rootNode.setText("Raiz");
+		rootNode.setPath("/");
+		rootNode.setText("");
 		generateFolderTree(foldersWrapper,rootNode);
 		
 		return rootNode;
@@ -74,7 +75,15 @@ public class FolderService {
 		for (FolderWrapper folder : folders){
 			if (folder.getParent()==item.getId()){
 				item.setLeaf(false);
-				item.setPath(folder.getPath()+"/"+item.getText());
+				if (folder.getParent()==0){
+					folder.setPath("/");
+				}else{
+					if (!item.getPath().equals("/")){
+						folder.setPath(item.getPath()+"/"+item.getText());
+					}else{
+						folder.setPath("/"+item.getText());
+					}
+				}
 				item.addChild(folder);
 				generateFolderTree(folders,folder);
 			}
