@@ -119,7 +119,8 @@ public class CloudService extends GenericService<File>{
 			HashMap<ImageSize,byte[]> result = imageTransform.transformImages(inputStream,
 					ImageTransformHelper.DATA_TYPE_SMALL_0,
 					ImageTransformHelper.DATA_TYPE_SMALL_1,
-					ImageTransformHelper.DATA_TYPE_SMALL_2);
+					ImageTransformHelper.DATA_TYPE_SMALL_2,
+					ImageTransformHelper.DATA_TYPE_MEDIUM_1);
 			
 			for (ImageSize imgSize : result.keySet()){
 				if (result.get(imgSize)!= null && result.get(imgSize).length > 0){

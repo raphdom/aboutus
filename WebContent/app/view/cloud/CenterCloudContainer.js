@@ -9,11 +9,11 @@ Ext.define('AboutUs.view.cloud.CenterCloudContainer' ,{
     title:'Ficheiros',
     
     items: [{
-                xtype: 'tilegriddetails'
+                xtype: 'tilegridthumbs'
             },{
                 xtype: 'tilegridicons'
             },{
-                xtype: 'tilegridthumbs'
+            	xtype: 'tilegriddetails'
             }],
             
     tbar:[{
@@ -40,6 +40,7 @@ Ext.define('AboutUs.view.cloud.CenterCloudContainer' ,{
                         })
         },{
                 xtype:'switchbuttonsegment',
+                activeItem: 2,
                 items:[{
                                 iconCls: 'icon-default',
                                 action:'gridDetails'

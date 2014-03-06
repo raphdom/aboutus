@@ -23,9 +23,10 @@ public class ImageTransformHelper {
 
 	public static final ImageSize DATA_TYPE_SMALL_0 = new ImageSize(50,40,0);
 	public static final ImageSize DATA_TYPE_SMALL_1 = new ImageSize(80,60,1);
-	public static final ImageSize DATA_TYPE_SMALL_2 = new ImageSize(128,128,2);
-	public static final ImageSize DATA_TYPE_MEDIUM_1 = new ImageSize(500,500,3);
-	public static final ImageSize DATA_TYPE_MEDIUM_2 = new ImageSize(800,800,4);
+	public static final ImageSize DATA_TYPE_SMALL_2 = new ImageSize(150,120,2);
+	public static final ImageSize DATA_TYPE_MEDIUM_1 = new ImageSize(600,480,3);
+	public static final ImageSize DATA_TYPE_MEDIUM_2 = new ImageSize(1050,800,4);
+	public static final ImageSize DATA_TYPE_LARGE_1 = new ImageSize(1650,1200,5);
 	
 	private static final Logger logger = Logger.getLogger(ImageTransformHelper.class);
 	
