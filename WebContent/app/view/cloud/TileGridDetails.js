@@ -6,6 +6,12 @@ Ext.define('AboutUs.view.cloud.TileGridDetails' ,{
     store:'CloudStore',
     
     columns: [{
+    		dataIndex: 'icon',
+    		width: 35,
+		    renderer: function(value){
+		        return '<img src="' + value + '" />';
+		    }
+    	},{
             text: 'Nome',
             id: 'name',
             flex: 1,

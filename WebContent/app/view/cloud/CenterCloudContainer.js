@@ -50,6 +50,9 @@ Ext.define('AboutUs.view.cloud.CenterCloudContainer' ,{
                         },{
                                 iconCls: 'icon-thumb',
                                 action:'gridThumbs'
+                        },{
+                                iconCls: 'icon-thumbLarge',
+                                action:'gridThumbsLarge'
                         }]
         }]
     

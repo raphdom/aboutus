@@ -16,3 +16,9 @@
 	background-image: url('../images/switch.png');
 	background-position: -32px 0 !important;
 }
+.icon-thumbLarge
+{
+	background: transparent no-repeat;
+	background-image: url('../images/switch.png');
+	background-position: -48px 0 !important;
+}

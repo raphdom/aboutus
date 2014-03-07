@@ -16,6 +16,11 @@
     height: 60px;
     width: 80px;
 }
+#images-view .thumbIcon img{
+	display: block;
+	margin-left:auto;
+	margin-right:auto;
+}
 #images-view .thumb-wrap{
     float: left;
     margin: 4px;
@@ -166,25 +171,37 @@
     background: white;
     font: 11px Arial, Helvetica, sans-serif;
 }
-#icons-view .icons{
+#icons-view .thumb{
     background: #dddddd;
     padding: 2px;
     float:left;
 }
+#icons-view .thumbIcon{
+   height: 44px;
+    width: 54px;
+    float:left;
+}
 
-.x-quirks #icons-view .icons {
+.x-quirks #icons-view .thumb {
     padding-bottom: 3px;
 }
 
-#icons-view .icons img{
+#icons-view .thumb img{
     height: 40px;
     width: 50px;
+}
+#icons-view .thumbIcon img{
+	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	padding-top:5px;
 }
 #icons-view .icons-wrap{
     float: left;
     margin: 4px;
     margin-right: 0;
     padding: 2px;
+    width:200px;
 }
 #icons-view .icons-wrap .iconsInfo {
     display: block;
