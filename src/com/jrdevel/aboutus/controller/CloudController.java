@@ -57,13 +57,19 @@ public class CloudController {
 		Iterator<String> itr =  request.getFileNames();
 
 		MultipartFile mpf = request.getFile(itr.next());
-
+		
+		String folderIdParam = request.getParameter("folderId");
+		Integer folderId = null;
+		if (!folderIdParam.isEmpty()){
+			folderId = Integer.parseInt(folderIdParam);
+		}
+		
 		java.io.File file = new java.io.File(AboutUsFileHelper.getNameOfFile(configuration.getMediaPath())); 
 
 		mpf.transferTo(file);
 
 		cloudService.processFile(mpf.getInputStream(),mpf.getOriginalFilename(),mpf.getSize(),
-				file.getAbsolutePath(), mpf.getContentType());
+				file.getAbsolutePath(), mpf.getContentType(),folderId);
 
 		//System.out.println(mpf.getOriginalFilename() +" uploaded!");
 

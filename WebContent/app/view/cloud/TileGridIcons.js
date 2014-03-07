@@ -17,7 +17,7 @@ Ext.define('AboutUs.view.cloud.TileGridIcons' ,{
                                         '<div class="iconsInfo">',
                                                 '<span class="infoName">{filename:htmlEncode}</span>',
                                                 '<span class="infoType">{filetype:htmlEncode}</span>',
-                                                '<span class="infoSize">{filesize:htmlEncode}</span>',
+                                                '<span class="infoSize">{filesize:fileSize}</span>',
                                         '</div>',
                                     '</div>',
                                 '</tpl>',

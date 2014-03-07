@@ -28,6 +28,8 @@
     overflow: hidden;
     text-align: center;
     width: 86px; /* for ie to ensure that the text is centered */
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 #images-view .x-item-over{
@@ -198,6 +200,8 @@
     height:13px;
     overflow:hidden;
     cursor:default;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 #icons-view .icons-wrap .iconsInfo .infoType{

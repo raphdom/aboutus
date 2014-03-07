@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import antlr.StringUtils;
-
 import com.jrdevel.aboutus.dao.FileDAO;
 import com.jrdevel.aboutus.dao.FileDataDAO;
 import com.jrdevel.aboutus.dao.FolderDAO;
@@ -96,7 +94,7 @@ public class CloudService extends GenericService<File>{
 	
 	@Transactional
 	public void processFile(InputStream inputStream, String name, Long size, 
-			String filePath, String fileType){
+			String filePath, String fileType, Integer folderId){
 		
 		File fileBean = new File();
 		fileBean.setFilename(name);
@@ -104,7 +102,7 @@ public class CloudService extends GenericService<File>{
 		fileBean.setFilesize(size);
 		fileBean.setTitle(name);
 		Folder folder = new Folder();
-		folder.setId(4);
+		folder.setId(folderId);
 		fileBean.setFolder(folder);
 		fileBean.setPath(filePath);
 		fileBean.setCreatedDate(new Date());

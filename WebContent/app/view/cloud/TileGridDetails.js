@@ -19,7 +19,8 @@ Ext.define('AboutUs.view.cloud.TileGridDetails' ,{
             text: 'Tamanho',
             id: 'size',
             flex: 1,
-            dataIndex: 'filesize'
+            dataIndex: 'filesize',
+            renderer: 'fileSize'
         }]
     
 });
