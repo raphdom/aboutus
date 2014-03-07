@@ -37,9 +37,10 @@ Ext.define('Ext.ux.upload.uploader.FormDataUploader', {
         formData.append(file.name, file);
         
         if (this.params) {
-        	
+        	for(var propt in this.params){
+    			formData.append(propt, this.params[propt]);
+			}
         }
-        formData.append('folderId', 4);
 
         var xhr = this.initConnection();
 

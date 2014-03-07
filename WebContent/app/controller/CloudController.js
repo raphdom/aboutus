@@ -140,16 +140,9 @@ Ext.define('AboutUs.controller.CloudController', {
     },
     
     onFolderClick : function(treepanel, record, item, idx, e, eOpts){
-    	//treepanel.getSelectionModel().select( 0 );
-    	if (record.get('path')=="/"){
-    		this.getCenterCloudContainer().setTitle("/" + record.get('text'));
-    	}else{
-    		this.getCenterCloudContainer().setTitle(record.get('path') + "/" + record.get('text'));	
-    	}
-    	var filters = [];
-    	filters.push({ property: 'folder.id', value: record.get('id') , type: 'id', operator:'eq'});
+    	this.getCenterCloudContainer().setTitle(this.getTreeCloudPanel().getFolderPath(record))
        	this.getCloudStoreStore().clearFilter(true);
-       	this.getCloudStoreStore().filter(filters);
+       	this.getCloudStoreStore().filter({ property: 'folder.id', value: record.get('id') , type: 'id', operator:'eq'});
     },
     
     onFileSelected : function(view, selections){
@@ -174,10 +167,13 @@ Ext.define('AboutUs.controller.CloudController', {
     
     onAddFiles: function(button){
         //Ext.create('AboutUs.view.cloud.CloudDialog').show();
+    	var folder = this.getTreeCloudPanel().getSelectedFolder();
+    	var folderPath = this.getTreeCloudPanel().getFolderPath(folder);
     	var dialog = Ext.create('Ext.ux.upload.Dialog', {
-		    dialogTitle: 'Adicionar ficheiros',
+		    dialogTitle: 'Adicionar ficheiros na pasta: ' + folderPath,
 		    uploadUrl: 'cloud/upload.action',
-		    modal:true
+		    modal:true,
+		    uploadParams:{folderId:folder.get('id')}
 		});
 		
 		dialog.show();

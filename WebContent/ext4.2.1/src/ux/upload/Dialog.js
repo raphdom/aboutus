@@ -55,7 +55,7 @@ Ext.define('Ext.ux.upload.Dialog', {
          * uploader object, for example if the {@link Ext.ux.upload.uploader.ExtJsUploader} is used, the params are sent
          * as GET params.
          */
-        uploadParams : {folderId:1},
+        uploadParams : {},
 
         /**
          * @cfg {Object}
