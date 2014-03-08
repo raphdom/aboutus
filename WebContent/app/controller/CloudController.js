@@ -47,6 +47,9 @@ Ext.define('AboutUs.controller.CloudController', {
            selector: 'folderdialog',
            autoCreate:true,
            xtype:'folderdialog'
+       },{
+       		ref: 'fileDownloader',
+       		selector: 'centercloudcontainer FileDownloader'
        }
     ],
     
@@ -88,6 +91,9 @@ Ext.define('AboutUs.controller.CloudController', {
     		},
     		'detailspanel toolbar button[action=view]':{
         		click: this.onViewImageFile
+    		},
+    		'detailspanel toolbar button[action=down]':{
+        		click: this.onDownloadFile
     		}
                 
         });
@@ -97,8 +103,8 @@ Ext.define('AboutUs.controller.CloudController', {
     	var centerContainer = this.getController('MainController').getMainContainer().down('container[itemId=centerContainer]');
     	var list = Ext.create('AboutUs.view.cloud.CloudContainer');
     	centerContainer.add(list);
-//    	AboutUs.app.getStore('FolderStore').load();
-    	//this.getFolderStore().load();
+    	this.hideAllGrids();
+    	this.getTileGridThumbs().show();
     },
     
     onClickGridDetails: function(button){
@@ -166,7 +172,6 @@ Ext.define('AboutUs.controller.CloudController', {
     },
     
     onAddFiles: function(button){
-        //Ext.create('AboutUs.view.cloud.CloudDialog').show();
     	var folder = this.getTreeCloudPanel().getSelectedFolder();
     	var folderPath = this.getTreeCloudPanel().getFolderPath(folder);
     	var dialog = Ext.create('Ext.ux.upload.Dialog', {
@@ -182,6 +187,13 @@ Ext.define('AboutUs.controller.CloudController', {
     onViewImageFile: function(button){
           var recordSelect = this.getGridActive().getSelectionModel().getSelection();
           Lightview.show(recordSelect[0].data.url2);
+    },
+    
+    onDownloadFile:function(button){
+    	var record = this.getGridActive().getSelectionModel().getSelection()[0]
+		this.getFileDownloader().load({
+		    url: 'cloud/downloadFile.action?fileId='+record.get('id')
+		});
     },
     
     onSlideShow: function(button){

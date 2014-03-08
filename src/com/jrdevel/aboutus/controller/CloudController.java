@@ -98,6 +98,25 @@ public class CloudController {
 		}
 
 	}
+	
+	@RequestMapping(value="/downloadFile.action", method = RequestMethod.GET)
+	public void downloadFile(@RequestParam Integer fileId,
+			final HttpServletResponse response) throws Exception {
+
+		Map<String,Object> result = cloudService.download(fileId);
+
+		byte[] fileByteArray = (byte[]) result.get("file_byte");
+		String fileName = (String) result.get("file_name");
+		String fileType = (String) result.get("file_type");
+		
+		if (fileByteArray != null && fileByteArray.length > 0){
+			response.setContentType(fileType);
+			response.setHeader("Content-Disposition", "attachment; filename="+fileName); 
+			response.getOutputStream().write(fileByteArray);
+			response.getOutputStream().flush();
+		}
+
+	}
 
 
 

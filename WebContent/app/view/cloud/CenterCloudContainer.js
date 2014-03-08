@@ -14,6 +14,8 @@ Ext.define('AboutUs.view.cloud.CenterCloudContainer' ,{
                 xtype: 'tilegridicons'
             },{
             	xtype: 'tilegriddetails'
+            },{
+				xtype: 'FileDownloader'
             }],
             
     tbar:[{

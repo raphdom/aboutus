@@ -2,6 +2,10 @@ Ext.define('AboutUs.view.cloud.DetailsPanel' ,{
     extend: 'Ext.panel.Panel',
     alias : 'widget.detailspanel',
     
+    requires: [
+    	'AboutUs.util.FileDownloader'
+	],
+    
     title:'Detalhes',
     region: 'east',
     width:200,
@@ -22,9 +26,9 @@ Ext.define('AboutUs.view.cloud.DetailsPanel' ,{
                     '<span>{size}</span>',
                     '<b>Criado em:</b>',
                     '<span>{name}</span>',
-                    '<b>Ultima modificação:</b>',
+                    '<b>Ultima modificaÃ§Ã£o:</b>',
                     '<span>{name}</span>',
-                    '<b>Título:</b>',
+                    '<b>TÃ­tulo:</b>',
                     '<span>{name}</span>',
                     '<b>Palavras-chave:</b>',
                     '<span>{name}</span>',
@@ -48,14 +52,14 @@ Ext.define('AboutUs.view.cloud.DetailsPanel' ,{
                         action:'down'
                        }]
                 },'->',{
-                xtype:'buttonsegment',
-                items:[{
-                        icon:'resources/images/edit.png',
-                        action:'edit'
-                },{
-                        icon:'resources/images/delete.png',
-                        action:'del'
-                }]
+	                xtype:'buttonsegment',
+	                items:[{
+	                        icon:'resources/images/edit.png',
+	                        action:'edit'
+	                },{
+	                        icon:'resources/images/delete.png',
+	                        action:'del'
+	                }]
              }]
     }],
    

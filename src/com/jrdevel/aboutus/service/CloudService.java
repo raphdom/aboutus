@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,14 +173,23 @@ public class CloudService extends GenericService<File>{
 	}
 	
 	@Transactional
-	public byte[] download(Integer fileId) {
+	public Map<String,Object> download(Integer fileId) {
+		
+		HashMap<String, Object> result = new HashMap<String,Object>();
 		
 		File file = fileDAO.findById(fileId, false);
 		
 		java.io.File fileDisk = new java.io.File(file.getPath());
 		
 		try {
-			return AboutUsFileHelper.getBytesFromFile(fileDisk);
+			
+			result.put("file_byte", AboutUsFileHelper.getBytesFromFile(fileDisk));
+			
+			result.put("file_name", file.getFilename());
+			
+			result.put("file_type", file.getFileType());
+			
+			return result;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
